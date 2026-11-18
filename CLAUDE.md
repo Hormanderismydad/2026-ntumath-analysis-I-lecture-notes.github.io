@@ -25,7 +25,7 @@ The owner sends LaTeX for that week's lectures (the offline version). For each u
 2. Insert the new subsections in chronological order (before the appendix sections `app:sard`, `app:fourier`).
 3. Regenerate `source/main.ptx` with the converter and check that it prints no warnings.
 4. Test build (needs `pip install -r requirements.txt` in a virtualenv, plus XeLaTeX for the TikZ figures and the PDF):
-   `pretext build web` and `pretext build print`. In a sandbox that cannot reach runestone.academy, build a copy of the project with `<stringparams debug.rs.dev="yes"/>` on the web target. Never commit that change.
+   `pretext build web` and `TEXMFHOME=$PWD/texmf pretext build print` (the TeX packages are listed in `.github/workflows/deploy.yml`). In a sandbox that cannot reach runestone.academy, build a copy of the project with `<stringparams debug.rs.dev="yes"/>` on the web target. Never commit that change.
 5. Commit `tex/analysis-i.tex` and `source/main.ptx` with a message like `Add lectures 2026-11-17 and 2026-11-19`.
 
 ## Links

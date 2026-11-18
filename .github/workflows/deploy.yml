@@ -17,6 +17,9 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-24.04
+    env:
+      # extra LaTeX files kept in the repo (see texmf/README.md)
+      TEXMFHOME: ${{ github.workspace }}/texmf
     steps:
       - uses: actions/checkout@v4
 
@@ -25,13 +28,22 @@ jobs:
           python-version: "3.12"
           cache: pip
 
+      # Only what the build uses (checked with xelatex -recorder):
+      #   texlive-xetex       XeLaTeX (also pulls in texlive-latex-extra: tcolorbox, titlesec, enumitem)
+      #   texlive-pictures    TikZ, for the figures
+      #   texlive-lang-cjk    xeCJK; its helper ctexhook.sty is in texmf/ instead of the 50 MB texlive-lang-chinese
+      #   texlive-fonts-recommended  rsfs fonts for \mathscr
+      #   fonts-noto-cjk      the Chinese font
+      # --no-install-recommends skips hundreds of MB of extras, and turning off
+      # man-db skips rebuilding the manual page index after the install.
       - name: Install TeX (for the PDF and the TikZ figures)
         run: |
-          sudo apt-get update
-          sudo apt-get install -y \
-            texlive-xetex texlive-latex-extra texlive-pictures \
-            texlive-lang-chinese texlive-lang-cjk \
-            fonts-lmodern fonts-noto-cjk
+          echo 'man-db man-db/auto-update boolean false' | sudo debconf-set-selections
+          sudo rm -f /var/lib/man-db/auto-update
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq --no-install-recommends \
+            texlive-xetex texlive-pictures texlive-lang-cjk \
+            texlive-fonts-recommended fonts-noto-cjk
 
       - name: Install PreTeXt
         run: pip install -r requirements.txt

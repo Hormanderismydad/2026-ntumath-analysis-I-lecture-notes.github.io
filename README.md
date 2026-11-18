@@ -15,6 +15,7 @@ Lecture notes for 臺大數學系「分析一」(蕭欽玉 教授, 2026 Fall), w
 | `.github/workflows/deploy.yml` | Builds both targets and publishes the site on every push |
 | `tex/analysis-i.tex` | The LaTeX version of the notes (XeLaTeX) that `source/main.ptx` is generated from |
 | `scripts/tex2ptx.py` | Converter from `tex/analysis-i.tex` to `source/main.ptx` |
+| `texmf/` | One extra LaTeX file the PDF build needs (saves installing a 50 MB package) |
 | `CLAUDE.md` | The weekly update workflow (for Claude Code sessions) |
 
 ## Updating the notes
@@ -34,5 +35,5 @@ python3 scripts/tex2ptx.py tex/analysis-i.tex source/main.ptx
 pip install -r requirements.txt
 pretext build web      # output/web/index.html
 pretext view web       # preview in the browser
-pretext build print    # output/print/main.pdf (needs XeLaTeX, xeCJK and a Noto CJK TC font)
+TEXMFHOME=$PWD/texmf pretext build print    # output/print/main.pdf (needs XeLaTeX, xeCJK and a Noto CJK TC font)
 ```
