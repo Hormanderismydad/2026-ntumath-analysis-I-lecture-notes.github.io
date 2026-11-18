@@ -688,9 +688,24 @@ For an interval $I\subset \R^n$, we denote its boundary by $\pr I$.
     $\pr I$ has measure zero.
 \end{lm}
 \begin{proof}
-    Let $I=\prod_{j}[a_j,b_j]$ and $\eps>0$.
-    The face $\set{x\in I\mid x_j=a_j}$ lies in the interval obtained from $I$ by replacing $[a_j,b_j]$ with $[a_j-\eps,a_j+\eps]$, whose volume is $2\eps\prod_{k\ne j}(b_k-a_k)$; similarly for $x_j=b_j$.
-    The $2n$ faces cover $\pr I$, so $\abs{\pr I}_e\le C\eps$ with $C$ independent of $\eps$.
+    Let $I=\prod_{j=1}^{n}[a_j,b_j]$ and let $\eps>0$.
+    A point $x\in I$ lies on $\pr I$ exactly when $x_j\in\set{a_j,b_j}$ for some $j$, so $\pr I$ is the union of the $2n$ faces
+    \begin{align*}
+        F_j^-\coloneqq\set{x\in I\mid x_j=a_j},\qquad F_j^+\coloneqq\set{x\in I\mid x_j=b_j},\qquad j=1,\dots,n.
+    \end{align*}
+    The face $F_j^-$ is contained in the interval $L_j$ obtained from $I$ by replacing the $j$-th side $[a_j,b_j]$ with $[a_j-\eps,a_j+\eps]$, and $F_j^+$ is contained in the interval $R_j$ obtained by replacing it with $[b_j-\eps,b_j+\eps]$.
+    Both have volume
+    \begin{align*}
+        \vol(L_j)=\vol(R_j)=2\eps\prod_{k\ne j}(b_k-a_k).
+    \end{align*}
+    By Theorem \ref{thm:outer-monotone}, Theorem \ref{thm:outer-subadditive} and Theorem \ref{thm:outer-measure-interval},
+    \begin{align*}
+        \abs{\pr I}_e
+        \le\sum_{j=1}^{n}\bigl(\abs{L_j}_e+\abs{R_j}_e\bigr)
+        =\sum_{j=1}^{n}2\cdot2\eps\prod_{k\ne j}(b_k-a_k)
+        =C\eps,\qquad C\coloneqq4\sum_{j=1}^{n}\prod_{k\ne j}(b_k-a_k).
+    \end{align*}
+    The constant $C$ does not depend on $\eps$, and $\eps>0$ is arbitrary, so $\abs{\pr I}_e=0$.
 \end{proof}
 
 \begin{thm}\label{thm:interval-measurable}
@@ -3147,6 +3162,445 @@ In functional analysis, this is called the \textit{weak-$^\ast$ topology}.
     \end{align*}
     The last sums are Riemann sums of the continuous compactly supported function $y\mapsto(u\ast\phi)(x-y)\psi(y)$, so they converge to $((u\ast\phi)\ast\psi)(x)$.
 \end{proof}
+
+
+\newpage
+\subsection{20261117}\label{ssec:1117}
+Throughout this lecture, $\chi\in C_c^\infty(\R^n)$ is the function from the previous lectures: $\chi\ge 0$, $\sp\chi\subset B_1(0)$ and $\int_{\R^n}\chi=1$.
+(We do not require $\chi\le1$: for large $n$ the unit ball has volume less than $1$, so the bound $\chi\le1$ would be incompatible with $\int\chi=1$.)
+For $\eps>0$, let $\chi_\eps(x) = \eps^{-n}\chi(x/\eps)$.
+Then $\chi_\eps\in C_c^\infty(B_\eps(0))$, $\chi_\eps\ge0$, and, by the substitution $x=\eps y$ (so $\d x=\eps^n\d y$),
+\begin{align*}
+    \int_{\R^n}\chi_\eps(x)\d x=\int_{\R^n}\eps^{-n}\chi(y)\,\eps^n\d y=\int_{\R^n}\chi(y)\d y=1.
+\end{align*}
+
+\textit{Notation}: for a function $f$ on $\R^n$, we write $\check f(x)\coloneqq f(-x)$.
+For a longer expression we write $(\cdots)^\vee$ for the same operation; for example, $(\chi_\eps\ast\check\Psi)^\vee(x)=(\chi_\eps\ast\check\Psi)(-x)$.
+Applying the operation twice gives back the function: $\check{\check f}=f$.
+
+\begin{lm}\label{lem:reflection}
+    Let $\phi,\psi\in C_c^\infty(\R^n)$.
+    \begin{enumerate}
+        \item $\check\phi\in C_c^\infty(\R^n)$, $\sp\check\phi=-\sp\phi$, and $\pr^\alpha\check\phi=(-1)^{\abs\alpha}(\pr^\alpha\phi)^\vee$ for every $\alpha\in\N_0^n$.
+        \item $(\phi\ast\psi)^\vee=\check\phi\ast\check\psi$.
+        \item If $\phi_j\to\phi$ in $C_c^\infty(\R^n)$, then $\check\phi_j\to\check\phi$ in $C_c^\infty(\R^n)$.
+    \end{enumerate}
+\end{lm}
+\begin{proof}
+    (i) $\check\phi$ is the composition of $\phi$ with the linear map $x\mapsto-x$, so it is smooth, and $\check\phi(x)\ne0$ if and only if $-x\in\set{\phi\ne0}$; taking closures gives $\sp\check\phi=-\sp\phi$, which is compact.
+    By the chain rule, $\pr_{x_i}\bigl[\phi(-x)\bigr]=-(\pr_{x_i}\phi)(-x)$.
+    Applying this once for each of the $\abs\alpha$ derivatives in $\pr^\alpha$ gives $\pr^\alpha\check\phi=(-1)^{\abs\alpha}(\pr^\alpha\phi)^\vee$.
+
+    (ii) Fix $x\in\R^n$.
+    By the definition of the convolution and the substitution $y\mapsto-y$ (which does not change the Lebesgue integral),
+    \begin{align*}
+        (\phi\ast\psi)^\vee(x)
+        &=(\phi\ast\psi)(-x)
+        =\int_{\R^n}\phi(y)\psi(-x-y)\d y\\
+        &=\int_{\R^n}\phi(-y)\psi(-x+y)\d y
+        =\int_{\R^n}\check\phi(y)\,\check\psi(x-y)\d y
+        =(\check\phi\ast\check\psi)(x),
+    \end{align*}
+    where we used $\check\psi(x-y)=\psi(-(x-y))=\psi(-x+y)$.
+
+    (iii) Let $K$ be a compact set with $\sp\phi_j\subset K$ for all $j$ and $\sp\phi\subset K$.
+    By (i), $\sp\check\phi_j\subset-K$ and $\sp\check\phi\subset-K$, and $-K$ is compact.
+    For every $\alpha$, (i) gives $\pr^\alpha(\check\phi_j-\check\phi)=(-1)^{\abs\alpha}\bigl(\pr^\alpha(\phi_j-\phi)\bigr)^\vee$, and reflecting a function does not change its supremum, so
+    \begin{align*}
+        \sup_{\R^n}\abs{\pr^\alpha(\check\phi_j-\check\phi)}=\sup_{\R^n}\abs{\pr^\alpha(\phi_j-\phi)}\to0\quad(j\to+\infty).
+    \end{align*}
+\end{proof}
+
+The following identity is the heart of the two approximation theorems of this lecture.
+
+\begin{lm}\label{lem:convolution-pairing}
+    Let $u\in\mathcal D'(\R^n)$ and $\phi,\Psi\in C_c^\infty(\R^n)$.
+    Then, regarding the smooth function $u\ast\phi$ as a distribution,
+    \begin{align*}
+        (u\ast\phi)(\Psi)=\int_{\R^n}(u\ast\phi)(x)\Psi(x)\d x=\bigl(u\ast(\phi\ast\check\Psi)\bigr)(0)=u(\check\phi\ast\Psi).
+    \end{align*}
+\end{lm}
+\begin{proof}
+    Write $w\coloneqq u\ast\phi$, which lies in $C^\infty(\R^n)$ by Lemma \ref{lem:distribution-convolution}(i).
+    The first equality is the definition of $T_w$ (Example \ref{ex:L1loc-distribution}).
+    For the second, evaluate the convolution of $w$ with $\check\Psi\in C_c^\infty(\R^n)$ at $0$:
+    \begin{align*}
+        (w\ast\check\Psi)(0)=\int_{\R^n}w(y)\check\Psi(0-y)\d y=\int_{\R^n}w(y)\Psi(y)\d y.
+    \end{align*}
+    On the other hand, by the associativity of convolutions (Theorem \ref{thm:convolution-associative}, applied to $\phi$ and $\check\Psi$),
+    \begin{align*}
+        (w\ast\check\Psi)(0)=\bigl((u\ast\phi)\ast\check\Psi\bigr)(0)=\bigl(u\ast(\phi\ast\check\Psi)\bigr)(0).
+    \end{align*}
+    For the third equality, put $g\coloneqq\phi\ast\check\Psi\in C_c^\infty(\R^n)$ (Lemma \ref{lem:convolution-properties}).
+    By the definition of $u\ast g$, then Lemma \ref{lem:reflection}(ii), and $\check{\check\Psi}=\Psi$,
+    \begin{align*}
+        (u\ast g)(0)=u\bigl(g(0-\cdot)\bigr)=u(\check g)=u\bigl((\phi\ast\check\Psi)^\vee\bigr)=u\bigl(\check\phi\ast\check{\check\Psi}\bigr)=u(\check\phi\ast\Psi).
+    \end{align*}
+\end{proof}
+
+\begin{thm}\label{thm:mollify-distribution}
+    Let $u\in\mathcal D'(\R^n)$.
+    For $\eps>0$, let $u_\eps\coloneqq u\ast \chi_\eps\in C^\infty(\R^n)$.
+    Then $u_\eps\to u$ in $\mathcal D'(\R^n)$ as $\eps\to0^+$, that is,
+    \begin{align*}
+        \lim_{\eps\to0^+}u_\eps(\Psi)=\lim_{\eps\to0^+}\int_{\R^n}u_\eps(x)\Psi(x)\d x=u(\Psi)\quad\text{for all }\Psi\in C_c^\infty(\R^n).
+    \end{align*}
+\end{thm}
+\begin{proof}
+    Let $\Psi\in C_c^\infty(\R^n)$.
+    By Lemma \ref{lem:convolution-pairing} with $\phi=\chi_\eps$, and then Lemma \ref{lem:reflection}(ii) together with $\check{\check\Psi}=\Psi$,
+    \begin{align*}
+        u_\eps(\Psi)=\bigl(u\ast(\chi_\eps\ast\check\Psi)\bigr)(0)=u(\check\chi_\eps\ast\Psi)=u\bigl((\chi_\eps\ast\check\Psi)^\vee\bigr).
+    \end{align*}
+    So it suffices to show that $(\chi_\eps\ast\check\Psi)^\vee\to\Psi$ in $C_c^\infty(\R^n)$ along every sequence $\eps_k\to0^+$; then the sequential continuity of $u$ (Theorem \ref{thm:sequential-continuity}) gives $u_{\eps_k}(\Psi)\to u(\Psi)$, and since the sequence was arbitrary, $u_\eps(\Psi)\to u(\Psi)$.
+
+    \textit{Supports.}
+    For $0<\eps\le1$, a point $x$ with $(\chi_\eps\ast\check\Psi)(x)=\int\check\Psi(x-y)\chi_\eps(y)\d y\ne0$ must have $x-y\in\sp\check\Psi$ for some $y$ with $\abs y<\eps$, so
+    \begin{align*}
+        \sp(\chi_\eps\ast\check\Psi)\subset\sp\check\Psi+\bar B_1(0),
+    \end{align*}
+    a compact set independent of $\eps$.
+
+    \textit{Derivatives.}
+    The convolution is commutative, so $\chi_\eps\ast\check\Psi=\check\Psi\ast\chi_\eps$.
+    Since $\check\Psi\in C_c^\infty(\R^n)\subset C_c^j(\R^n)$ for every $j$, Theorem \ref{thm:mollification} gives, for every $\alpha\in\N_0^n$,
+    \begin{align*}
+        \sup_{x\in\R^n}\abs{\pr^\alpha(\check\Psi\ast\chi_\eps-\check\Psi)(x)}\to0\quad\text{as }\eps\to0^+.
+    \end{align*}
+    Together with the support statement, this says that $\chi_{\eps_k}\ast\check\Psi\to\check\Psi$ in $C_c^\infty(\R^n)$.
+    By Lemma \ref{lem:reflection}(iii), $(\chi_{\eps_k}\ast\check\Psi)^\vee\to\check{\check\Psi}=\Psi$ in $C_c^\infty(\R^n)$, as required.
+\end{proof}
+
+\begin{remark}\label{rmk:convolution-of-distributions}
+    In the proof above we used the identity
+    \begin{align*}
+        u_\eps(\Psi)=\bigl(u\ast (\chi_\eps\ast\check\Psi)\bigr)(0).
+    \end{align*}
+    This motivates the definition of the convolution of two distributions $u,v\in\mathcal D'(\R^n)$:
+    \begin{align*}
+        (u\ast v)(\phi) \coloneqq \bigl(u\ast (v\ast\check\phi)\bigr)(0),\qquad \phi\in C_c^\infty(\R^n).
+    \end{align*}
+    For this to make sense, $v\ast\check\phi$ has to be a test function, which is the case if $v\in\mathcal E'(\R^n)$, by Lemma \ref{lem:distribution-convolution}(ii).
+    (We will not need this definition below.)
+    It is consistent with what we had before.
+    If $v\in C_c^\infty(\R^n)$, then Lemma \ref{lem:convolution-pairing} says that $\bigl(u\ast(v\ast\check\phi)\bigr)(0)=\int(u\ast v)\phi$, the old convolution $u\ast v$ regarded as a distribution.
+    If $v=\delta_0$, then $\delta_0\ast\check\phi=\check\phi$ (Example \ref{ex:delta-convolution}), and
+    \begin{align*}
+        (u\ast\delta_0)(\phi)=(u\ast\check\phi)(0)=u\bigl(\check\phi(0-\cdot)\bigr)=u(\phi),
+    \end{align*}
+    so $u\ast\delta_0=u$.
+\end{remark}
+
+\begin{thm}\label{thm:density-test-functions}
+    Let $X\subset\R^n$ be an open set and let $u\in\mathcal D'(X)$.
+    Then there are $u_j\in C_c^\infty(X)\subset \mathcal D'(X)$ such that $u_j\to u$ in $\mathcal D'(X)$.
+\end{thm}
+\begin{proof}
+    For a set $A\subset\R^n$ we write $\operatorname{dist}(x,A)=\inf_{a\in A}\abs{x-a}$, with the convention $\operatorname{dist}(x,\varnothing)=+\infty$ (this covers the case $X=\R^n$).
+    For $j\in\N$, let
+    \begin{align*}
+        K_j \coloneqq \set{x\in \R^n \mid \abs{x}\le j,\ \operatorname{dist}(x,\R^n\setminus X) \ge 1/j}.
+    \end{align*}
+    (In the lecture this is written with $\operatorname{dist}(x,\pr X)$, which is the same thing for $x\in X$.)
+    The function $x\mapsto\operatorname{dist}(x,\R^n\setminus X)$ is continuous, so $K_j$ is closed; it is bounded, hence compact; and $K_j\subset X$ because points of $\R^n\setminus X$ have distance $0$ to it.
+    By the cutoff theorem (Theorem \ref{thm:cutoff}), there is $\tau_j\in C_c^\infty(X)$ with $0\le\tau_j\le1$ and $\tau_j\equiv 1$ on a neighborhood of $K_j$.
+
+    \textit{Step 1: the approximants.}
+    For each $j$, define $v_j\colon C_c^\infty(\R^n)\to\C$ by
+    \begin{align*}
+        v_j(\phi)\coloneqq u\bigl(\tau_j\phi|_X\bigr).
+    \end{align*}
+    (This is the distribution $\tau_j.u$, extended by $0$ to $\R^n$.)
+    It is well defined because $\tau_j\phi|_X\in C_c^\infty(X)$ with support in $L_j\coloneqq\sp\tau_j\Subset X$, and it is linear.
+    It is a distribution on $\R^n$: since $u\in\mathcal D'(X)$, there are $C>0$ and $k\in\N_0$ with $\abs{u(\psi)}\le C\sum_{\abs\beta\le k}\sup\abs{\pr^\beta\psi}$ for all $\psi$ supported in $L_j$, and the Leibniz rule estimate from the proof of Lemma \ref{lem:derivative-product-distribution} gives, for every $\phi\in C_c^\infty(\R^n)$,
+    \begin{align*}
+        \abs{v_j(\phi)}\le C\sum_{\abs\beta\le k}\sup\abs{\pr^\beta(\tau_j\phi)}\le C\cdot\#\set{\beta\mid\abs\beta\le k}\cdot2^kA_j\sum_{\abs\gamma\le k}\sup\abs{\pr^\gamma\phi},
+    \end{align*}
+    where $A_j=\max_{\abs\beta\le k}\sup\abs{\pr^\beta\tau_j}$.
+    So $v_j\in\mathcal D'(\R^n)$.
+    If $\phi\in C_c^\infty(\R^n\setminus L_j)$, then $\tau_j\phi=0$ and $v_j(\phi)=0$; so $v_j$ vanishes on the open set $\R^n\setminus L_j$, that is, $\sp v_j\subset L_j$.
+    In particular $v_j\in\mathcal E'(\R^n)$.
+
+    Let $d_j\coloneqq\operatorname{dist}(L_j,\R^n\setminus X)$.
+    This is positive, since $L_j$ is compact, $\R^n\setminus X$ is closed and the two sets are disjoint ($d_j=+\infty$ if $X=\R^n$).
+    Choose
+    \begin{align*}
+        0<\eps_j\le\min\set{\frac1j,\frac{d_j}2}
+    \end{align*}
+    and define $u_j\coloneqq v_j\ast\chi_{\eps_j}$.
+    By Lemma \ref{lem:distribution-convolution}, $u_j\in C^\infty(\R^n)$ and
+    \begin{align*}
+        \sp u_j\subset\sp v_j+\sp\chi_{\eps_j}\subset L_j+\bar B_{\eps_j}(0).
+    \end{align*}
+    The right-hand side is compact, and it is contained in $X$: a point $x+y$ with $x\in L_j$ and $\abs y\le\eps_j\le d_j/2<d_j$ cannot lie in $\R^n\setminus X$.
+    Hence $u_j\in C_c^\infty(X)$.
+    (The condition $\eps_j\le d_j/2$ is what makes $\sp v_j+\sp\chi_{\eps_j}\Subset X$; the condition $\eps_j\le1/j$ is used in Step 2.)
+
+    \textit{Step 2: convergence.}
+    Let $\Psi\in C_c^\infty(X)$, extended by $0$ to a function in $C_c^\infty(\R^n)$, and let $K\coloneqq\sp\Psi\Subset X$.
+    By Lemma \ref{lem:convolution-pairing} (applied to $v_j\in\mathcal D'(\R^n)$ and $\phi=\chi_{\eps_j}$) and the definition of $v_j$,
+    \begin{align*}
+        u_j(\Psi)
+        =\int_{\R^n}(v_j\ast\chi_{\eps_j})\Psi\d x
+        =v_j\bigl(\check\chi_{\eps_j}\ast\Psi\bigr)
+        =u\bigl(\tau_j\cdot(\check\chi_{\eps_j}\ast\Psi)\bigr).
+    \end{align*}
+    Since $\sp\check\chi_{\eps_j}\subset\bar B_{\eps_j}(0)$, we have $\sp(\check\chi_{\eps_j}\ast\Psi)\subset K+\bar B_{\eps_j}(0)$.
+
+    We now show that $\tau_j=1$ there for large $j$.
+    Choose $R>0$ with $K\subset\bar B_R(0)$, let $d\coloneqq\operatorname{dist}(K,\R^n\setminus X)>0$, and choose $j_0\in\N$ with $j_0\ge R+1$ and $j_0\ge2/d$.
+    Let $j\ge j_0$ and $x\in K+\bar B_{1/j}(0)$, say $x=y+z$ with $y\in K$ and $\abs z\le1/j$.
+    Then
+    \begin{align*}
+        \abs x\le\abs y+\abs z\le R+\frac1j\le R+1\le j,
+        \qquad
+        \operatorname{dist}(x,\R^n\setminus X)\ge\operatorname{dist}(y,\R^n\setminus X)-\abs z\ge d-\frac1j\ge\frac2j-\frac1j=\frac1j,
+    \end{align*}
+    so $x\in K_j$.
+    Since $\eps_j\le1/j$, this gives $K+\bar B_{\eps_j}(0)\subset K_j$, where $\tau_j\equiv1$.
+    Therefore, for $j\ge j_0$, using Lemma \ref{lem:reflection}(ii),
+    \begin{align*}
+        \tau_j\cdot(\check\chi_{\eps_j}\ast\Psi)=\check\chi_{\eps_j}\ast\Psi=(\chi_{\eps_j}\ast\check\Psi)^\vee.
+    \end{align*}
+    As in the proof of Theorem \ref{thm:mollify-distribution}, $(\chi_{\eps_j}\ast\check\Psi)^\vee\to\Psi$ uniformly with all derivatives, since $\eps_j\le1/j\to0$.
+    For $j\ge j_0$ all these functions, and $\Psi$, are supported in $K'\coloneqq K+\bar B_{d_0}(0)$ with $d_0=\min\set{d/2,1}$, because $\eps_j\le1/j\le d/2$ and $\eps_j\le1$.
+    The set $K'$ is compact and contained in $X$ (its points have distance at least $d-d_0\ge d/2>0$ from $\R^n\setminus X$), so the convergence takes place in $C_c^\infty(X)$.
+    Since $u$ is sequentially continuous on $C_c^\infty(X)$ (Theorem \ref{thm:sequential-continuity}),
+    \begin{align*}
+        \lim_{j\to+\infty}u_j(\Psi)=\lim_{j\to+\infty}u\bigl((\chi_{\eps_j}\ast\check\Psi)^\vee\bigr)=u(\Psi).
+    \end{align*}
+    As $\Psi\in C_c^\infty(X)$ was arbitrary, $u_j\to u$ in $\mathcal D'(X)$.
+\end{proof}
+
+
+\newpage
+\section{Fundamental Solutions of Partial Differential Operators}\label{sec:fundamental-solutions}
+\subsection{20261117 (continued)}\label{ssec:1117b}
+
+A \textit{partial differential operator} (PDO) of order at most $m$ on an open set $X\subset\R^n$ is an operator of the form
+\begin{align*}
+    P = \sum_{\substack{\alpha\in \N_0^n \\ \abs{\alpha}\le m}} a_\alpha(x)\, \pr_x^\alpha,
+\end{align*}
+where $a_\alpha\in C^\infty(X)$.
+It maps $C^\infty(X)$ to itself, and it maps $\mathcal D'(X)$ to itself: for distributions, $\pr^\alpha u$ and $a_\alpha.u$ are distributions by Definition \ref{def:distribution-derivative} and Lemma \ref{lem:derivative-product-distribution}.
+Solving PDEs has always been a central topic of pure and applied mathematics, and next semester a very general point of view will be introduced.
+Here we only consider operators with constant coefficients $a_\alpha(x)=a_\alpha\in\C$.
+
+\begin{df}\label{def:fundamental-solution}
+    Let $P=\sum_{\abs{\alpha}\le m}a_\alpha\pr_x^\alpha$ be a PDO with constant coefficients.
+    A distribution $E\in\mathcal D'(\R^n)$ is called a \textit{fundamental solution} of $P$ if $PE=\delta_0$.
+\end{df}
+
+\begin{remark}\label{rmk:fundamental-solution-test}
+    A fundamental solution is not unique: if $h\in\mathcal D'(\R^n)$ satisfies $Ph=0$ (for example, a harmonic polynomial $h$ for $P=\triangle$), then $P(E+h)=\delta_0$ as well.
+
+    Let us write out the equation $PE=\delta_0$.
+    By Definition \ref{def:distribution-derivative}, each derivative moves to the test function with a factor $-1$, so $(\pr^\alpha E)(\phi)=(-1)^{\abs\alpha}E(\pr^\alpha\phi)$.
+    Hence, for $\phi\in C_c^\infty(\R^n)$,
+    \begin{align*}
+        (PE)(\phi)
+        = \sum_{\abs{\alpha}\le m}a_\alpha (\pr_x^\alpha E)(\phi)
+        = \sum_{\abs{\alpha}\le m}a_\alpha (-1)^{\abs{\alpha}}E(\pr_x^\alpha\phi)
+        = E\left(\sum_{\abs{\alpha}\le m}(-1)^{\abs{\alpha}}a_\alpha\pr_x^\alpha\phi\right).
+    \end{align*}
+    Therefore $E$ is a fundamental solution of $P$ if and only if
+    \begin{align*}
+        E\left(\sum_{\abs{\alpha}\le m}(-1)^{\abs{\alpha}}a_\alpha\pr_x^\alpha\phi\right) = \phi(0)\qquad\text{for all }\phi\in C_c^\infty(\R^n).
+    \end{align*}
+\end{remark}
+
+\begin{lm}\label{lem:PDO-convolution}
+    Let $u\in\mathcal D'(\R^n)$ and let $P=\sum_{\abs{\alpha}\le m} a_\alpha\pr_x^\alpha$ be a PDO with constant coefficients.
+    Then $P(u\ast g) = (Pu)\ast g$ for every $g\in C_c^\infty(\R^n)$.
+\end{lm}
+\begin{proof}
+    \textit{First proof.}
+    Recall that $(u\ast g)(x)=u(g(x-\cdot))$.
+    Fix $\alpha\in\N_0^n$ and $x\in\R^n$.
+    By Lemma \ref{lem:distribution-convolution}(i),
+    \begin{align*}
+        \pr_x^\alpha(u\ast g)(x)=\bigl(u\ast\pr^\alpha g\bigr)(x)=u\bigl((\pr^\alpha g)(x-\cdot)\bigr).
+    \end{align*}
+    On the other hand, by the chain rule, $\pr_y^\alpha\bigl[g(x-y)\bigr]=(-1)^{\abs\alpha}(\pr^\alpha g)(x-y)$ (each derivative in $y$ produces a factor $-1$).
+    So the definition of the distributional derivative gives
+    \begin{align*}
+        \bigl((\pr^\alpha u)\ast g\bigr)(x)
+        =(\pr^\alpha u)\bigl(g(x-\cdot)\bigr)
+        =(-1)^{\abs\alpha}u\bigl(\pr_y^\alpha[g(x-y)]\bigr)
+        =(-1)^{\abs\alpha}(-1)^{\abs\alpha}u\bigl((\pr^\alpha g)(x-\cdot)\bigr)
+        =u\bigl((\pr^\alpha g)(x-\cdot)\bigr).
+    \end{align*}
+    Hence $\pr_x^\alpha(u\ast g)=(\pr^\alpha u)\ast g$ for every $\alpha$.
+    The convolution with $g$ is linear in $u$, so multiplying by the constants $a_\alpha$ and summing over $\abs\alpha\le m$ gives
+    \begin{align*}
+        P(u\ast g)=\sum_{\abs\alpha\le m}a_\alpha\pr^\alpha(u\ast g)=\sum_{\abs\alpha\le m}a_\alpha\bigl((\pr^\alpha u)\ast g\bigr)=\Bigl(\sum_{\abs\alpha\le m}a_\alpha\pr^\alpha u\Bigr)\ast g=(Pu)\ast g.
+    \end{align*}
+    (Here the coefficients must be constant: a function $a_\alpha(x)$ could not be moved inside the convolution.)
+
+    \textit{Second proof.}
+    By Theorem \ref{thm:density-test-functions} (with $X=\R^n$), there are $u_j\in C_c^\infty(\R^n)$ with $u_j\to u$ in $\mathcal D'(\R^n)$.
+    For the smooth functions $u_j$, the identity $P(u_j\ast g)=(Pu_j)\ast g$ is classical: by Lemma \ref{lem:convolution-properties}(ii), $\pr^\alpha(u_j\ast g)=(\pr^\alpha u_j)\ast g$ for every $\alpha$.
+    We pass to the limit at a fixed $x\in\R^n$.
+    Since $g(x-\cdot)$ and $(\pr^\alpha g)(x-\cdot)$ are test functions, the first proof's formula $\pr^\alpha(v\ast g)(x)=v\bigl((\pr^\alpha g)(x-\cdot)\bigr)$ (valid for every distribution $v$) gives
+    \begin{align*}
+        P(u_j\ast g)(x)=\sum_{\abs\alpha\le m}a_\alpha u_j\bigl((\pr^\alpha g)(x-\cdot)\bigr)\to\sum_{\abs\alpha\le m}a_\alpha u\bigl((\pr^\alpha g)(x-\cdot)\bigr)=P(u\ast g)(x).
+    \end{align*}
+    Also $Pu_j\to Pu$ in $\mathcal D'(\R^n)$: with $P^t\phi\coloneqq\sum_{\abs\alpha\le m}(-1)^{\abs\alpha}a_\alpha\pr^\alpha\phi$, Remark \ref{rmk:fundamental-solution-test} shows that $(Pv)(\phi)=v(P^t\phi)$ for every distribution $v$, so $(Pu_j)(\phi)=u_j(P^t\phi)\to u(P^t\phi)=(Pu)(\phi)$.
+    Hence
+    \begin{align*}
+        \bigl((Pu_j)\ast g\bigr)(x)=(Pu_j)\bigl(g(x-\cdot)\bigr)\to(Pu)\bigl(g(x-\cdot)\bigr)=\bigl((Pu)\ast g\bigr)(x).
+    \end{align*}
+    The two sequences are equal term by term, so their limits are equal: $P(u\ast g)(x)=\bigl((Pu)\ast g\bigr)(x)$.
+\end{proof}
+
+\begin{remark}\label{rmk:solving-with-fundamental-solution}
+    Let $E\in\mathcal D'(\R^n)$ be a fundamental solution of $P=\sum_{\abs{\alpha}\le m}a_\alpha \pr_x^\alpha$.
+    Let $v\in C_c^\infty(\R^n)$ and put $u \coloneqq E\ast v$, which lies in $C^\infty(\R^n)$ by Lemma \ref{lem:distribution-convolution}(i).
+    By Lemma \ref{lem:PDO-convolution} and Example \ref{ex:delta-convolution},
+    \begin{align*}
+        (Pu)(x)
+        = P(E\ast v)(x)
+        = \bigl((PE)\ast v\bigr)(x)
+        = (\delta_0\ast v)(x)
+        = \delta_0\bigl(v(x-\cdot)\bigr)
+        = v(x).
+    \end{align*}
+    Therefore, once we have a fundamental solution, the equation $Pu=v$ can be solved for every $v\in C_c^\infty(\R^n)$, namely by $u=E\ast v$.
+\end{remark}
+
+We use polar coordinates in the following form: if $g\colon(0,+\infty)\to[0,+\infty]$ is measurable, then
+\begin{align*}
+    \int_{\set{\abs x<\rho}}g(\abs x)\d x=c_n\int_0^\rho g(r)\,r^{n-1}\d r,
+\end{align*}
+where $c_n$ is the area of the unit sphere $\set{\abs x=1}\subset\R^n$ (so $c_2=2\pi$); and the sphere $\set{\abs x=\eps}$ has area $c_n\eps^{n-1}$.
+
+\begin{thm}\label{thm:laplace-fundamental}
+    Let $n\ge2$ and let $\triangle = \pr_{x_1}^2 + \cdots + \pr_{x_n}^2$ be the Laplacian.
+    For $x\in\R^n\setminus\set0$, put
+    \begin{align*}
+        E(x) \coloneqq
+        \begin{cases}
+            \dfrac{1}{2\pi} \log \abs{x} & \text{if } n=2, \\[3mm]
+            -\dfrac{\abs{x}^{2-n}}{(n-2)c_n} & \text{if } n>2,
+        \end{cases}
+    \end{align*}
+    where $\abs x=\sqrt{x_1^2+\cdots+x_n^2}$.
+    Then $E\in L_\loc^1(\R^n)\subset \mathcal D'(\R^n)$ and $\triangle E = \delta_0$, that is, $E$ is a fundamental solution of $\triangle$.
+\end{thm}
+\begin{proof}
+    \textit{Step 0: $E$ is locally integrable, and $\triangle E=0$ away from $0$.}
+    $E$ is continuous on $\R^n\setminus\set0$, so it is integrable on every compact set not containing $0$; it remains to check integrability near $0$.
+    By polar coordinates, for $n>2$,
+    \begin{align*}
+        \int_{\abs x<1}\abs x^{2-n}\d x=c_n\int_0^1r^{2-n}\,r^{n-1}\d r=c_n\int_0^1r\d r=\frac{c_n}2<+\infty,
+    \end{align*}
+    and for $n=2$, integrating by parts with $\frac{d}{dr}\bigl(\frac{r^2}{2}\log r-\frac{r^2}{4}\bigr)=r\log r$,
+    \begin{align*}
+        \int_{\abs x<1}\abs{\log\abs x}\d x=2\pi\int_0^1r\abs{\log r}\d r=-2\pi\int_0^1r\log r\d r=-2\pi\left[\frac{r^2}2\log r-\frac{r^2}4\right]_{0^+}^1=\frac\pi2<+\infty,
+    \end{align*}
+    using $r^2\log r\to0$ as $r\to0^+$.
+    Hence $E\in L^1_\loc(\R^n)$.
+
+    On $\R^n\setminus\set{0}$, $E$ is smooth.
+    Since $\pr_{x_j}\abs x=x_j/\abs x$, for $n>2$
+    \begin{align*}
+        \pr_{x_j}E=-\frac{1}{(n-2)c_n}(2-n)\abs x^{1-n}\frac{x_j}{\abs x}=\frac{x_j}{c_n\abs x^n},
+    \end{align*}
+    and for $n=2$, $\pr_{x_j}E=\frac1{2\pi}\cdot\frac1{\abs x}\cdot\frac{x_j}{\abs x}=\frac{x_j}{c_2\abs x^2}$.
+    So in all cases
+    \begin{align*}
+        \nabla E(x)=\frac{x}{c_n\abs x^{n}},\qquad x\ne0.
+    \end{align*}
+    Differentiating once more, by the product rule,
+    \begin{align*}
+        \pr_{x_j}\bigl(x_j\abs x^{-n}\bigr)=\abs x^{-n}+x_j\cdot(-n)\abs x^{-n-1}\frac{x_j}{\abs x}=\abs x^{-n}-nx_j^2\abs x^{-n-2},
+    \end{align*}
+    and summing over $j=1,\dots,n$ (with $x_1^2+\cdots+x_n^2=\abs x^2$),
+    \begin{align*}
+        c_n\triangle E=n\abs x^{-n}-n\abs x^2\abs x^{-n-2}=0\qquad\text{on }\R^n\setminus\set0.
+    \end{align*}
+
+    \textit{Step 1: cutting out a small ball.}
+    Let $\phi\in C_c^\infty(\R^n)$, and choose $R>0$ with $\sp\phi\subset B_R(0)$.
+    Two derivatives each give a factor $-1$, so $(\pr_{x_j}^2E)(\phi)=E(\pr_{x_j}^2\phi)$ and
+    \begin{align*}
+        (\triangle E)(\phi)=E(\triangle\phi)=\int_{\R^n}E\,\triangle\phi\d x.
+    \end{align*}
+    The function $E\triangle\phi$ is integrable (Step 0, and $\triangle\phi$ is bounded with compact support), and $E\triangle\phi\,1_{\set{\abs x>\eps}}\to E\triangle\phi$ pointwise on $\R^n\setminus\set0$ as $\eps\to0^+$, with $\abs{E\triangle\phi\,1_{\set{\abs x>\eps}}}\le\abs{E\triangle\phi}$.
+    By Lebesgue's dominated convergence theorem,
+    \begin{align*}
+        (\triangle E)(\phi)=\lim_{\eps\to0^+}\int_{\abs x>\eps}E\,\triangle\phi\d x.
+    \end{align*}
+    Fix $0<\eps<R$.
+    On $\set{\abs x>\eps}$ we have $\triangle E=0$ by Step 0, and
+    \begin{align*}
+        \operatorname{div}\bigl(E\nabla\phi-\phi\nabla E\bigr)
+        =\nabla E\cdot\nabla\phi+E\triangle\phi-\nabla\phi\cdot\nabla E-\phi\triangle E
+        =E\triangle\phi-\phi\triangle E,
+    \end{align*}
+    so
+    \begin{align*}
+        \int_{\abs{x}>\eps}E\,\triangle\phi\d x
+        =\int_{\abs{x}>\eps}\bigl(E\triangle\phi-\phi\triangle E\bigr)\d x
+        =\int_{\abs{x}>\eps}\operatorname{div}F\d x,\qquad F\coloneqq E\nabla\phi-\phi\nabla E.
+    \end{align*}
+
+    \textit{Step 2: the divergence theorem.}
+    Write $\set{\abs x>\eps}=\set{r_\eps<0}$ with $r_\eps(x)=\eps^2-\abs x^2$; then $\nabla r_\eps=-2x\ne0$ on the boundary sphere $\set{\abs x=\eps}$, and the outward unit normal there is $\nabla r_\eps/\abs{\nabla r_\eps}=-x/\abs x$ (it points towards the origin, out of the region $\set{\abs x>\eps}$).
+    The vector field $F$ is smooth on $\R^n\setminus\set0$ and vanishes for $\abs x\ge R$.
+    (To apply the Gauss--Green formula to a field defined on all of $\R^n$, replace $E$ by $(1-\theta)E$, where $\theta\in C_c^\infty(B_{\eps/2}(0))$ equals $1$ near $0$; this changes nothing on $\set{\abs x\ge\eps/2}$.)
+    By the Gauss--Green formula (Example \ref{ex:gauss-green}, written with the outward normal), with $\d S$ the surface element of the sphere $\set{\abs x=\eps}$,
+    \begin{align*}
+        \int_{\abs{x}>\eps}\operatorname{div}F\d x
+        =\int_{\abs x=\eps}\Bigl\langle F,-\frac x{\abs x}\Bigr\rangle\d S
+        =\int_{\abs x=\eps}\phi\Bigl\langle\nabla E,\frac x{\abs x}\Bigr\rangle\d S-\int_{\abs x=\eps}E\Bigl\langle\nabla\phi,\frac x{\abs x}\Bigr\rangle\d S.
+    \end{align*}
+    By Step 0, $\langle\nabla E,x/\abs x\rangle=\langle x,x\rangle/(c_n\abs x^{n}\abs x)=\abs x^{1-n}/c_n$.
+    Hence
+    \begin{align*}
+        (\triangle E)(\phi)=\lim_{\eps\to0^+}\bigl(I_\eps+II_\eps\bigr),\qquad
+        I_\eps\coloneqq\int_{\abs x=\eps}\frac{\phi(x)\abs x^{1-n}}{c_n}\d S,\quad
+        II_\eps\coloneqq-\int_{\abs x=\eps}E(x)\Bigl\langle\nabla\phi(x),\frac x{\abs x}\Bigr\rangle\d S.
+    \end{align*}
+    (Explicitly, $\langle\nabla\phi,x/\abs x\rangle=\frac1{\abs x}\bigl(x_1\pr_{x_1}\phi+\cdots+x_n\pr_{x_n}\phi\bigr)$, so for $n>2$, $II_\eps=\int_{\abs x=\eps}\frac{\abs x^{2-n}}{(n-2)c_n}\cdot\frac1{\abs x}\bigl(x_1\pr_{x_1}\phi+\cdots+x_n\pr_{x_n}\phi\bigr)\d S$, as written in the lecture.)
+
+    \textit{Step 3: the limits.}
+    On $\set{\abs x=\eps}$ we have $\abs x^{1-n}=\eps^{1-n}$, and the sphere has area $c_n\eps^{n-1}$, so $\phi(0)=\frac1{c_n\eps^{n-1}}\int_{\abs x=\eps}\phi(0)\d S$ and
+    \begin{align*}
+        \abs{I_\eps-\phi(0)}
+        =\abs*{\frac1{c_n\eps^{n-1}}\int_{\abs x=\eps}\bigl(\phi(x)-\phi(0)\bigr)\d S}
+        \le\frac1{c_n\eps^{n-1}}\cdot c_n\eps^{n-1}\sup_{\abs x=\eps}\abs{\phi(x)-\phi(0)}
+        =\sup_{\abs x=\eps}\abs{\phi(x)-\phi(0)},
+    \end{align*}
+    which tends to $0$ as $\eps\to0^+$ because $\phi$ is continuous at $0$.
+
+    For $II_\eps$, let $M\coloneqq\sup_{\R^n}\abs{\nabla\phi}<+\infty$.
+    By the Cauchy--Schwarz inequality, $\abs{\langle\nabla\phi,x/\abs x\rangle}\le\abs{\nabla\phi}\le M$.
+    If $n>2$, then $\abs{E(x)}=\frac{\eps^{2-n}}{(n-2)c_n}$ on $\set{\abs x=\eps}$, so
+    \begin{align*}
+        \abs{II_\eps}\le M\cdot\frac{\eps^{2-n}}{(n-2)c_n}\cdot c_n\eps^{n-1}=\frac M{n-2}\,\eps\to0.
+    \end{align*}
+    If $n=2$, then $\abs{E(x)}=\frac1{2\pi}\abs{\log\eps}$ on $\set{\abs x=\eps}$, and the circle has length $2\pi\eps$, so
+    \begin{align*}
+        \abs{II_\eps}\le M\cdot\frac{\abs{\log\eps}}{2\pi}\cdot2\pi\eps=M\eps\abs{\log\eps}\to0,
+    \end{align*}
+    since $\eps\log\eps\to0$ as $\eps\to0^+$ (for instance by l'Hôpital's rule applied to $\log\eps/(1/\eps)$).
+    (The lecture bounds these terms by $\hat C\eps^{2-n}\eps^{n-1}$ and $\hat C\eps\abs{\log\eps}$; above we computed the constants.)
+
+    Therefore, for every $n\ge2$,
+    \begin{align*}
+        (\triangle E)(\phi)=\lim_{\eps\to0^+}(I_\eps+II_\eps)=\phi(0)+0=\delta_0(\phi).
+    \end{align*}
+    Since $\phi\in C_c^\infty(\R^n)$ was arbitrary, $\triangle E=\delta_0$.
+\end{proof}
+
+\begin{remark}\label{rmk:poisson-equation}
+    Combining Theorem \ref{thm:laplace-fundamental} with Remark \ref{rmk:solving-with-fundamental-solution}: for every $v\in C_c^\infty(\R^n)$ ($n\ge2$), the function $u=E\ast v\in C^\infty(\R^n)$ solves the Poisson equation $\triangle u=v$ on $\R^n$.
+    Since $E\in L^1_\loc(\R^n)$, Example \ref{ex:Lloc-convolution} and the substitution $y\mapsto x-y$ give the explicit formula
+    \begin{align*}
+        u(x)=\int_{\R^n}E(y)v(x-y)\d y=\int_{\R^n}E(x-y)v(y)\d y.
+    \end{align*}
+\end{remark}
 
 
 \newpage
