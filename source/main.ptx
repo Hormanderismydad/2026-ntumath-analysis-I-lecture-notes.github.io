@@ -2997,6 +2997,476 @@ Since <m>E\in L^1_\mathrm{loc}(\R^n)</m>, Example <xref ref="ex-Lloc-convolution
 <md>u(x)=\int_{\R^n}E(y)v(x-y)\,dy=\int_{\R^n}E(x-y)v(y)\,dy.</md></p>
 </remark>
 </subsection>
+<subsection xml:id="ssec-1119">
+<title>20261119</title>
+<theorem xml:id="thm-heat-fundamental">
+<title>Fundamental solution of the heat operator</title>
+<statement>
+<p>Consider the heat operator
+<md>\frac{\pr}{\pr t} - \triangle_x,\qquad \triangle_x=\sum_{j=1}^n\frac{\pr^2}{\pr x_j^2},</md>
+on <m>\R^{n+1}</m>, where <m>(x,t)=(x_1,\dots,x_n,t)\in\R^n\times\R =\R^{n+1}</m>.
+Let
+<md>
+<mrow>E(x,t) \coloneqq
+        \begin{cases}
+            (4\pi t)^{-n/2}e^{-\abs{x}^2/4t} &amp; \text{if } t&gt;0, \\
+            0 &amp; \text{if } t\le 0.
+        \end{cases}</mrow>
+</md>
+Then <m>E\in L_\mathrm{loc}^1(\R^{n+1})\subset\mathcal D'(\R^{n+1})</m> and
+<md>\left(\frac{\pr}{\pr t}-\triangle_x\right)E = \delta_0.</md></p>
+</statement>
+<proof>
+<p><em>Step 0: <m>E\in L^1_\mathrm{loc}(\R^{n+1})</m>.</em>
+Recall <m>\int_\R e^{-s^2}\,ds=\sqrt\pi</m>.
+For <m>t&gt;0</m>, the substitution <m>s=\sigma/\sqrt{4t}</m> (<m>\,ds=\,d\sigma/\sqrt{4t}</m>) gives <m>\int_\R e^{-\sigma^2/4t}\,d\sigma=\sqrt{4t}\int_\R e^{-s^2}\,ds=\sqrt{4\pi t}</m>.
+Since <m>e^{-\abs x^2/4t}=\prod_{j=1}^ne^{-x_j^2/4t}</m>, Fubini's theorem gives
+<md>\int_{\R^n}e^{-\abs{x}^2/4t}\,dx=\prod_{j=1}^n\int_\R e^{-x_j^2/4t}\,dx_j=(4\pi t)^{n/2},
+        \qquad\text{hence}\qquad
+        \int_{\R^n}E(x,t)\,dx=1\quad(t&gt;0).</md>
+Let <m>K\subset\R^{n+1}</m> be compact.
+Then <m>K\subset\R^n\times[-C,C]</m> for some <m>C&gt;0</m>, and by Tonelli's theorem (Theorem <xref ref="thm-tonelli" text="global"/>; <m>E\ge0</m> and <m>E=0</m> for <m>t\le0</m>),
+<md>\int_{K} E(x,t)\,dx \,dt
+        \le \int_{0}^{C}\left(\int_{\R^n} E(x,t)\,dx\right)\,dt
+        = \int_0^C1\,dt=C
+        &lt; +\infty.</md>
+So <m>E\in L_\mathrm{loc}^1(\R^{n+1})</m>, and <m>E</m> is a distribution by Example <xref ref="ex-L1loc-distribution" text="global"/>.</p>
+<p><em>Step 1: <m>E</m> solves the equation for <m>t&gt;0</m>.</em>
+For <m>t&gt;0</m>, <m>E</m> is smooth.
+By the chain rule, <m>\pr_{x_j}\bigl(-\abs x^2/4t\bigr)=-x_j/2t</m>, so
+<md>\frac{\pr E}{\pr x_j}=-\frac{x_j}{2t}E,\qquad
+        \frac{\pr^2E}{\pr x_j^2}=-\frac1{2t}E-\frac{x_j}{2t}\cdot\left(-\frac{x_j}{2t}E\right)=-\frac1{2t}E+\frac{x_j^2}{4t^2}E,</md>
+and summing over <m>j</m>,
+<md>\triangle_xE=-\frac n{2t}E+\frac{\abs x^2}{4t^2}E.</md>
+By the product rule, <m>\pr_t(4\pi t)^{-n/2}=-\frac n{2t}(4\pi t)^{-n/2}</m> and <m>\pr_t\bigl(-\abs x^2/4t\bigr)=\abs x^2/4t^2</m>, so
+<md>\frac{\pr E}{\pr t}=-\frac n{2t}E+\frac{\abs x^2}{4t^2}E.</md>
+Hence <m>\pr_tE-\triangle_xE=0</m> on <m>\set{t&gt;0}</m>.</p>
+<p><em>Step 2: the distributional equation.</em>
+Let <m>\phi\in C_c^\infty(\R^{n+1})</m>.
+By Definition <xref ref="def-distribution-derivative" text="global"/>, <m>(\pr_tE)(\phi)=-E(\pr_t\phi)</m>, and <m>(\pr_{x_j}^2E)(\phi)=(-1)^2E(\pr_{x_j}^2\phi)</m>, so
+<md>\left(\left(\frac{\pr}{\pr t}-\triangle_x\right)E\right)(\phi)
+        = E\left(-\frac{\pr\phi}{\pr t}-\triangle_x\phi\right)
+        = \int_{\R^{n+1}}E\left(-\frac{\pr\phi}{\pr t}-\triangle_x\phi\right)\,dx\,dt.</md>
+The integrand is in <m>L^1(\R^{n+1})</m> (<m>E\in L^1_\mathrm{loc}</m>, and <m>\pr_t\phi+\triangle_x\phi</m> is bounded with compact support), and it vanishes for <m>t\le0</m>.
+By Lebesgue's dominated convergence theorem (the integrands <m>1_{\set{t&gt;\eps}}E(\cdots)</m> are dominated by <m>\abs{E(\cdots)}</m>),
+<md>
+<mrow xml:id="eq-heat-limit" number="yes">\left(\left(\frac{\pr}{\pr t}-\triangle_x\right)E\right)(\phi)
+        = \lim_{\eps\to 0^+} \int_{t&gt;\eps}E(x,t)\left(-\frac{\pr\phi}{\pr t} - \triangle_x\phi\right)\,dx\,dt.</mrow>
+</md>
+On <m>\set{t\ge\eps}</m> the function <m>E</m> is smooth and bounded, and <m>\phi</m> has compact support, so Fubini's theorem and integration by parts are legitimate.
+In <m>t</m> (for fixed <m>x</m>; <m>\phi(x,t)=0</m> for large <m>t</m>),
+<md>\int_{t&gt;\eps}-E\frac{\pr\phi}{\pr t}\,dx\,dt
+        = \int_{\R^n}\left(\Bigl[-E\phi\Bigr]_{t=\eps}^{t=+\infty}+\int_\eps^{+\infty}\frac{\pr E}{\pr t}\phi\,dt\right)\,dx,</md>
+and since <m>\phi(x,t)=0</m> for large <m>t</m>, the bracket equals <m>E(x,\eps)\phi(x,\eps)</m>, so
+<md>
+<mrow xml:id="eq-heat-ibp-t" number="yes">\int_{t&gt;\eps}-E\frac{\pr\phi}{\pr t}\,dx\,dt
+        = \int_{\R^n}E(x,\eps)\phi(x,\eps)\,dx+\int_{t&gt;\eps}\frac{\pr E}{\pr t}\,\phi\,dx\,dt.</mrow>
+</md>
+In <m>x</m> (for fixed <m>t&gt;\eps</m>; <m>\phi(\cdot,t)</m> has compact support, so there are no boundary terms), integrating by parts twice in each variable <m>x_j</m>,
+<md>
+<mrow xml:id="eq-heat-ibp-x" number="yes">\int_{t&gt;\eps}-E\,\triangle_x\phi\,dx\,dt=\int_{t&gt;\eps}-(\triangle_xE)\,\phi\,dx\,dt.</mrow>
+</md>
+Combining <xref ref="eq-heat-limit" text="global"/>, <xref ref="eq-heat-ibp-t" text="global"/> and <xref ref="eq-heat-ibp-x" text="global"/>, and using <m>\pr_tE-\triangle_xE=0</m> on <m>\set{t&gt;0}</m> (Step 1),
+<md>
+<mrow>\left(\left(\frac{\pr}{\pr t}-\triangle_x\right)E\right)(\phi)
+        &amp;= \lim_{\eps\to 0^+}\left(\int_{\R^n}E(x,\eps)\phi(x,\eps)\,dx+\int_{t&gt;\eps}\left(\frac{\pr E}{\pr t}-\triangle_xE\right)\phi\,dx\,dt\right)</mrow>
+<mrow>&amp;= \lim_{\eps\to 0^+}\int_{\R^n}E(x,\eps)\phi(x,\eps)\,dx.</mrow>
+</md>
+Finally, substituting <m>x=\sqrt\eps\,y</m>, <m>\,dx=\eps^{n/2}\,dy</m>, so that <m>\abs x^2/4\eps=\abs y^2/4</m>,
+<md>
+<mrow>\int_{\R^n}E(x,\eps)\phi(x,\eps)\,dx
+        &amp;= (4\pi\eps)^{-n/2} \int_{\R^n} e^{-\abs{x}^2/4\eps}\phi(x,\eps)\,dx</mrow>
+<mrow>&amp;= (4\pi\eps)^{-n/2}\eps^{n/2}\int_{\R^n} e^{-\abs{y}^2/4} \phi(\sqrt{\eps}\,y, \eps) \,dy</mrow>
+<mrow>&amp;= (4\pi)^{-n/2}\int_{\R^n} e^{-\abs{y}^2/4} \phi(\sqrt{\eps}\,y, \eps) \,dy.</mrow>
+</md>
+The integrand is dominated by <m>\sup\abs\phi\cdot e^{-\abs y^2/4}\in L^1(\R^n)</m>, and it converges to <m>e^{-\abs y^2/4}\phi(0,0)</m> as <m>\eps\to0^+</m> for every <m>y</m>, by the continuity of <m>\phi</m>.
+By Lebesgue's dominated convergence theorem and <m>\int_{\R^n}e^{-\abs y^2/4}\,dy=(4\pi)^{n/2}</m> (Step 0 with <m>t=1</m>),
+<md>\lim_{\eps\to0^+}\int_{\R^n}E(x,\eps)\phi(x,\eps)\,dx=(4\pi)^{-n/2}\cdot(4\pi)^{n/2}\phi(0,0)=\phi(0,0)=\delta_0(\phi).</md>
+So <m>E</m> is a fundamental solution of the heat operator.</p>
+</proof>
+</theorem>
+<p>Next we consider the <em>Schrödinger operator</em>
+<md>
+<mrow xml:id="eq-schrodinger-operator" number="yes">L = \frac{\pr}{\pr t} - \sum_{j,k=1}^{n}A_{j,k}\frac{\pr^2}{\pr x_j\pr x_k},</mrow>
+</md>
+where <m>A=(A_{j,k})_{j,k=1}^{n}</m> is a complex symmetric matrix (i.e. <m>A=A^{\mathsf T}</m>, <m>A_{j,k}=A_{k,j}</m>) such that <m>\operatorname{Re} A</m> is positive semi-definite (denoted by <m>\operatorname{Re} A\ge 0</m>) and <m>\det A\ne 0</m>.
+Here, for a complex matrix <m>B=M_1+iM_2</m> with <m>M_1,M_2</m> real, <m>\operatorname{Re}B\coloneqq M_1</m> is the entrywise real part, and <m>\operatorname{Re}B\ge0</m> (resp. <m>&gt;0</m>) means that the real symmetric matrix <m>M_1</m> is positive semi-definite (resp. positive definite).
+We write <m>\ags{Bx,x}\coloneqq x^{\mathsf T}Bx=\sum_{j,k}B_{j,k}x_jx_k</m> (a bilinear pairing, without complex conjugation).
+For <m>x\in\R^n</m>,
+<md>\operatorname{Re}\ags{Bx,x}=\sum_{j,k}\operatorname{Re}(B_{j,k})x_jx_k=\ags{(\operatorname{Re}B)x,x}\ge0\qquad(\operatorname{Re}B\ge0),</md>
+so that <m>\abs{e^{-\ags{Bx,x}/t}}=e^{-\operatorname{Re}\ags{Bx,x}/t}\le 1</m> for all <m>t&gt;0</m>.
+(The case <m>A=I</m> is the heat operator, and <m>A=iI</m> gives the free Schrödinger operator <m>\pr_t-i\triangle_x</m>.)</p>
+<p>We will need the square root <m>(\det B)^{-1/2}</m> for such matrices, and it has to be defined carefully, since the square root of a complex number is only defined up to a sign.
+Let
+<md>
+<mrow>H&amp;\coloneqq\set{B\in\C^{n\times n}\mid B=B^{\mathsf T},\ \operatorname{Re}B&gt;0},</mrow>
+<mrow>S&amp;\coloneqq\set{B\in\C^{n\times n}\mid B=B^{\mathsf T},\ \operatorname{Re}B\ge0,\ \det B\ne0}.</mrow>
+</md>
+Both are subsets of the space of symmetric matrices, which we identify with <m>\C^{n(n+1)/2}</m> via the entries <m>B_{j,k}</m>, <m>j\le k</m>.
+<m>H</m> is open and convex.
+The matrix <m>A</m> in <xref ref="eq-schrodinger-operator" text="global"/> belongs to <m>S</m>.</p>
+<lemma xml:id="lem-det-branch">
+<statement>
+<p><ol marker="(i)">
+<li>
+<p>For every <m>B\in H</m>, <m>\det B\ne0</m>.
+There is a unique continuous function <m>D\colon H\to\C</m> such that <m>D(B)^2\det B=1</m> for all <m>B\in H</m> and <m>D(B)&gt;0</m> whenever <m>B</m> is real.
+We write <m>D(B)=(\det B)^{-1/2}</m>.
+<m>D</m> is holomorphic, <m>D(sB)=s^{-n/2}D(B)</m> for <m>s&gt;0</m>, and for <m>B=M_1+iM_2\in H</m>,
+<md>D(B)=(\det M_1)^{-1/2}\prod_{j=1}^n(1+i\lambda_j)^{-1/2},</md>
+where <m>\lambda_1,\dots,\lambda_n\in\R</m> are the eigenvalues of <m>M_1^{-1/2}M_2M_1^{-1/2}</m> and <m>z^{-1/2}</m> is the principal branch on <m>\operatorname{Re}z&gt;0</m>.</p>
+</li>
+<li>
+<p>For every <m>B\in S</m> and <m>\delta&gt;0</m> we have <m>B+\delta I\in H</m>, and the limit <m>D(B)\coloneqq\lim_{\delta\to0^+}D(B+\delta I)</m> exists.
+With this definition, <m>D\colon H\cup S\to\C</m> is continuous, and <m>D(B)^2\det B=1</m> on <m>S</m>.</p>
+</li>
+<li>
+<p>If <m>B\in S</m>, then <m>B^{-1}\in S</m>, <m>sB\in S</m> for <m>s&gt;0</m>, and
+<md>D(B^{-1})=D(B)^{-1},\qquad D(sB)=s^{-n/2}D(B).</md></p>
+</li>
+<li>
+<p>Every partial derivative of order <m>m</m> of <m>D</m> (with respect to the entries <m>B_{j,k}</m>, <m>j\le k</m>) is of the form <m>D(B)\,P(B^{-1})</m>, where <m>P</m> is a polynomial in the entries of <m>B^{-1}</m> which depends only on the derivative taken, not on <m>B</m>.</p>
+</li>
+</ol></p>
+</statement>
+<proof>
+<p>(i) Let <m>B=M_1+iM_2\in H</m> and <m>z\in\C^n\setminus\set0</m>.
+Since <m>M_1,M_2</m> are real symmetric, <m>z^*M_1z</m> and <m>z^*M_2z</m> are real (each equals its own complex conjugate), so
+<md>\operatorname{Re}(z^*Bz)=\operatorname{Re}\bigl(z^*M_1z+i\,z^*M_2z\bigr)=z^*M_1z&gt;0.</md>
+In particular <m>Bz\ne0</m>, so <m>\det B\ne0</m>.
+The set <m>H</m> is convex (if <m>\operatorname{Re}B,\operatorname{Re}B'&gt;0</m> then <m>\operatorname{Re}(sB+(1-s)B')=s\operatorname{Re}B+(1-s)\operatorname{Re}B'&gt;0</m> for <m>s\in[0,1]</m>), hence simply connected, and <m>B\mapsto\det B</m> is a nowhere vanishing holomorphic function on <m>H</m>.
+So it has a holomorphic logarithm <m>g</m> with <m>g(I)=0</m>, and <m>D\coloneqq e^{-g/2}</m> satisfies <m>D^2\det=e^{-g}e^{g}=1</m>.
+If <m>B\in H</m> is real, then along the segment <m>s\mapsto(1-s)I+sB</m>, <m>s\in[0,1]</m>, all matrices are real positive definite, so <m>\det</m> is a positive real number there; <m>g</m> restricted to the segment is a continuous logarithm of a positive function that vanishes at <m>s=0</m>, hence it is the real logarithm, and <m>D(B)=e^{-g(B)/2}&gt;0</m>.
+If <m>D'</m> is another continuous function with the same properties, then <m>(D'/D)^2=1</m>, so <m>D'/D</m> is continuous with values in <m>\set{\pm1}</m> on the connected set <m>H</m>; hence it is constant, and it equals <m>1</m> at <m>B=I</m> (both are positive there).
+This proves existence and uniqueness.
+For <m>s&gt;0</m>, the function <m>B\mapsto s^{n/2}D(sB)</m> is continuous on <m>H</m>, positive on real matrices, and its square times <m>\det B</m> is <m>s^nD(sB)^2\det B=D(sB)^2\det(sB)=1</m> (as <m>\det(sB)=s^n\det B</m>); by uniqueness it equals <m>D</m>.</p>
+<p>For the last formula, <m>M_1^{-1/2}M_2M_1^{-1/2}</m> is real symmetric, so its eigenvalues <m>\lambda_j</m> are real, and
+<md>B=M_1^{1/2}\bigl(I+iM_1^{-1/2}M_2M_1^{-1/2}\bigr)M_1^{1/2}
+        \quad\Longrightarrow\quad
+        \det B=\det M_1\prod_{j=1}^n(1+i\lambda_j).</md>
+Let <m>G(B)\coloneqq(\det M_1)^{-1/2}\prod_j(1+i\lambda_j)^{-1/2}</m>.
+The eigenvalues depend continuously on <m>B</m> (as an unordered <m>n</m>-tuple), the principal branch is continuous on <m>\operatorname{Re}z&gt;0</m>, and the product is symmetric in the <m>\lambda_j</m>, so <m>G</m> is continuous on <m>H</m>.
+Moreover <m>G^2\det B=(\det M_1)^{-1}\prod_j(1+i\lambda_j)^{-1}\cdot\det M_1\prod_j(1+i\lambda_j)=1</m>, and <m>G&gt;0</m> for real <m>B</m> (where all <m>\lambda_j=0</m>).
+By uniqueness, <m>G=D</m>.</p>
+<p><em>Warning.</em>
+<m>D(B)</m> is in general <em>not</em> <m>r^{-1/2}e^{-i\theta/2}</m> for the polar form <m>\det B=re^{i\theta}</m> with <m>\theta\in(-\pi,\pi]</m> when <m>n\ge3</m>, because <m>\sum_j\arg(1+i\lambda_j)</m> lies in <m>(-n\pi/2,n\pi/2)</m>, which is larger than <m>(-\pi,\pi]</m>.
+For example, let <m>n=3</m> and <m>B=(\delta+i)I</m> with small <m>\delta&gt;0</m>.
+Then <m>M_1=\delta I</m>, <m>M_2=I</m>, all <m>\lambda_j=1/\delta</m>, and
+<md>D(B)=\delta^{-3/2}\Bigl(\bigl(1+i/\delta\bigr)^{-1/2}\Bigr)^3\to e^{-3\pi i/4}\quad(\delta\to0^+),</md>
+since <m>\bigl(1+i/\delta\bigr)^{-1/2}=\abs{1+i/\delta}^{-1/2}e^{-\frac i2\arg(1+i/\delta)}</m>, <m>\arg(1+i/\delta)\to\pi/2</m>, and <m>\delta^{-3/2}\abs{1+i/\delta}^{-3/2}\to1</m>.
+But <m>\det B\to i^3=-i=e^{-i\pi/2}</m>, and the polar formula would give <m>e^{+i\pi/4}=-e^{-3\pi i/4}</m>.
+For <m>n\le2</m> the polar formula is correct on <m>H</m>, since then <m>\sum_j\arg(1+i\lambda_j)\in(-\pi,\pi)</m>.
+In general <m>D</m> has to be used.</p>
+<p>(ii) <m>\operatorname{Re}(B+\delta I)=\operatorname{Re}B+\delta I&gt;0</m>, so <m>B+\delta I\in H</m>.
+The function <m>\delta\mapsto\det(B+\delta I)</m> is continuous and nowhere zero on <m>[0,+\infty)</m> (for <m>\delta=0</m> because <m>B\in S</m>, for <m>\delta&gt;0</m> by (i)).
+Hence there are exactly two continuous square roots of <m>1/\det(B+\delta I)</m> on the interval <m>[0,+\infty)</m>, differing by a sign.
+On <m>(0,+\infty)</m>, <m>\delta\mapsto D(B+\delta I)</m> is a continuous square root, so it is the restriction of one of them, and the limit as <m>\delta\to0^+</m> exists.
+For the continuity of <m>D</m> on <m>H\cup S</m>, let <m>B_0\in S</m>.
+Since <m>\det B_0\ne0</m>, there is an open ball <m>U</m> (in the space of symmetric matrices) around <m>B_0</m> on which <m>\det\ne0</m>, and <m>U</m>, being convex, carries a holomorphic function <m>D_U</m> with <m>D_U^2\det=1</m>.
+The set <m>U\cap H</m> is convex and nonempty (it contains <m>B_0+\delta I</m> for small <m>\delta</m>), so <m>D=\pm D_U</m> on it, and we choose the sign of <m>D_U</m> so that <m>D=D_U</m> on <m>U\cap H</m>.
+For <m>B\in U\cap S</m>, <m>B+\delta I\in U\cap H</m> for small <m>\delta</m>, so <m>D(B)=\lim D(B+\delta I)=\lim D_U(B+\delta I)=D_U(B)</m>.
+Hence <m>D=D_U</m> on <m>U\cap(H\cup S)</m>, which is continuous.
+The identity <m>D^2\det=1</m> on <m>S</m> follows by letting <m>\delta\to0^+</m> in <m>D(B+\delta I)^2\det(B+\delta I)=1</m>.</p>
+<p>(iii) Let <m>B=M_1+iM_2\in S</m> and <m>w\in\C^n</m>, and put <m>z\coloneqq B^{-1}w</m>.
+Note that <m>B^{-1}</m> is symmetric, <m>(B^{-1})^*=(B^*)^{-1}</m>, and <m>B^*=\overline B</m> since <m>B</m> is symmetric.
+Then
+<md>w^*B^{-1}w=(Bz)^*B^{-1}(Bz)=z^*B^*B^{-1}Bz=z^*\overline Bz=\overline{z^*Bz},</md>
+because <m>z^*\overline Bz</m> is the conjugate of the number <m>z^{\mathsf T}B\overline z=(z^{\mathsf T}B\overline z)^{\mathsf T}=z^*B^{\mathsf T}z=z^*Bz</m>.
+So <m>\operatorname{Re}(w^*B^{-1}w)=\operatorname{Re}(z^*Bz)=z^*M_1z\ge0</m> (as in (i)).
+For real <m>x</m>, <m>x^{\mathsf T}\operatorname{Re}(B^{-1})x=\operatorname{Re}(x^*B^{-1}x)\ge0</m>, i.e. <m>\operatorname{Re}B^{-1}\ge0</m>, and <m>\det B^{-1}=1/\det B\ne0</m>.
+Thus <m>B^{-1}\in S</m>; the same computation with strict inequalities shows <m>B\in H\Rightarrow B^{-1}\in H</m>.
+The claim <m>sB\in S</m> is clear.
+The identity <m>D(sB)=s^{-n/2}D(B)</m> holds on <m>H</m> by (i), and for <m>B\in S</m> we let <m>\delta\to0^+</m> in <m>D(sB+s\delta I)=s^{-n/2}D(B+\delta I)</m>.
+Next, <m>B\mapsto D(B)D(B^{-1})</m> is continuous on <m>H</m>, and its square is <m>\frac1{\det B}\cdot\frac1{\det B^{-1}}=1</m>; so it is <m>\pm1</m>-valued, hence constant on the connected set <m>H</m>, and it equals <m>1</m> at <m>B=I</m>.
+Thus <m>D(B)D(B^{-1})=1</m> on <m>H</m>.
+For <m>B\in S</m>, apply this to <m>B_\delta\coloneqq B+\delta I\in H</m>: <m>D(B_\delta)\to D(B)</m>, and <m>B_\delta^{-1}\to B^{-1}</m> in <m>H\cup S</m>, so <m>D(B_\delta^{-1})\to D(B^{-1})</m> by the continuity in (ii).
+Hence <m>D(B)D(B^{-1})=1</m>.</p>
+<p>(iv) <m>D</m> is holomorphic on <m>H</m> and <m>D^2\det=1</m>, so <m>D=(\det)^{-1/2}</m> locally and <m>\pr D=-\frac12D\,\pr\log\det</m>.
+By Jacobi's formula <m>\pr\log\det B=\operatorname{tr}(B^{-1}\pr B)</m>,
+<md>\pr_{B_{j,k}}D=-\tfrac12D\operatorname{tr}\bigl(B^{-1}\pr_{B_{j,k}}B\bigr),</md>
+which is <m>D</m> times a linear polynomial in the entries of <m>B^{-1}</m> (<m>\pr_{B_{j,k}}B=E_{jj}</m> if <m>j=k</m> and <m>E_{jk}+E_{kj}</m> if <m>j&lt;k</m>, with <m>E_{jk}</m> the matrix units).
+Moreover, differentiating <m>BB^{-1}=I</m> gives <m>\pr_{B_{j,k}}B^{-1}=-B^{-1}(\pr_{B_{j,k}}B)B^{-1}</m>, whose entries are quadratic polynomials in the entries of <m>B^{-1}</m>.
+So if a derivative has the form <m>D\,P(B^{-1})</m>, its next derivative is <m>(\pr D)P(B^{-1})+D\,(\pr P(B^{-1}))</m>, again of this form.
+By induction on the order, all derivatives have the stated form.</p>
+</proof>
+</lemma>
+<p>Now let
+<md>E(x,t) \coloneqq
+    (4\pi t)^{-n/2} (\det A)^{-1/2}e^{-\ags{A^{-1}x,x}/4t}\quad(t&gt;0),\qquad E(x,t)\coloneqq0\quad(t\le0),</md>
+where <m>(\det A)^{-1/2}\coloneqq D(A)</m> is as in Lemma <xref ref="lem-det-branch" text="global"/>.
+(Note that <m>A^{-1}\in S</m> by Lemma <xref ref="lem-det-branch" text="global"/>(iii), so <m>\abs{e^{-\ags{A^{-1}x,x}/4t}}\le1</m>.)
+In general <m>E\notin L^1_\mathrm{loc}(\R^{n+1})</m>: for <m>A=iI</m>, <m>\abs{E(x,t)}=(4\pi t)^{-n/2}</m>, and <m>\int_{\abs x&lt;1,\,0&lt;t&lt;1}t^{-n/2}\,dx\,dt=\abs{B_1(0)}\int_0^1t^{-n/2}\,dt=+\infty</m> when <m>n\ge2</m>.
+So <m>E</m> has to be defined as a distribution by integrating first in <m>x</m> (where the oscillation of <m>e^{-\ags{A^{-1}x,x}/4t}</m> helps) and then in <m>t</m>.</p>
+<theorem xml:id="thm-schrodinger-fundamental">
+<title>Fundamental solution of the Schrödinger operator</title>
+<statement>
+<p>With the notation and assumptions above, for every <m>\phi\in C_c^\infty(\R^{n+1})</m> the iterated integral
+<md>E(\phi)
+        \coloneqq \int_{0}^{+\infty}(4\pi t)^{-n/2}(\det A)^{-1/2}\left(\int_{\R^n}e^{-\ags{A^{-1}x,x}/4t} \phi(x,t)\,dx\right)\,dt</md>
+converges absolutely, <m>E</m> is a distribution in <m>\mathcal D'(\R^{n+1})</m>, and <m>LE=\delta_0</m>, where <m>L</m> is given by <xref ref="eq-schrodinger-operator" text="global"/>.
+(If <m>\operatorname{Re}A^{-1}&gt;0</m>, then <m>E\in L^1_\mathrm{loc}(\R^{n+1})</m> and <m>E(\phi)=\int_{\R^{n+1}}E\phi</m> is the usual integral.)</p>
+</statement>
+</theorem>
+<p>The proof uses three lemmas on Gaussian integrals.</p>
+<lemma xml:id="lem-gaussian-integral">
+<statement>
+<p>Let <m>B\in H</m>, i.e. <m>B</m> is a symmetric <m>n\times n</m> complex matrix with <m>\operatorname{Re} B&gt;0</m>.
+Then
+<md>\int_{\R^n}e^{-\ags{Bx,x}}\,dx
+        = \pi^{n/2}(\det B)^{-1/2}=\pi^{n/2}D(B).</md></p>
+</statement>
+<proof>
+<p><em>First proof (direct computation).</em>
+Write <m>B=M_1+iM_2</m> with <m>M_1,M_2</m> real symmetric and <m>M_1&gt;0</m>.
+Substitute <m>x=M_1^{-1/2}y</m>, so <m>\,dx=(\det M_1)^{-1/2}\,dy</m>, and
+<md>\ags{Bx,x}=y^{\mathsf T}M_1^{-1/2}(M_1+iM_2)M_1^{-1/2}y=\abs y^2+i\,y^{\mathsf T}M_1^{-1/2}M_2M_1^{-1/2}y.</md>
+So
+<md>\int_{\R^n} e^{-\ags{Bx,x}}\,dx
+        = (\det M_1)^{-1/2}\int_{\R^n} e^{-\ags{(I+iM_1^{-1/2}M_2M_1^{-1/2})y,y}}\,dy.</md>
+The real symmetric matrix <m>M_1^{-1/2}M_2M_1^{-1/2}</m> is <m>O^{\mathsf T}\Lambda O</m> with <m>O</m> orthogonal and <m>\Lambda=\operatorname{diag}(\lambda_1,\dots,\lambda_n)</m>.
+Substituting <m>z=Oy</m> (<m>\,dz=\,dy</m>, <m>\abs z=\abs y</m>), the quadratic form becomes <m>\sum_j(1+i\lambda_j)z_j^2</m>, and by Fubini's theorem
+<md>\int_{\R^n}e^{-\ags{Bx,x}}\,dx
+        = (\det M_1)^{-1/2}\prod_{j=1}^n\int_{\R} e^{-(1+i\lambda_j)z_j^2}\,dz_j.</md>
+For <m>\lambda\in\R</m> let <m>I(\lambda)\coloneqq\int_{\R}e^{-(1+i\lambda)s^2}\,ds</m>.
+By Fubini's theorem and polar coordinates <m>(s,u)=(r\cos\theta,r\sin\theta)</m>, <m>\,ds\,du=r\,dr\,d\theta</m>,
+<md>
+<mrow>I(\lambda)^2
+        &amp;= \int_{\R^2} e^{-(1+i\lambda)(s^2+u^2)}\,ds\,du
+        = \int_{0}^{2\pi}\int_{0}^{+\infty} e^{-(1+i\lambda)r^2}r \,dr\,d\theta</mrow>
+<mrow>&amp;= 2\pi\left[-\frac{e^{-(1+i\lambda)r^2}}{2(1+i\lambda)}\right]_{r=0}^{r=+\infty}
+        = 2\pi\cdot\frac1{2(1+i\lambda)}=\frac{\pi}{1+i\lambda},</mrow>
+</md>
+where <m>e^{-(1+i\lambda)r^2}\to0</m> as <m>r\to+\infty</m> because <m>\abs{e^{-(1+i\lambda)r^2}}=e^{-r^2}</m>.
+So <m>I(\lambda)=\pm\sqrt\pi(1+i\lambda)^{-1/2}</m>.
+The function <m>\lambda\mapsto I(\lambda)</m> is continuous (dominated convergence, with dominating function <m>e^{-s^2}</m>), and so is the principal branch <m>\lambda\mapsto(1+i\lambda)^{-1/2}</m>; their quotient is a continuous function with values in <m>\set{\pm\sqrt\pi}</m>, hence constant, and it equals <m>\sqrt\pi</m> at <m>\lambda=0</m> since <m>I(0)=\sqrt\pi</m>.
+Therefore <m>I(\lambda)=\sqrt\pi(1+i\lambda)^{-1/2}</m> (principal branch), and by the formula in Lemma <xref ref="lem-det-branch" text="global"/>(i),
+<md>\int_{\R^n}e^{-\ags{Bx,x}}\,dx=\pi^{n/2}(\det M_1)^{-1/2}\prod_{j=1}^n(1+i\lambda_j)^{-1/2}=\pi^{n/2}D(B).</md></p>
+<p><em>Second proof (complex analysis).</em>
+Regard both sides as functions of <m>B\in H</m>, an open convex (in particular connected) subset of <m>\C^{n(n+1)/2}</m>.
+The left-hand side is holomorphic in the entries of <m>B</m>: on a small ball around a point of <m>H</m> we have <m>\operatorname{Re}\ags{Bx,x}\ge c\abs x^2</m> with a uniform <m>c&gt;0</m>, so differentiation under the integral sign is justified by the dominating function <m>\mathrm{poly}(x)e^{-c\abs x^2}</m>.
+The right-hand side is holomorphic by Lemma <xref ref="lem-det-branch" text="global"/>(i).
+For real positive definite <m>B</m>, the equality holds by the standard computation (diagonalize <m>B</m> by an orthogonal matrix and use <m>\int_\R e^{-\mu s^2}\,ds=\sqrt{\pi/\mu}</m> for <m>\mu&gt;0</m>), and the real positive definite matrices form a totally real open subset of <m>H</m> of full dimension.
+By the identity theorem for holomorphic functions of several variables, the two sides agree on all of <m>H</m>.
+(This is the point of view of the lecture: the formula is known for real <m>B</m>, and holomorphy together with the connectedness of <m>H</m> gives a unique extension; the branch of <m>(\det B)^{-1/2}</m> is the unique continuous one that is positive for real <m>B</m>.)</p>
+</proof>
+</lemma>
+<lemma xml:id="lem-gaussian-moments">
+<statement>
+<p>Let <m>B\in S</m>, i.e. <m>B</m> is a symmetric <m>n\times n</m> complex matrix with <m>\operatorname{Re} B\ge 0</m> and <m>\det B\ne 0</m>.
+<ol marker="(i)">
+<li>
+<p>For all <m>t&gt;0</m>, <m>\displaystyle (\pi t)^{-n/2}\int_{\R^n} e^{-\ags{Bx,x}/t} e^{-\abs{x}^2} \,dx = D(B+tI)</m>, and hence
+<md>
+<mrow xml:id="eq-gauss-limit" number="yes">\lim_{t\to 0^+}(\pi t)^{-n/2}\int_{\R^n} e^{-\ags{Bx,x}/t} e^{-\abs{x}^2} \,dx
+            = (\det B)^{-1/2}.</mrow>
+</md></p>
+</li>
+<li>
+<p>For every <m>\beta\in\N_0^n</m> with <m>\abs\beta=2k</m> even, there are <m>C_\beta&gt;0</m> and <m>t_0\in(0,1]</m> (depending on <m>B</m>) such that
+<md>
+<mrow xml:id="eq-gauss-even" number="yes">\left\lvert \int_{\R^n}e^{-\ags{Bx,x}/t}x^{\beta}e^{-\abs{x}^2}\,dx \right\rvert \le C_\beta\, t^{n/2+k}\qquad(0&lt;t\le t_0).</mrow>
+</md>
+(In particular, for <m>\beta=2\alpha</m> the bound is <m>O(t^{n/2+\abs\alpha})</m>.)</p>
+</li>
+<li>
+<p>For every <m>\beta\in\N_0^n</m> with <m>\abs\beta</m> odd,
+<md>
+<mrow xml:id="eq-gauss-odd" number="yes">\int_{\R^n}e^{-\ags{Bx,x}/t}x^{\beta}e^{-\abs{x}^2}\,dx = 0\qquad(t&gt;0).</mrow>
+</md></p>
+</li>
+</ol></p>
+</statement>
+<proof>
+<p>All the integrals converge absolutely, since <m>\abs{e^{-\ags{Bx,x}/t}}\le1</m> and <m>\abs{x^\beta}e^{-\abs x^2}</m> is integrable.</p>
+<p>(iii) The substitution <m>x\mapsto-x</m> does not change <m>e^{-\ags{Bx,x}/t}e^{-\abs x^2}</m> (as <m>\ags{B(-x),-x}=\ags{Bx,x}</m>) and multiplies <m>x^\beta</m> by <m>(-1)^{\abs\beta}=-1</m>, so the integral equals minus itself, hence <m>0</m>.
+(The lecture states this for <q>some <m>\beta_j</m> odd</q>.
+That is true only for diagonal <m>B</m>, because <m>\ags{Bx,x}</m> contains the mixed terms <m>B_{j,k}x_jx_k</m>; for general <m>B</m> what is true is the vanishing for <m>\abs\beta</m> odd, and this is what is needed below.)</p>
+<p>(i) We have <m>\ags{Bx,x}/t+\abs x^2=\ags{Mx,x}</m> with <m>M\coloneqq t^{-1}(B+tI)</m>, and <m>\operatorname{Re}M=t^{-1}\operatorname{Re}B+I&gt;0</m>, so <m>M\in H</m>.
+By Lemma <xref ref="lem-gaussian-integral" text="global"/> and <m>D(sB)=s^{-n/2}D(B)</m> with <m>s=1/t</m> (Lemma <xref ref="lem-det-branch" text="global"/>(i)),
+<md>\int_{\R^n}e^{-\ags{Bx,x}/t-\abs x^2}\,dx=\pi^{n/2}D\bigl(t^{-1}(B+tI)\bigr)=\pi^{n/2}t^{n/2}D(B+tI)=(\pi t)^{n/2}D(B+tI).</md>
+Dividing by <m>(\pi t)^{n/2}</m> gives the identity, and <m>D(B+tI)\to D(B)=(\det B)^{-1/2}</m> as <m>t\to0^+</m> by the definition of <m>D</m> on <m>S</m> (Lemma <xref ref="lem-det-branch" text="global"/>(ii)).</p>
+<p>(ii) Let <m>\Lambda</m> be a complex symmetric matrix with <m>\norm{\Lambda-I}&lt;1/2</m> (operator norm).
+For real <m>x</m>, <m>x^{\mathsf T}(\operatorname{Re}\Lambda)x=\abs x^2+\operatorname{Re}\bigl(x^{\mathsf T}(\Lambda-I)x\bigr)\ge\abs x^2-\tfrac12\abs x^2=\tfrac12\abs x^2</m>, so <m>\operatorname{Re}\Lambda&gt;0</m> and <m>t^{-1}(B+t\Lambda)\in H</m>.
+As in (i),
+<md>\Phi(\Lambda)\coloneqq\int_{\R^n}e^{-\ags{Bx,x}/t-\ags{\Lambda x,x}}\,dx=\pi^{n/2}D\bigl(t^{-1}(B+t\Lambda)\bigr)=(\pi t)^{n/2}D(B+t\Lambda).</md>
+Regard both sides as functions of the independent entries <m>\Lambda_{j,l}</m>, <m>j\le l</m>, so that <m>\ags{\Lambda x,x}=\sum_j\Lambda_{j,j}x_j^2+2\sum_{j&lt;l}\Lambda_{j,l}x_jx_l</m>.
+Differentiation under the integral sign is allowed, because <m>\abs{e^{-\ags{Bx,x}/t}}\le1</m> and <m>\abs{e^{-\ags{\Lambda x,x}}}\le e^{-\abs x^2/2}</m>, so the differentiated integrands are dominated by <m>\mathrm{poly}(x)e^{-\abs x^2/2}</m>.
+Differentiating <m>e^{-\ags{\Lambda x,x}}</m> with respect to <m>\Lambda_{j,l}</m> inserts the factor <m>-x_j^2</m> (if <m>j=l</m>) or <m>-2x_jx_l</m> (if <m>j&lt;l</m>).
+Now let <m>\abs\beta=2k</m> and write <m>x^\beta=\prod_{i=1}^kx_{j_i}x_{l_i}</m> with <m>j_i\le l_i</m> (group the <m>2k</m> factors into pairs).
+Differentiating <m>k</m> times, with respect to <m>\Lambda_{j_1,l_1},\dots,\Lambda_{j_k,l_k}</m>, and then putting <m>\Lambda=I</m>, we get
+<md>\int_{\R^n}e^{-\ags{Bx,x}/t}x^\beta e^{-\abs x^2}\,dx
+        = c_\beta\,(\pi t)^{n/2}\,\pr_{\Lambda_{j_1,l_1}}\cdots\pr_{\Lambda_{j_k,l_k}}D(B+t\Lambda)\Big|_{\Lambda=I},</md>
+with a constant <m>c_\beta</m> of the form <m>\pm2^{-p}</m>.
+By the chain rule, <m>\pr_{\Lambda_{j,l}}\bigl[D(B+t\Lambda)\bigr]=t\,(\pr_{B_{j,l}}D)(B+t\Lambda)</m>: each differentiation produces a factor <m>t</m>.
+Hence
+<md>\int_{\R^n}e^{-\ags{Bx,x}/t}x^\beta e^{-\abs x^2}\,dx
+        = c_\beta\,(\pi t)^{n/2}\,t^{k}\,(\pr^kD)(B+tI),</md>
+where <m>\pr^kD</m> is the <m>k</m>-th order partial derivative <m>\pr_{B_{j_1,l_1}}\cdots\pr_{B_{j_k,l_k}}D</m>.
+By Lemma <xref ref="lem-det-branch" text="global"/>(iv), <m>(\pr^kD)(B+tI)=D(B+tI)\,P\bigl((B+tI)^{-1}\bigr)</m> with a fixed polynomial <m>P</m>.
+The matrices <m>B+tI</m> are invertible for all <m>t\ge0</m> (<m>t=0</m>: <m>B\in S</m>; <m>t&gt;0</m>: <m>B+tI\in H</m>).
+So <m>t\mapsto(B+tI)^{-1}</m> is continuous on <m>[0,1]</m>, hence bounded there; and <m>t\mapsto D(B+tI)</m> is continuous on <m>[0,1]</m> by Lemma <xref ref="lem-det-branch" text="global"/>(ii), hence bounded.
+Therefore <m>\abs{(\pr^kD)(B+tI)}\le C</m> for <m>0&lt;t\le1</m>, and <xref ref="eq-gauss-even" text="global"/> holds with <m>t_0=1</m> and <m>C_\beta=\abs{c_\beta}\pi^{n/2}C</m>.</p>
+</proof>
+</lemma>
+<lemma xml:id="lem-oscillatory-estimate">
+<statement>
+<p>Let <m>B\in S</m> and <m>\phi\in C_c^\infty(\R^n)</m>.
+Then
+<md>
+<mrow xml:id="eq-osc-limit" number="yes">\lim_{t\to0^+}(\pi t)^{-n/2}\int_{\R^n}e^{-\ags{Bx,x}/t}\phi(x)\,dx
+        = (\det B)^{-1/2}\phi(0).</mrow>
+</md>
+Moreover, for every compact set <m>K\subset\R^n</m> there is a constant <m>C&gt;0</m> such that
+<md>
+<mrow xml:id="eq-osc-bound" number="yes">\left\lvert (\pi t)^{-n/2}\int_{\R^n}e^{-\ags{Bx,x}/t}\phi(x)\,dx \right\rvert
+        \le C \sum_{\abs{\alpha}\le 2n+2}\sup_K \abs{\pr_x^\alpha \phi}</mrow>
+</md>
+for all <m>t&gt;0</m> and all <m>\phi\in C_c^\infty(\R^n)</m> with <m>\operatorname{supp}\phi\subset K</m>.
+(The order of the seminorm is irrelevant for the application below: any fixed order suffices to get a distribution.
+The lecture writes order <m>n</m>; the argument below gives <m>2n+2</m>.)</p>
+</statement>
+<proof>
+<p><em>Step 1: an integration by parts identity.</em>
+Let <m>F\in C^\infty(\R^n)</m> be such that <m>F</m> and all its derivatives are integrable and tend to <m>0</m> at infinity (we only use <m>F</m> of the form <m>\mathrm{poly}(x)e^{-\abs x^2}g(x)</m> with <m>g</m> bounded together with all derivatives).
+Since <m>B</m> is symmetric, <m>\pr_{x_j}\ags{Bx,x}=2(Bx)_j</m>, so
+<md>\pr_{x_j}e^{-\ags{Bx,x}/t}=-\frac2t(Bx)_j\,e^{-\ags{Bx,x}/t}.</md>
+Since <m>x_k=\sum_j(B^{-1})_{k,j}(Bx)_j</m>, this gives <m>x_ke^{-\ags{Bx,x}/t}=-\frac t2\sum_j(B^{-1})_{k,j}\pr_{x_j}e^{-\ags{Bx,x}/t}</m>, and, integrating by parts in <m>x_j</m> (there are no boundary terms by the decay of <m>F</m>, and <m>\abs{e^{-\ags{Bx,x}/t}}\le1</m>),
+<md>
+<mrow xml:id="eq-ibp" number="yes">\int_{\R^n}e^{-\ags{Bx,x}/t}\,x_kF\,dx=\frac t2\sum_{j=1}^n(B^{-1})_{k,j}\int_{\R^n}e^{-\ags{Bx,x}/t}\,\pr_{x_j}F\,dx.</mrow>
+</md>
+Let <m>\gamma\in\N_0^n</m> with <m>\abs\gamma=m</m>, and apply <xref ref="eq-ibp" text="global"/> repeatedly to remove the factors of <m>x^\gamma</m> one at a time.
+Each application produces a factor <m>t/2</m> and a derivative <m>\pr_{x_j}</m>, which falls either on <m>F</m> or on one of the remaining factors <m>x_i</m> (which then disappears as well).
+So each application removes one or two factors <m>x_i</m>, and after <m>p</m> applications, with <m>m/2\le p\le m</m>, all factors are gone.
+By induction on <m>m</m>,
+<md>\int_{\R^n}e^{-\ags{Bx,x}/t}x^\gamma F\,dx=\sum_{p,\delta}c_{p,\delta}\,t^p\int_{\R^n}e^{-\ags{Bx,x}/t}\,\pr^\delta F\,dx,</md>
+a finite sum over <m>m/2\le p\le m</m> and <m>\abs\delta\le p</m>, with constants <m>c_{p,\delta}</m> depending only on <m>B^{-1}</m> and <m>\gamma</m>.
+Since <m>\abs{e^{-\ags{Bx,x}/t}}\le1</m> and <m>t^p\le t^{m/2}</m> for <m>0&lt;t\le1</m>, we get
+<md>
+<mrow xml:id="eq-ibp-bound" number="yes">\left\lvert \int_{\R^n}e^{-\ags{Bx,x}/t}x^\gamma F\,dx \right\rvert\le C\,t^{m/2}\sum_{\abs\delta\le m}\norm{\pr^\delta F}_{L^1}\qquad(0&lt;t\le1).</mrow>
+</md></p>
+<p><em>Step 2: Taylor expansion.</em>
+Let <m>\operatorname{supp}\phi\subset K</m>.
+Put <m>h(x)\coloneqq e^{\abs x^2}\phi(x)\in C_c^\infty(\R^n)</m> (also supported in <m>K</m>), and let <m>T(x)=\sum_{\abs\beta\le n}c_\beta x^\beta</m>, <m>c_\beta=\pr^\beta h(0)/\beta!</m>, be its Taylor polynomial of degree <m>n</m> at <m>0</m>.
+By the Leibniz rule, <m>\abs{c_\beta}\le C\sum_{\abs\gamma\le n}\abs{\pr^\gamma\phi(0)}</m>, with <m>C</m> depending only on the derivatives of <m>e^{\abs x^2}</m> at <m>0</m>.
+By Taylor's formula with integral remainder,
+<md>h(x)-T(x)=\sum_{\abs\gamma=n+1}x^\gamma h_\gamma(x),\qquad h_\gamma(x)\coloneqq\frac{n+1}{\gamma!}\int_0^1(1-s)^n(\pr^\gamma h)(sx)\,ds.</md>
+Multiplying by <m>e^{-\abs x^2}</m>,
+<md>\phi(x)=e^{-\abs x^2}T(x)+R(x),\qquad R(x)\coloneqq\sum_{\abs\gamma=n+1}x^\gamma G_\gamma(x),\quad G_\gamma(x)\coloneqq e^{-\abs x^2}h_\gamma(x).</md>
+(The lecture uses degree <m>n-1</m> and a remainder <m>O(\abs x^n)</m>; we take one more term because <xref ref="eq-ibp-bound" text="global"/> only gains <m>t^{m/2}</m> from <m>m</m> factors of <m>x</m>, and we need <m>m/2&gt;n/2</m>.)
+Differentiating under the integral sign,
+<md>\pr^\delta h_\gamma(x)=\frac{n+1}{\gamma!}\int_0^1(1-s)^ns^{\abs\delta}(\pr^{\gamma+\delta}h)(sx)\,ds,
+        \qquad\text{so}\qquad
+        \sup\abs{\pr^\delta h_\gamma}\le\frac{n+1}{\gamma!}\sup\abs{\pr^{\gamma+\delta}h}.</md>
+By the Leibniz rule and the boundedness of the derivatives of <m>e^{\abs x^2}</m> on <m>K</m>, <m>\sup\abs{\pr^{\gamma+\delta}h}\le C_K\sum_{\abs\alpha\le n+1+\abs\delta}\sup_K\abs{\pr^\alpha\phi}</m>.
+Again by the Leibniz rule (now for <m>e^{-\abs x^2}h_\gamma</m>, whose derivatives are of the form <m>\mathrm{poly}(x)e^{-\abs x^2}\pr^{\delta'}h_\gamma</m>),
+<md>\norm{\pr^\delta G_\gamma}_{L^1}\le C\sum_{\abs\alpha\le 2n+2}\sup_K\abs{\pr^\alpha\phi}\qquad(\abs\delta\le n+1),</md>
+with <m>C</m> depending only on <m>n</m> and <m>K</m>.</p>
+<p><em>Step 3: the limit <xref ref="eq-osc-limit" text="global"/>.</em>
+Let <m>0&lt;t\le1</m>.
+By <xref ref="eq-ibp-bound" text="global"/> with <m>m=n+1</m> and <m>F=G_\gamma</m>,
+<md>(\pi t)^{-n/2}\left\lvert \int_{\R^n}e^{-\ags{Bx,x}/t}R\,dx \right\rvert\le(\pi t)^{-n/2}\,C\,t^{(n+1)/2}\sum_{\abs\alpha\le 2n+2}\sup_K\abs{\pr^\alpha\phi}=C'\,t^{1/2}\sum_{\abs\alpha\le 2n+2}\sup_K\abs{\pr^\alpha\phi},</md>
+which tends to <m>0</m> as <m>t\to0^+</m>.
+For the main term, Lemma <xref ref="lem-gaussian-moments" text="global"/> gives: the monomial <m>\beta=0</m> contributes <m>(\pi t)^{n/2}D(B+tI)</m> (part (i)), the monomials with <m>\abs\beta</m> odd contribute <m>0</m> (part (iii)), and those with <m>\abs\beta=2k\ge2</m> contribute at most <m>C_\beta t^{n/2+k}</m> in absolute value (part (ii)).
+Hence
+<md>
+<mrow>(\pi t)^{-n/2}\int_{\R^n}e^{-\ags{Bx,x}/t}e^{-\abs x^2}T(x)\,dx
+        =c_0\,D(B+tI)+\sum_{\substack{2\le\abs\beta\le n</mrow>
+<mrow>\abs\beta\text{ even}}}c_\beta\,r_\beta(t),\qquad\abs{r_\beta(t)}\le\pi^{-n/2}C_\beta\,t^{\abs\beta/2}.</mrow>
+</md>
+Here <m>c_0=h(0)=\phi(0)</m>, <m>D(B+tI)\to D(B)=(\det B)^{-1/2}</m>, and the sum is <m>O(t)</m> as <m>t\to0^+</m>.
+Adding the two parts gives <xref ref="eq-osc-limit" text="global"/>.</p>
+<p><em>Step 4: the bound <xref ref="eq-osc-bound" text="global"/>.</em>
+For <m>0&lt;t\le1</m>, Step 3 gives
+<md>(\pi t)^{-n/2}\left\lvert \int_{\R^n}e^{-\ags{Bx,x}/t}\phi\,dx \right\rvert
+        \le\abs{c_0}\sup_{0&lt;t\le1}\abs{D(B+tI)}+\sum_{\beta}\abs{c_\beta}\pi^{-n/2}C_\beta+C'\sum_{\abs\alpha\le 2n+2}\sup_K\abs{\pr^\alpha\phi},</md>
+and every term on the right is bounded by a constant times <m>\sum_{\abs\alpha\le 2n+2}\sup_K\abs{\pr^\alpha\phi}</m> (recall <m>\abs{c_\beta}\le C\sum_{\abs\gamma\le n}\abs{\pr^\gamma\phi(0)}</m>, and <m>\sup_{0&lt;t\le1}\abs{D(B+tI)}&lt;+\infty</m> by the continuity of <m>D</m>).
+For <m>t\ge1</m>, simply use <m>\abs{e^{-\ags{Bx,x}/t}}\le1</m>:
+<md>(\pi t)^{-n/2}\left\lvert \int_{\R^n}e^{-\ags{Bx,x}/t}\phi\,dx \right\rvert\le\pi^{-n/2}\abs K\sup_K\abs\phi.</md>
+This proves <xref ref="eq-osc-bound" text="global"/>.</p>
+</proof>
+</lemma>
+<proof ref="thm-schrodinger-fundamental">
+<p><em>Step 0: reduction to Lemma <xref ref="lem-oscillatory-estimate" text="global"/>.</em>
+Let <m>B\coloneqq\frac14A^{-1}</m>.
+By Lemma <xref ref="lem-det-branch" text="global"/>(iii), <m>A^{-1}\in S</m> and <m>B\in S</m>, and
+<md>D(B)=\left(\tfrac14\right)^{-n/2}D(A^{-1})=2^nD(A)^{-1}.</md>
+Since <m>(4\pi t)^{-n/2}=4^{-n/2}(\pi t)^{-n/2}=2^{-n}(\pi t)^{-n/2}</m> and <m>\ags{A^{-1}x,x}/4t=\ags{Bx,x}/t</m>, for <m>\phi\in C_c^\infty(\R^{n+1})</m> and <m>t&gt;0</m> the inner integral is
+<md>
+<mrow>F_\phi(t)&amp;\coloneqq(4\pi t)^{-n/2}D(A)\int_{\R^n}e^{-\ags{A^{-1}x,x}/4t}\phi(x,t)\,dx
+        =2^{-n}D(A)\,(\pi t)^{-n/2}\int_{\R^n}e^{-\ags{Bx,x}/t}\phi(x,t)\,dx.</mrow>
+</md></p>
+<p><em>Step 1: <m>E</m> is a distribution.</em>
+Let <m>K\subset\R^{n+1}</m> be compact, and choose a compact set <m>K_0\subset\R^n</m> and <m>C&gt;0</m> with <m>K\subset K_0\times[-C,C]</m>.
+If <m>\operatorname{supp}\phi\subset K</m>, then <m>\operatorname{supp}\phi(\cdot,t)\subset K_0</m> for every <m>t</m>, and <m>\phi(\cdot,t)=0</m> for <m>t&gt;C</m>.
+By <xref ref="eq-osc-bound" text="global"/> applied to <m>\phi(\cdot,t)\in C_c^\infty(\R^n)</m> and the compact set <m>K_0</m>,
+<md>\abs{F_\phi(t)}\le C_1\sum_{\abs\alpha\le 2n+2}\sup_{x}\abs{\pr_x^\alpha\phi(x,t)}\le C_1\sum_{\abs\alpha\le 2n+2}\sup_{\R^{n+1}}\abs{\pr_x^\alpha\phi}\qquad(t&gt;0),</md>
+with <m>C_1=2^{-n}\abs{D(A)}C</m> independent of <m>t</m> and <m>\phi</m>.
+The function <m>F_\phi</m> is continuous on <m>(0,+\infty)</m> (dominated convergence, with dominating function <m>\sup\abs\phi\cdot1_{K_0}</m>) and vanishes for <m>t&gt;C</m>.
+So <m>E(\phi)=\int_0^{+\infty}F_\phi(t)\,dt=\int_0^CF_\phi(t)\,dt</m> converges absolutely, it is linear in <m>\phi</m>, and
+<md>\abs{E(\phi)}\le\int_0^C\abs{F_\phi(t)}\,dt\le C\,C_1\sum_{\abs\alpha\le 2n+2}\sup_{\R^{n+1}}\abs{\pr_x^\alpha\phi}.</md>
+Hence <m>E\in\mathcal D'(\R^{n+1})</m>.
+(If <m>\operatorname{Re}A^{-1}\ge c\,I</m> with <m>c&gt;0</m>, then <m>\abs{E(x,t)}\le(4\pi t)^{-n/2}\abs{D(A)}e^{-c\abs x^2/4t}</m>, so <m>\int_{\R^n}\abs{E(x,t)}\,dx\le\abs{D(A)}c^{-n/2}</m> by Step 0 of Theorem <xref ref="thm-heat-fundamental" text="global"/> (after the substitution <m>x\mapsto x/\sqrt c</m>); thus <m>E\in L^1_\mathrm{loc}(\R^{n+1})</m>, and Fubini's theorem shows that <m>E(\phi)=\int_{\R^{n+1}}E\phi</m>.)</p>
+<p><em>Step 2: <m>LE=0</m> on <m>\set{t&gt;0}</m>.</em>
+Let <m>Q(x)\coloneqq\ags{A^{-1}x,x}</m>.
+For <m>t&gt;0</m>, <m>E=c\,t^{-n/2}e^{-Q/4t}</m> with <m>c=(4\pi)^{-n/2}D(A)</m> is smooth.
+Since <m>A^{-1}</m> is symmetric, <m>\pr_{x_j}Q=2(A^{-1}x)_j</m> and <m>\pr_{x_k}(A^{-1}x)_j=(A^{-1})_{j,k}</m>, so
+<md>\pr_{x_j}E=-\frac{(A^{-1}x)_j}{2t}E,\qquad
+        \pr_{x_k}\pr_{x_j}E=\left(-\frac{(A^{-1})_{j,k}}{2t}+\frac{(A^{-1}x)_j(A^{-1}x)_k}{4t^2}\right)E.</md>
+Multiply by <m>A_{j,k}</m> and sum over <m>j,k</m>.
+Since <m>A</m> and <m>A^{-1}</m> are symmetric,
+<md>\sum_{j,k}A_{j,k}(A^{-1})_{j,k}=\sum_{j,k}A_{j,k}(A^{-1})_{k,j}=\operatorname{tr}(AA^{-1})=n,</md>
+and, writing <m>y=A^{-1}x</m>,
+<md>\sum_{j,k}A_{j,k}y_jy_k=y^{\mathsf T}Ay=x^{\mathsf T}A^{-1}AA^{-1}x=x^{\mathsf T}A^{-1}x=Q(x).</md>
+Hence
+<md>\sum_{j,k}A_{j,k}\pr_{x_j}\pr_{x_k}E=\left(-\frac n{2t}+\frac{Q(x)}{4t^2}\right)E.</md>
+On the other hand, by the product rule, <m>\pr_tE=\left(-\frac n{2t}+\frac{Q(x)}{4t^2}\right)E</m>.
+So <m>LE=0</m> on <m>\set{t&gt;0}</m> in the classical sense.</p>
+<p><em>Step 3: <m>LE=\delta_0</m>.</em>
+Let <m>\phi\in C_c^\infty(\R^{n+1})</m> and put <m>\psi\coloneqq-\pr_t\phi-\sum_{j,k}A_{j,k}\pr_{x_j}\pr_{x_k}\phi\in C_c^\infty(\R^{n+1})</m>.
+By the definition of derivatives of distributions (one <m>t</m>-derivative gives a sign <m>-1</m>, two <m>x</m>-derivatives give <m>(-1)^2</m>),
+<md>(LE)(\phi)=E(\psi)=\int_0^{+\infty}F_\psi(t)\,dt=\lim_{\eps\to0^+}\int_\eps^{+\infty}F_\psi(t)\,dt,</md>
+the last step by the absolute convergence from Step 1.
+On <m>\set{t\ge\eps}</m> the function <m>E</m> is smooth and bounded and <m>\phi</m> has compact support, so <m>\int_\eps^{+\infty}F_\psi(t)\,dt=\int_{t&gt;\eps}E\psi\,dx\,dt</m> by Fubini's theorem.
+Integrating by parts in <m>t</m> and twice in <m>x</m> exactly as in <xref ref="eq-heat-ibp-t" text="global"/> and <xref ref="eq-heat-ibp-x" text="global"/> (the matrix <m>A</m> is symmetric, so moving <m>\sum_{j,k}A_{j,k}\pr_{x_j}\pr_{x_k}</m> from <m>\phi</m> to <m>E</m> gives the same operator),
+<md>
+<mrow>\int_\eps^{+\infty}F_\psi(t)\,dt
+        &amp;=\int_{\R^n}E(x,\eps)\phi(x,\eps)\,dx+\int_{t&gt;\eps}\left(\frac{\pr E}{\pr t}-\sum_{j,k}A_{j,k}\frac{\pr^2E}{\pr x_j\pr x_k}\right)\phi\,dx\,dt</mrow>
+<mrow>&amp;=\int_{\R^n}E(x,\eps)\phi(x,\eps)\,dx,</mrow>
+</md>
+by Step 2.
+Now write <m>\phi(x,\eps)=\phi(x,0)+\bigl(\phi(x,\eps)-\phi(x,0)\bigr)</m>.
+<ol marker="(i)">
+<li>
+<p>By Step 0 and <xref ref="eq-osc-limit" text="global"/> applied to <m>\phi(\cdot,0)</m>,
+<md>
+<mrow>\int_{\R^n}E(x,\eps)\phi(x,0)\,dx
+            &amp;=2^{-n}D(A)\,(\pi\eps)^{-n/2}\int_{\R^n}e^{-\ags{Bx,x}/\eps}\phi(x,0)\,dx</mrow>
+<mrow>&amp;\to2^{-n}D(A)D(B)\phi(0,0)=2^{-n}D(A)\cdot2^nD(A)^{-1}\phi(0,0)=\phi(0,0).</mrow>
+</md></p>
+</li>
+<li>
+<p>By <xref ref="eq-osc-bound" text="global"/> applied to <m>x\mapsto\phi(x,\eps)-\phi(x,0)</m> (supported in <m>K_0</m>), and the mean value theorem in <m>t</m>,
+<md>
+<mrow>\left\lvert \int_{\R^n}E(x,\eps)\bigl(\phi(x,\eps)-\phi(x,0)\bigr)\,dx \right\rvert
+            &amp;\le C_1\sum_{\abs\alpha\le 2n+2}\sup_x\abs{\pr_x^\alpha\phi(x,\eps)-\pr_x^\alpha\phi(x,0)}</mrow>
+<mrow>&amp;\le C_1\,\eps\sum_{\abs\alpha\le 2n+2}\sup_{\R^{n+1}}\abs{\pr_t\pr_x^\alpha\phi}\to0.</mrow>
+</md></p>
+</li>
+</ol>
+(The lecture glosses over the dependence of <m>\phi(x,\eps)</m> on <m>\eps</m>; it is the uniform estimate <xref ref="eq-osc-bound" text="global"/> that handles it.)
+Therefore
+<md>(LE)(\phi)=\lim_{\eps\to0^+}\int_{\R^n}E(x,\eps)\phi(x,\eps)\,dx=\phi(0,0)=\delta_0(\phi),</md>
+that is, <m>LE=\delta_0</m>.</p>
+</proof>
+<remark xml:id="rmk-schrodinger-examples">
+<p>For <m>A=I</m> we have <m>D(I)=1</m> and <m>A^{-1}=I</m>, and <m>E</m> is the heat kernel of Theorem <xref ref="thm-heat-fundamental" text="global"/>.
+For <m>A=iI</m> (the operator <m>\pr_t-i\triangle_x</m>) we have <m>A^{-1}=-iI</m>, so <m>-\ags{A^{-1}x,x}/4t=i\abs x^2/4t</m>, and, as in the warning in the proof of Lemma <xref ref="lem-det-branch" text="global"/> (with <m>n</m> in place of <m>3</m>), <m>D(iI)=\lim_{\delta\to0^+}D\bigl((\delta+i)I\bigr)=e^{-in\pi/4}</m>.
+Hence
+<md>E(x,t)=(4\pi t)^{-n/2}e^{-in\pi/4}e^{i\abs x^2/4t}\qquad(t&gt;0),</md>
+which is not locally integrable for <m>n\ge2</m> and is defined as a distribution by the formula in Theorem <xref ref="thm-schrodinger-fundamental" text="global"/>.
+By Lemma <xref ref="lem-PDO-convolution" text="global"/> (in <m>\R^{n+1}</m>) and Remark <xref ref="rmk-solving-with-fundamental-solution" text="global"/>, <m>u=E\ast v</m>, i.e. <m>u(x,t)=E\bigl(v((x,t)-\cdot)\bigr)</m>, solves <m>Lu=v</m> for every <m>v\in C_c^\infty(\R^{n+1})</m>.</p>
+</remark>
+</subsection>
 </section>
 <backmatter>
 <appendix xml:id="app-sard">
