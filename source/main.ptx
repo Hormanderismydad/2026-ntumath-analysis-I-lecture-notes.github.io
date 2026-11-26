@@ -3003,7 +3003,10 @@ The <em>convolution</em> <m>u_1\ast u_2</m> (resp. <m>u_2\ast u_1</m>) is the un
 </definition>
 <remark xml:id="rmk-convolution-formula">
 <p>(i) From the proof of Theorem <xref ref="thm-translation-invariant" text="global"/>,
-<md>(u_1\ast u_2)(\phi)=(U\check\phi)(0)=\bigl(u_1\ast(u_2\ast\check\phi)\bigr)(0),\qquad(u_2\ast u_1)(\phi)=\bigl(u_2\ast(u_1\ast\check\phi)\bigr)(0).</md>
+<md>
+<mrow xml:id="eq-convolution-formula" number="yes">(u_1\ast u_2)(\phi)=(U\check\phi)(0)=\bigl(u_1\ast(u_2\ast\check\phi)\bigr)(0),\qquad(u_2\ast u_1)(\phi)=\bigl(u_2\ast(u_1\ast\check\phi)\bigr)(0).</mrow>
+</md>
+We can also define <m>u_1\ast u_2</m> and <m>u_2\ast u_1</m> by using <xref ref="eq-convolution-formula" text="global"/>.
 (ii) By definition, <m>(u_1\ast u_2)\ast\phi=u_1\ast(u_2\ast\phi)</m> and <m>(u_2\ast u_1)\ast\phi=u_2\ast(u_1\ast\phi)</m> for <m>\phi\in C_c^\infty(\R^n)</m>.</p>
 </remark>
 <lemma xml:id="lem-assoc-extension">
