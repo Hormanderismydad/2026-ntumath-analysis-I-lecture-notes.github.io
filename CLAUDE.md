@@ -13,13 +13,16 @@ Online lecture notes for NTU Math "Analysis I" (2026 Fall), built with PreTeXt a
 
 ## Weekly update
 
-The owner sends LaTeX for that week's lectures (the offline version). For each update:
+The owner sends LaTeX for that week's lectures (the offline version), sometimes with the professor's handwritten notes as PDFs. For each update:
+
+**Style (owner's preference since 2026-11-26).** From chapter 5 on (`sec:distributions` onwards), the notes follow the style of the professor's handwritten lecture notes and of the owner's offline version: the same statements, in the same order, with the same proofs as in the lecture, written concisely. Take the owner's text as the base. Fill in a skipped step briefly where the argument would otherwise have a gap, and fix mistakes, but do not expand proofs with long commentary or add material that is not in the lecture. Where the rules below ask for more detail, this paragraph wins.
 
 1. **Rewrite the lectures so they are clear and easy to follow**, in the same style as the lectures already in `tex/analysis-i.tex`:
    - one `\subsection{YYYYMMDD}\label{ssec:MMDD}` per lecture, inside the right `\section{...}` (start a new `\section` with a `\label{sec:...}` when the course reaches a new topic);
    - put every statement in an environment: `df`, `thm`, `lm`, `prop`, `cl`, `ex`, `exs`, `remark`, `recall`, `question`, `claim`, `goal` and `proof`. Give numbered ones a `\label{def:|thm:|lm:|ex:|rmk:...}` and cite them with `Definition \ref{...}` / `Theorem \ref{...}`;
    - write complete sentences and fill in skipped steps. Say which earlier result each step uses, and fix typos or mistakes in the math. Do not add new material beyond the lecture;
-   - **do every calculation explicitly and in detail**: show each intermediate line in a displayed `align*`. That includes substitutions, changes of variables, integration by parts, Taylor expansions, chain/product rule computations, estimates (say where each inequality comes from) and how constants are chosen. Never write "a direct computation shows" or "it is easy to check" in place of the computation;
+   - **show the calculations**: write out the computations the lecture does (substitutions, integration by parts, Taylor expansions, chain/product rule, estimates) in displayed `align*`, rather than "a direct computation shows"; keep them as short as the lecture's;
+   - the converter does not support `\tag`, `\nonumber` or `\tr`: use numbered `align` with `\label{eq:...}` and `\eqref`, and write `^{\mathsf T}`;
    - use the macros in the preamble (`\R`, `\N`, `\pr`, `\abs`, `\norm`, `\set`, `\sp`, `\d`, `\loc`, `\coloneqq`, ...). Only use commands that `scripts/tex2ptx.py` handles. If something new is needed, extend the converter.
    - **Improve older proofs too.** When an earlier proof is badly written (skipped calculations, unclear steps, gaps or errors), rewrite it to the same standard in the same update, keeping its label. Mention each rewritten proof in the commit message and in the summary to the owner.
 2. Insert the new subsections in chronological order (before the appendix sections `app:sard`, `app:fourier`).

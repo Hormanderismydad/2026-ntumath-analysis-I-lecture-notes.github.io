@@ -2044,35 +2044,23 @@ which is small for <m>\ell</m> large.</p>
 <title>Test Functions and Basic Properties of Distributions</title>
 <subsection xml:id="ssec-1022">
 <title>20261022</title>
-<p>We will use the notations <m>\N\coloneqq\Z_{&gt;0}</m>, <m>\N_0\coloneqq \N\cup\set{0}</m> and <m>\overline\N_0 \coloneqq \N_0\cup\set{+\infty}</m>.
+<p>We write <m>\N\coloneqq\Z_{&gt;0}</m>, <m>\N_0\coloneqq \N\cup\set{0}</m> and <m>\overline\N_0 \coloneqq \N_0\cup\set{+\infty}</m>.
 Let <m>X\subset \R^n</m> be an open set.
-For every <m>k\in\overline\N_0</m>, let <m>C^k(X)</m> be the space of <m>k</m>-times continuously differentiable functions.
-For any multi-index <m>\alpha=(\alpha_1,\dots,\alpha_n)\in \N_0^n</m>, let <m>\abs{\alpha}=\alpha_1+\dots+\alpha_n</m> and
+For <m>k\in\overline\N_0</m>, let <m>C^k(X)</m> be the space of <m>k</m>-times continuously differentiable functions.
+For a multi-index <m>\alpha=(\alpha_1,\dots,\alpha_n)\in \N_0^n</m>, let <m>\abs{\alpha}=\alpha_1+\dots+\alpha_n</m> and
 <md>\pr_x^\alpha f = \pr_{x_1}^{\alpha_1}\cdots\pr_{x_n}^{\alpha_n} f
-    = \left( \frac{\pr}{\pr x_1} \right)^{\alpha_1}\cdots\left( \frac{\pr}{\pr x_n} \right)^{\alpha_n}f
     = \frac{\pr^{\abs{\alpha}}f}{\pr x_1^{\alpha_1} \cdots \pr x_n^{\alpha_n}}.</md></p>
 <definition xml:id="def-support">
 <statement>
 <p>Let <m>f\in C^0(X)</m>.
-The <em>support</em> of <m>f</m> is the closure in <m>X</m> of the set <m>\set{x\in X\mid f(x)\ne 0}</m> and is denoted by <m>\operatorname{supp} f</m>.
-Let <m>k\in\overline\N_0</m>.
+The <em>support</em> of <m>f</m>, denoted by <m>\operatorname{supp} f</m>, is the closure in <m>X</m> of <m>\set{x\in X\mid f(x)\ne 0}</m>.
 If <m>f\in C^k(X)</m> and <m>\operatorname{supp} f</m> is a compact subset of <m>X</m>, we write <m>f\in C_c^k(X)</m>.
 If <m>f\in C_c^\infty(X)</m>, we call <m>f</m> a <em>test function</em>.</p>
 </statement>
 </definition>
 <example xml:id="ex-support">
-<p>Let <m>X=\R</m> and
-<md>
-<mrow>u(x) =
-        \begin{cases}
-            x(1-x) &amp; \text{if } 0\le x\le 1 \\
-            0 &amp; \text{otherwise}.
-        \end{cases}</mrow>
-</md>
-Then <m>u</m> is continuous, <m>\set{u\ne0}=(0,1)</m>, and hence <m>\operatorname{supp} u=[0,1]</m>.
-Note that the support is always closed, so it contains the endpoints <m>0</m> and <m>1</m> even though <m>u</m> vanishes there.
-Thus <m>u\in C_c^0(\R)</m>.
-(But <m>u\notin C^1(\R)</m>, because <m>u'(0^+)=1\ne0=u'(0^-)</m>.)</p>
+<p>Let <m>X=\R</m> and <m>u(x)=x(1-x)</m> if <m>0\le x\le 1</m>, <m>u(x)=0</m> otherwise.
+Then <m>u\in C_c^0(\R)</m> and <m>\operatorname{supp} u=[0,1]</m>, but <m>u\notin C^1(\R)</m>, because <m>u'(0^+)=1\ne0=u'(0^-)</m>.</p>
 <image width="60%">
 <latex-image>\begin{tikzpicture}[scale=1.2]
             \draw[-&gt;] (-1.2,0) -- (3.4,0) node[right] {$x$};
@@ -2093,56 +2081,50 @@ Thus <m>u\in C_c^0(\R)</m>.
 <p>There is a nonnegative <m>\phi\in C_c^\infty(\R^n)</m> with <m>\phi(0)&gt;0</m>.</p>
 </statement>
 <proof>
-<p>Let <m>f(t)=e^{-1/t}</m> for <m>t&gt;0</m> and <m>f(t)=0</m> for <m>t\le0</m>.
-By induction, <m>f^{(k)}(t)=P_k(1/t)e^{-1/t}</m> for <m>t&gt;0</m>, with polynomials <m>P_0=1</m> and <m>P_{k+1}(s)=s^2(P_k(s)-P_k'(s))</m>.
-Since <m>s^me^{-s}\to0</m> as <m>s\to+\infty</m>, each <m>f^{(k)}(t)\to0</m> as <m>t\to0^+</m>, and inductively <m>f^{(k)}(0)=0</m>; hence <m>f\in C^\infty(\R)</m>.
-Then <m>\phi(x)=f(1-\abs x^2)</m> is smooth, nonnegative, positive exactly on <m>\set{\abs x&lt;1}</m>, and <m>\phi(0)=e^{-1}</m>.</p>
+<p>Let <m>f(t)=e^{-1/t}</m> if <m>t&gt;0</m> and <m>f(t)=0</m> if <m>t\le 0</m>.
+For <m>t&gt;0</m>, <m>f^{(k)}(t)=P_k(1/t)e^{-1/t}</m> for a polynomial <m>P_k</m>: by induction, <m>P_0=1</m> and
+<md>\frac{d}{dt}\Bigl(P_k\bigl(\tfrac1t\bigr)e^{-1/t}\Bigr)=\frac1{t^2}\Bigl(P_k\bigl(\tfrac1t\bigr)-P_k'\bigl(\tfrac1t\bigr)\Bigr)e^{-1/t},
+        \qquad\text{so}\qquad P_{k+1}(s)=s^2\bigl(P_k(s)-P_k'(s)\bigr).</md>
+Since <m>s^me^{-s}\to0</m> as <m>s\to+\infty</m>, <m>f^{(k)}(t)\to 0</m> as <m>t\to0^+</m>.
+By induction on <m>k</m>, <m>f^{(k)}(0)</m> exists and is <m>0</m> (the right derivative of <m>f^{(k-1)}</m> at <m>0</m> is <m>\lim_{h\to0^+}P_{k-1}(1/h)e^{-1/h}/h=0</m>).
+Hence <m>f\in C^\infty(\R)</m>.
+Let <m>\phi(x)=f(1-\abs{x}^2)</m>.
+Then <m>\phi\in C^\infty(\R^n)</m>, <m>\phi\ge0</m>, <m>\operatorname{supp}\phi=\set{\abs x\le 1}</m> is compact, and <m>\phi(0)=f(1)=e^{-1}&gt;0</m>.</p>
 </proof>
 </lemma>
 <definition xml:id="def-compactly-contained">
 <statement>
-<p>Let <m>A,B</m> be subsets of <m>\R^n</m> with <m>A\subset B</m>.
+<p>Let <m>A\subset B</m> be sets in <m>\R^n</m>.
 We write <m>A\Subset B</m> if <m>\overline A</m> is a compact subset of <m>B</m>.</p>
 </statement>
 </definition>
-<remark xml:id="rmk-compact-support">
 <p>Let <m>f\in C^k(X)</m>.
-Then <m>f\in C_c^k(X)</m> if and only if <m>\operatorname{supp} f\Subset X</m>.
-Indeed, if <m>\operatorname{supp} f</m> is a compact subset of <m>X</m>, then it is closed in <m>\R^n</m>, so <m>\overline{\operatorname{supp} f}=\operatorname{supp} f</m> is a compact subset of <m>X</m>.
-Conversely, if the closure <m>\overline{\operatorname{supp} f}</m> in <m>\R^n</m> is a compact subset of <m>X</m>, then <m>\operatorname{supp} f=\overline{\operatorname{supp} f}\cap X=\overline{\operatorname{supp} f}</m> is compact.</p>
-</remark>
+Then <m>f\in C_c^k(X)</m> if and only if <m>\operatorname{supp} f\Subset X</m>.</p>
 <remark xml:id="rmk-scaled-bump">
-<p>Let <m>\phi</m> be as in Lemma <xref ref="lem-bump" text="global"/>, and let <m>x_0\in\R^n</m>, <m>\delta&gt;0</m>.
-Let <m>F</m> be defined by
-<md>F(x) = \phi\left( \frac{x-x_0}{\delta} \right).</md>
-Then <m>F\in C_c^\infty(\R^n)</m>, <m>F\ge0</m>, <m>F(x_0)&gt;0</m>, and <m>F</m> has support in the closed ball <m>\overline B_\delta(x_0)</m>, where <m>B_\delta(x_0) = \set{x\in\R^n \mid \abs{x-x_0}&lt;\delta}</m>.
-In particular, if <m>x_0\in X</m>, then <m>F\in C_c^\infty(X)</m> for all sufficiently small <m>\delta&gt;0</m>.
-(So by translation and scaling we get test functions which are positive at a prescribed point and supported in a prescribed neighborhood of it.)</p>
+<p>By translation and change of scale, we obtain the nonnegative function <m>x\mapsto \phi\left( \frac{x-x_0}{\delta} \right)</m> in <m>C_c^\infty(\R^n)</m>, which is positive at <m>x_0</m> and has support in <m>\overline B_\delta(x_0)</m>, where <m>B_\delta(x_0)=\set{x\in\R^n\mid \abs{x-x_0}&lt;\delta}</m>.</p>
 </remark>
 <definition xml:id="def-convolution">
 <statement>
-<p>Let <m>u,v\in C^0(\R^n)</m>.
-If <m>u</m> or <m>v</m> has compact support, then the <em>convolution</em> <m>u\ast v</m> is the function given by
-<md>(u\ast v)(x) = \int_{\R^n} u(x-y)v(y)\,dy.</md></p>
+<p>If <m>u,v\in C^0(\R^n)</m> and either one has compact support, then the <em>convolution</em> <m>u\ast v</m> is the continuous function defined by
+<md>(u\ast v)(x) = \int_{\R^n} u(x-y)v(y)\,dy = \int_{\R^n} u(y)v(x-y)\,dy = (v\ast u)(x).</md></p>
 </statement>
 </definition>
-<remark xml:id="rmk-convolution-continuous">
-<p>The substitution <m>y\mapsto x-y</m> shows <m>u\ast v=v\ast u</m>, so we may assume <m>v</m> has compact support; then the integrand is continuous and vanishes outside <m>\operatorname{supp} v</m>, so the integral is well defined.
-Moreover, <m>u\ast v</m> is continuous: if <m>x_j\to x</m> with <m>\abs{x_j-x}\le1</m>, then <m>\abs{u(x_j-y)v(y)}\le C1_{\operatorname{supp} v}(y)</m> with <m>C=\sup_{\overline B_1(x)-\operatorname{supp} v}\abs u\cdot\sup\abs v&lt;+\infty</m>, and Lebesgue's dominated convergence theorem (Theorem <xref ref="thm-dct" text="global"/>) applies.
-If both <m>u</m> and <m>v</m> have compact support, then <m>\operatorname{supp}(u\ast v)\subset\operatorname{supp} u+\operatorname{supp} v</m>, which is compact.</p>
-</remark>
+<p>(The two integrals agree by the substitution <m>y\mapsto x-y</m>.
+Say <m>v</m> has compact support.
+If <m>x_j\to x</m> with <m>\abs{x_j-x}\le1</m>, then <m>u(x_j-y)v(y)\to u(x-y)v(y)</m>, and the integrands are bounded by <m>C1_{\operatorname{supp} v}(y)</m> with <m>C=\sup\abs v\cdot\sup\set{\abs{u(z)}\mid z\in\overline B_1(x)-\operatorname{supp} v}</m>, so <m>u\ast v</m> is continuous by Lebesgue's dominated convergence theorem.
+If <m>u,v</m> both have compact support, then <m>\operatorname{supp}(u\ast v)\subset\operatorname{supp} u+\operatorname{supp} v</m>.)</p>
 <definition xml:id="def-Lp-loc">
 <statement>
 <p>Let <m>0&lt;p&lt;+\infty</m>.
-Define
+Let
 <md>L_\mathrm{loc}^p(X) \coloneqq
-        \left\lbrace f\colon X\to\overline\R: \text{measurable} \mathrel{\Big\vert} \int_K \abs{f}^p &lt;+\infty \text{ for all } K\Subset X \right\rbrace</md></p>
+        \left\lbrace f\colon X\to\overline\R: \text{measurable} \mathrel{\Big\vert} \int_K \abs{f}^p &lt;+\infty \text{ for all } K\Subset X \right\rbrace.</md></p>
 </statement>
 </definition>
 <remark xml:id="rmk-convolution-Lloc">
-<p>For <m>u\in C_c^0(\R^n)</m> and <m>v\in L_\mathrm{loc}^1(\R^n)</m>, we can also define
-<md>(u\ast v)(x) = \int_{\R^n}u(x-y)v(y)\,dy.</md>
-Again, <m>u\ast v</m> is continuous by Theorem <xref ref="thm-dct" text="global"/>: for <m>\abs{x_j-x}\le1</m> the integrands are dominated by <m>\sup\abs u\cdot\abs{v}1_{S}</m>, where <m>S=\overline B_1(x)-\operatorname{supp} u</m> is compact and <m>v\in L^1(S)</m>.</p>
+<p>Let <m>u\in C_c^0(\R^n)</m> and <m>v\in L_\mathrm{loc}^1(\R^n)</m>.
+We can also define the convolution <m>(u\ast v)(x) = \int_{\R^n}u(x-y)v(y)\,dy</m>.
+By Lebesgue's dominated convergence theorem, <m>u\ast v</m> is a continuous function, i.e. <m>u\ast v\in C^0(\R^n)</m>.</p>
 </remark>
 <lemma xml:id="lem-convolution-properties">
 <statement>
@@ -2151,1321 +2133,920 @@ Again, <m>u\ast v</m> is continuous by Theorem <xref ref="thm-dct" text="global"
 <p>If <m>u,v,w\in C_c^0(\R^n)</m>, then <m>(u\ast v)\ast w = u\ast (v\ast w)</m>.</p>
 </li>
 <li>
-<p>If <m>u\in C_c^j(\R^n)</m> and <m>v\in C^k(\R^n)</m>, then <m>u\ast v\in C^{j+k}(\R^n)</m> and for all <m>\alpha,\beta\in\N_0^n</m> with <m>\abs{\alpha}\le j</m> and <m>\abs{\beta}\le k</m>, one has <m>\pr_x^\alpha\pr_x^\beta(u\ast v) = (\pr_x^\alpha u)\ast (\pr_x^\beta v)</m>.</p>
+<p>If <m>u\in C_c^j(\R^n)</m> and <m>v\in C^k(\R^n)</m>, then <m>u\ast v\in C^{j+k}(\R^n)</m> and <m>\pr_x^{\alpha+\beta}(u\ast v) = (\pr_x^\alpha u)\ast (\pr_x^\beta v)</m> for all multi-indices <m>\alpha,\beta</m> with <m>\abs{\alpha}\le j</m>, <m>\abs{\beta}\le k</m>.</p>
 </li>
 <li>
-<p>If <m>u\in C_c^j(\R^n)</m> and <m>v\in L_\mathrm{loc}^1(\R^n)</m>, then <m>u\ast v\in C^j(\R^n)</m> and <m>\pr_x^\alpha(u\ast v)=(\pr_x^\alpha u)\ast v</m> for all <m>\abs\alpha\le j</m>.</p>
+<p>If <m>u\in C_c^j(\R^n)</m> and <m>v\in L_\mathrm{loc}^1(\R^n)</m>, then <m>u\ast v\in C^j(\R^n)</m>, and <m>\pr_x^\alpha(u\ast v)=(\pr_x^\alpha u)\ast v</m> for <m>\abs\alpha\le j</m>.</p>
 </li>
 </ol></p>
 </statement>
 <proof>
-<p>(i) Both sides equal <m>\int\int u(x-y-z)v(z)w(y)\,dz\,dy</m>: the integrand is continuous and vanishes outside the compact set <m>\operatorname{supp} w\times\operatorname{supp} v</m>, so Fubini's theorem (Theorem <xref ref="thm-fubini-2" text="global"/>) allows exchanging the order of integration after substituting <m>z=s-y</m>.</p>
-<p>(iii) Let <m>u\in C_c^1</m> and <m>0&lt;\abs h\le1</m>.
-The difference quotient <m>\frac1h\left(u(x+he_i-y)-u(x-y)\right)v(y)</m> vanishes outside the compact set <m>S=\overline B_1(x)-\operatorname{supp} u</m>, is bounded by <m>\sup\abs{\pr_{x_i}u}\cdot\abs{v(y)}</m>, and tends to <m>\pr_{x_i}u(x-y)v(y)</m>.
-By Theorem <xref ref="thm-dct" text="global"/>, <m>\pr_{x_i}(u\ast v)=(\pr_{x_i}u)\ast v</m>, which is continuous by Remark <xref ref="rmk-convolution-Lloc" text="global"/>.
-Iterate, using <m>\pr^\alpha u\in C_c^{j-\abs\alpha}</m>.</p>
-<p>(ii) The same argument with the roles of <m>u</m> and <m>v</m> exchanged gives <m>\pr^\beta(u\ast v)=u\ast\pr^\beta v</m> for <m>\abs\beta\le k</m>.
-Applying (iii) to <m>u</m> and <m>\pr^\beta v\in C^0\subset L^1_\mathrm{loc}</m> gives <m>\pr^\alpha\pr^\beta(u\ast v)=(\pr^\alpha u)\ast(\pr^\beta v)</m>, which is continuous.
-Every <m>\gamma</m> with <m>\abs\gamma\le j+k</m> splits as <m>\alpha+\beta</m> with <m>\abs\alpha\le j</m>, <m>\abs\beta\le k</m>, so <m>u\ast v\in C^{j+k}</m>.</p>
+<p>By Fubini's theorem and Lebesgue's dominated convergence theorem.</p>
+<p>(i) Both <m>((u\ast v)\ast w)(x)</m> and <m>(u\ast(v\ast w))(x)</m> are equal to
+<md>\int_{\R^n}\int_{\R^n}u(x-y-z)v(z)w(y)\,dz\,dy,</md>
+by Fubini's theorem (the integrand is continuous with compact support in <m>(y,z)</m>) and the substitution <m>s=y+z</m> in the inner integral.</p>
+<p>(iii) Let <m>j=1</m>.
+For <m>0&lt;\abs h\le1</m>, the difference quotient
+<md>\frac{(u\ast v)(x+he_i)-(u\ast v)(x)}{h}=\int_{\R^n}\frac{u(x+he_i-y)-u(x-y)}{h}v(y)\,dy</md>
+has integrand bounded by <m>\sup\abs{\pr_{x_i}u}\cdot\abs{v(y)}1_S(y)</m>, where <m>S=\overline B_1(x)-\operatorname{supp} u</m> is compact (mean value theorem), and the integrand converges to <m>\pr_{x_i}u(x-y)v(y)</m> as <m>h\to0</m>.
+Hence <m>\pr_{x_i}(u\ast v)=(\pr_{x_i}u)\ast v</m>, which is continuous by Remark <xref ref="rmk-convolution-Lloc" text="global"/>.
+The general case follows by induction on <m>j</m>.</p>
+<p>(ii) In the same way, <m>\pr_{x_i}(u\ast v)=u\ast(\pr_{x_i}v)</m> for <m>v\in C^1</m>, using <m>(u\ast v)(x)=\int u(y)v(x-y)\,dy</m>.
+Combine this with (iii).</p>
 </proof>
 </lemma>
-<p>Let <m>\chi\in C_c^\infty(\R^n)</m> be the function such that <m>\chi\ge 0</m>, <m>\operatorname{supp}\chi \subset B_1(0)</m>, and <m>\int_{\R^n}\chi = 1</m>.
-(Such a function exists: take <m>\phi</m> from Lemma <xref ref="lem-bump" text="global"/>, put <m>\chi(x)=c\,\phi(2x)</m> with <m>c=\left(\int\phi(2x)\,dx\right)^{-1}</m>; then <m>\operatorname{supp}\chi=\overline B_{1/2}(0)\subset B_1(0)</m>.)
-For any <m>\eps&gt;0</m>, let <m>\chi_\eps(x) = \eps^{-n}\chi(x/\eps)\in C_c^\infty(B_\eps(0))</m>.
-Note that <m>\int_{\R^n}\chi_\eps(x)\,dx=1</m>.</p>
+<p>Let <m>\chi\in C_c^\infty(B_1(0))</m> with <m>\chi\ge0</m> and <m>\int_{\R^n}\chi(x)\,dx=1</m> (for example <m>\chi(x)=c\,\phi(2x)</m> with <m>\phi</m> as in Lemma <xref ref="lem-bump" text="global"/> and a suitable <m>c&gt;0</m>).
+For <m>\eps&gt;0</m>, let <m>\chi_\eps(x)\coloneqq\eps^{-n}\chi(x/\eps)\in C_c^\infty(B_\eps(0))</m>.
+Then <m>\int_{\R^n}\chi_\eps=1</m> (substitute <m>x=\eps y</m>).</p>
 <theorem xml:id="thm-mollification">
 <statement>
-<p>Fix <m>j\in\N_0</m> and let <m>u\in C_c^j(\R^n)</m>.
-Define <m>u_\eps\coloneqq u\ast \chi_\eps\in C_c^\infty(\R^n)</m>.
-Then
-<md>\lim_{\eps\to 0} \sup\set{\abs{\pr_x^\alpha(u_\eps-u)(x)} \mid x\in \R^n,\, \abs{\alpha}\le j} = 0.</md></p>
+<p>Let <m>u\in C_c^j(\R^n)</m>, <m>j\in\N_0</m>.
+Then <m>u_\eps\coloneqq u\ast\chi_\eps\in C_c^\infty(\R^n)</m> and
+<md>\lim_{\eps\to0^+}\sup\set{\abs{\pr_x^\alpha(u-u_\eps)(x)}\mathrel{\Big\vert} x\in\R^n}=0</md>
+for every multi-index <m>\alpha</m> with <m>\abs\alpha\le j</m>.</p>
 </statement>
 <proof>
-<p>By Lemma <xref ref="lem-convolution-properties" text="global"/>(ii) and Remark <xref ref="rmk-convolution-continuous" text="global"/>, <m>u_\eps\in C_c^\infty(\R^n)</m> and <m>\pr^\alpha u_\eps=(\pr^\alpha u)\ast\chi_\eps</m> for <m>\abs\alpha\le j</m>.
-Since <m>\chi_\eps\ge0</m>, <m>\int\chi_\eps=1</m> and <m>\chi_\eps=0</m> outside <m>B_\eps(0)</m>,
-<md>\abs{\pr^\alpha(u_\eps-u)(x)}
-        =\left\lvert \int_{\R^n}\left(\pr^\alpha u(x-y)-\pr^\alpha u(x)\right)\chi_\eps(y)\,dy \right\rvert
-        \le\sup_{\abs y\le\eps}\abs{\pr^\alpha u(x-y)-\pr^\alpha u(x)},</md>
-which tends to <m>0</m> uniformly in <m>x</m>, because <m>\pr^\alpha u</m> is continuous with compact support, hence uniformly continuous.</p>
+<p>By Lemma <xref ref="lem-convolution-properties" text="global"/>, <m>u_\eps\in C^\infty(\R^n)</m>, <m>\operatorname{supp} u_\eps\subset\operatorname{supp} u+\operatorname{supp}\chi_\eps</m> is compact, and <m>\pr_x^\alpha u_\eps=(\pr_x^\alpha u)\ast\chi_\eps</m>.
+Recall that <m>u_\eps(x)=\int u(x-y)\chi_\eps(y)\,dy</m>.
+Since <m>\int\chi_\eps(y)\,dy=1</m>, <m>u(x)=\int u(x)\chi_\eps(y)\,dy</m>.
+Since <m>\chi_\eps\ge0</m> and <m>\chi_\eps(y)=0</m> for <m>\abs y\ge\eps</m>, we have
+<md>
+<mrow>\abs{u(x)-u_\eps(x)}
+        &amp;=\left\lvert \int_{\R^n}\bigl(u(x)-u(x-y)\bigr)\chi_\eps(y)\,dy \right\rvert</mrow>
+<mrow>&amp;\le\int_{\R^n}\abs{u(x)-u(x-y)}\chi_\eps(y)\,dy</mrow>
+<mrow>&amp;\le\sup_{\abs y\le\eps}\abs{u(x)-u(x-y)}\to0</mrow>
+</md>
+uniformly in <m>x</m> as <m>\eps\to0^+</m>, since <m>u</m> is uniformly continuous.
+Similarly, for <m>\abs\alpha\le j</m>,
+<md>\abs{(\pr_x^\alpha u)(x)-(\pr_x^\alpha u_\eps)(x)}\le\sup_{\abs y\le\eps}\abs{\pr_x^\alpha u(x)-\pr_x^\alpha u(x-y)}\to0</md>
+uniformly in <m>x\in\R^n</m> as <m>\eps\to0^+</m>.</p>
 </proof>
 </theorem>
 <theorem xml:id="thm-cutoff">
 <statement>
-<p>Let <m>K\Subset X</m>.
-Then there exists a function <m>\phi\in C_c^\infty(X)</m> with <m>0\le\phi\le 1</m> such that <m>\phi\equiv 1</m> in some neighborhood of <m>K</m>.</p>
+<p>Let <m>K\Subset X</m>, where <m>X\subset\R^n</m> is an open set.
+Then there is <m>\phi\in C_c^\infty(X)</m> with <m>0\le\phi\le1</m> such that <m>\phi=1</m> in a neighborhood of <m>K</m>.</p>
 </statement>
 <proof>
-<p>Let <m>K_\delta=\set{x\mid\operatorname{dist}(x,K)&lt;\delta}</m>, and choose <m>\eps&gt;0</m> with <m>\operatorname{dist}(K,\R^n\setminus X)\ge4\eps</m>.
-Put <m>\phi=1_{K_{2\eps}}\ast\chi_\eps</m>, which is smooth by Lemma <xref ref="lem-convolution-properties" text="global"/>(iii) and takes values in <m>[0,1]</m>.
-Since <m>\chi_\eps=0</m> outside <m>B_\eps(0)</m>: if <m>x\notin K_{3\eps}</m>, then <m>x-y\notin K_{2\eps}</m> for <m>\abs y&lt;\eps</m>, so <m>\phi(x)=0</m>; and if <m>x\in K_\eps</m>, then <m>x-y\in K_{2\eps}</m> for <m>\abs y&lt;\eps</m>, so <m>\phi(x)=\int\chi_\eps=1</m>.
-Hence <m>\phi\equiv1</m> on <m>K_\eps</m>, and <m>\operatorname{supp}\phi\subset\overline{K_{3\eps}}</m> is a compact subset of <m>X</m>.</p>
+<p>Let <m>\eps&gt;0</m> be a small constant such that <m>\abs{x-y}\ge4\eps</m> for every <m>x\in K</m> and <m>y\notin X</m>.
+For <m>\delta&gt;0</m>, let <m>K_\delta\coloneqq\set{y\in\R^n\mid\abs{x-y}&lt;\delta\text{ for some }x\in K}</m>.
+Then <m>K\subset K_\eps\subset K_{2\eps}\subset K_{3\eps}\subset X</m>, and each <m>K_\delta</m> is open and bounded.
+Let <m>v\coloneqq1_{K_{2\eps}}</m> and
+<md>\phi(x)\coloneqq(v\ast\chi_\eps)(x)=\int_{\R^n}v(x-y)\chi_\eps(y)\,dy=\int_{\R^n}v(y)\chi_\eps(x-y)\,dy.</md>
+By Lemma <xref ref="lem-convolution-properties" text="global"/>(iii), <m>\phi\in C^\infty(\R^n)</m>.
+Clearly <m>0\le\phi\le\int\chi_\eps=1</m>.
+If <m>x\notin K_{3\eps}</m>, then <m>x-y\notin K_{2\eps}</m> for every <m>\abs y&lt;\eps</m>.
+Hence <m>\phi(x)=\int_{\abs y&lt;\eps}1_{K_{2\eps}}(x-y)\chi_\eps(y)\,dy=0</m> for <m>x\notin K_{3\eps}</m>.
+Thus <m>\operatorname{supp}\phi\subset\overline{K_{3\eps}}\Subset X</m>, and <m>\phi\in C_c^\infty(X)</m>.
+Now,
+<md>1-\phi(x)=\int_{\R^n}\chi_\eps(y)\,dy-\int_{\R^n}v(x-y)\chi_\eps(y)\,dy=\int_{\R^n}\bigl(1-1_{K_{2\eps}}(x-y)\bigr)\chi_\eps(y)\,dy.</md>
+If <m>x\in K_\eps</m>, then <m>x-y\in K_{2\eps}</m> for every <m>\abs y&lt;\eps</m>, so <m>1-\phi(x)=0</m>.
+Hence <m>\phi=1</m> in the neighborhood <m>K_\eps</m> of <m>K</m>.</p>
 </proof>
 </theorem>
+<remark xml:id="rmk-cutoff-derivatives">
+<p>Let <m>\phi</m> be as in the proof of Theorem <xref ref="thm-cutoff" text="global"/>.
+Then <m>\pr^\gamma\phi=v\ast\pr^\gamma\chi_\eps</m>, and since <m>0\le v\le1</m> and <m>\pr^\gamma\chi_\eps(y)=\eps^{-n-\abs\gamma}(\pr^\gamma\chi)(y/\eps)</m>,
+<md>\abs{(\pr^\gamma\phi)(x)}\le\int_{\R^n}\abs{\pr^\gamma\chi_\eps(y)}\,dy=\eps^{-\abs\gamma}\int_{\R^n}\abs{\pr^\gamma\chi(y)}\,dy= C_\gamma\eps^{-\abs\gamma}</md>
+for every multi-index <m>\gamma</m>.</p>
+</remark>
 <theorem xml:id="thm-partition-of-unity">
 <title>Partition of unity</title>
 <statement>
-<p>Let <m>X_1,\dots, X_k</m> be open sets in <m>\R^n</m>.
-Then given <m>\phi\in C_c^\infty(\bigcup_{j=1}^{k} X_j)</m>, there exists <m>\phi_j\in C_c^\infty(X_j)</m> for each <m>j</m> such that <m>\phi = \phi_1 + \cdots + \phi_k</m>.
+<p>Let <m>X_1,\dots,X_k</m> be open sets in <m>\R^n</m> and let <m>\phi\in C_c^\infty\bigl(\bigcup_{j=1}^kX_j\bigr)</m>.
+Then we can find <m>\phi_j\in C_c^\infty(X_j)</m>, <m>j=1,\dots,k</m>, such that <m>\phi=\sum_{j=1}^k\phi_j</m>.
 If <m>\phi\ge0</m>, we can take all <m>\phi_j\ge0</m>.</p>
 </statement>
 <proof>
-<p>By compactness, <m>\operatorname{supp}\phi</m> is covered by finitely many closed balls, each contained in some <m>X_j</m>; let <m>K_j\Subset X_j</m> be the union of those assigned to <m>X_j</m>, so <m>\operatorname{supp}\phi\subset\bigcup_jK_j</m>.
-By Theorem <xref ref="thm-cutoff" text="global"/>, take <m>\psi_j\in C_c^\infty(X_j)</m> with <m>0\le\psi_j\le1</m> and <m>\psi_j\equiv1</m> near <m>K_j</m> (<m>\psi_j=0</m> if <m>K_j=\varnothing</m>).
-With <m>P_j=(1-\psi_1)\cdots(1-\psi_j)</m> and <m>P_0=1</m>, put
-<md>\phi_j=\phi P_{j-1}\psi_j=\phi(P_{j-1}-P_j)\in C_c^\infty(X_j).</md>
-The sum telescopes to <m>\phi-\phi P_k</m>, and <m>\phi P_k=0</m> since every point of <m>\operatorname{supp}\phi</m> lies in some <m>K_j</m>, where <m>\psi_j=1</m>.
-If <m>\phi\ge0</m>, then each <m>\phi_j\ge0</m>.</p>
+<p>There exist <m>K_j\Subset X_j</m>, <m>j=1,\dots,k</m>, such that <m>\operatorname{supp}\phi\subset\bigcup_{j=1}^kK_j</m>: cover the compact set <m>\operatorname{supp}\phi</m> by finitely many closed balls, each contained in some <m>X_j</m>, and let <m>K_j</m> be the union of those balls assigned to <m>X_j</m>.
+By Theorem <xref ref="thm-cutoff" text="global"/>, for every <m>j</m> we can find <m>\psi_j\in C_c^\infty(X_j)</m> with <m>0\le\psi_j\le1</m> and <m>\psi_j=1</m> in some neighborhood of <m>K_j</m>.
+Put
+<md>\phi_1\coloneqq\phi\psi_1,\quad\phi_2\coloneqq\phi\psi_2(1-\psi_1),\quad\dots,\quad\phi_k\coloneqq\phi\psi_k(1-\psi_1)\cdots(1-\psi_{k-1}),</md>
+so that <m>\phi_j\in C_c^\infty(X_j)</m>.
+Then
+<md>
+<mrow>(\phi_1+\cdots+\phi_k)-\phi
+        &amp;=-\phi(1-\psi_1)+\phi\psi_2(1-\psi_1)+\cdots+\phi\psi_k(1-\psi_1)\cdots(1-\psi_{k-1})</mrow>
+<mrow>&amp;=-\phi(1-\psi_1)(1-\psi_2)+\phi\psi_3(1-\psi_1)(1-\psi_2)+\cdots</mrow>
+<mrow>&amp;=-\phi(1-\psi_1)(1-\psi_2)\cdots(1-\psi_k)=0,</mrow>
+</md>
+because every point of <m>\operatorname{supp}\phi</m> lies in some <m>K_j</m>, where <m>\psi_j=1</m>.
+If <m>\phi\ge0</m>, then all <m>\phi_j\ge0</m>.</p>
 </proof>
 </theorem>
 <definition xml:id="def-distribution">
 <statement>
-<p>A <em>distribution</em> in <m>X</m> is a linear functional <m>u</m> from the space of test functions <m>C_c^\infty(X)</m> to <m>\C</m> such that for every <m>K\Subset X</m>, there exist constants <m>C&gt;0</m> and <m>k\in\N_0</m> such that
-<md>\abs{u(\phi)}
-        \le C\sum_{\abs{\alpha}\le k} \sup_{\R^n} \abs{\pr_x^\alpha \phi}</md>
+<p>A <em>distribution</em> in <m>X</m> is a linear form <m>u\colon C_c^\infty(X)\to\C</m> such that for every compact set <m>K\subset X</m> there are constants <m>C&gt;0</m> and <m>k\in\N_0</m> such that
+<md>\abs{u(\phi)}\le C\sum_{\abs\alpha\le k}\sup_{\R^n}\abs{\pr_x^\alpha\phi}</md>
 for all <m>\phi\in C_c^\infty(X)</m> with <m>\operatorname{supp}\phi\subset K</m>.
-Note that <m>C</m> and <m>k</m> depend only on <m>K</m>.
-The space of all distributions is denoted by <m>\mathcal D'(X)</m>.</p>
+Note that <m>C</m> and <m>k</m> depend on <m>K</m>.
+The set of all distributions in <m>X</m> is denoted by <m>\mathcal D'(X)</m>.</p>
 </statement>
 </definition>
+<p>We write <m>p_k(\phi)\coloneqq\sum_{\abs\alpha\le k}\sup\abs{\pr_x^\alpha\phi}</m>.</p>
 <example xml:id="ex-L1loc-distribution">
-<p>Let <m>u\in L_\mathrm{loc}^1(X)</m>.
-Then the linear functional <m>T_u\colon C_c^\infty(X)\to \C</m> defined by
-<md>T_u(\phi) = \int_{X} u\phi</md>
+<p>Let <m>f\in L_\mathrm{loc}^1(X)</m>.
+Then
+<md>T_f\colon C_c^\infty(X)\to\C,\qquad T_f(\phi)\coloneqq\int_Xf(x)\phi(x)\,dx,</md>
 is a distribution.
-Indeed, <m>T_u</m> is well defined and linear because <m>u\phi</m> is integrable (as <m>\operatorname{supp}\phi\Subset X</m>), and for every <m>K\Subset X</m> and every <m>\phi\in C_c^\infty(X)</m> with <m>\operatorname{supp}\phi\subset K</m>,
-<md>\abs{T_u(\phi)}\le\int_K\abs u\abs\phi\le\left(\int_K\abs u\right)\sup_{\R^n}\abs\phi.</md>
-So the condition holds with <m>C=\max\set{\int_K\abs u,1}</m> and <m>k=0</m>.</p>
+Indeed, let <m>K\Subset X</m>.
+Then
+<md>\abs{T_f(\phi)}\le\int_K\abs f\abs\phi\le\left(\int_K\abs f\right)\sup_{\R^n}\abs\phi</md>
+for all <m>\phi\in C_c^\infty(X)</m> with <m>\operatorname{supp}\phi\subset K</m>.</p>
 </example>
 <example xml:id="ex-dirac">
 <p>Let <m>p\in X</m>.
-The <em>Dirac distribution</em> <m>\delta_p\in\mathcal D'(X)</m> is defined by
-<md>
-<mrow>\delta_p \colon
-        \begin{array}{ccc}
-            C_c^\infty(X) &amp; \to &amp; \C \\
-            \phi &amp; \mapsto &amp; \phi(p)
-        \end{array}.</mrow>
-</md>
-It is clearly linear, and <m>\abs{\delta_p(\phi)}=\abs{\phi(p)}\le\sup_{\R^n}\abs\phi</m> for all <m>\phi\in C_c^\infty(X)</m>, so <m>\delta_p</m> is a distribution with <m>C=1</m> and <m>k=0</m> for every <m>K\Subset X</m>.
-This is important in the theory of PDE.</p>
+The <em>Dirac distribution</em> at <m>p</m> is <m>\delta_p\colon C_c^\infty(X)\to\C</m>, <m>\delta_p(\phi)\coloneqq\phi(p)</m>.
+Since <m>\abs{\delta_p(\phi)}\le\sup\abs\phi</m>, <m>\delta_p</m> is a distribution, i.e. <m>\delta_p\in\mathcal D'(X)</m>.</p>
 </example>
 </subsection>
 <subsection xml:id="ssec-1110">
 <title>20261110</title>
 <theorem xml:id="thm-smooth-dependence">
 <statement>
-<p>Let <m>\phi\in C_c^\infty(X\times Y)</m>, where <m>X\subset \R^n</m> and <m>Y\subset\R^m</m> are open sets.
-Let <m>u\in \mathcal D'(X)</m>.
-Then the function <m>y\in Y\mapsto u(\phi(\cdot,y))</m> is a smooth function in <m>Y</m>, and
-<md>\pr_y^\alpha\, u(\phi(\cdot,y)) = u(\pr_y^\alpha\phi(\cdot,y))</md>
-for all <m>\alpha\in \N_0^m</m>.</p>
+<p>Let <m>\phi\in C_c^\infty(X\times Y)</m>, where <m>X\subset\R^n</m> and <m>Y\subset\R^m</m> are open sets.
+Let <m>u\in\mathcal D'(X)</m>.
+Then <m>y\mapsto u(\phi(\cdot,y))</m> is a smooth function in <m>Y</m>, and
+<md>\pr_y^\alpha\,u(\phi(\cdot,y))=u(\pr_y^\alpha\phi(\cdot,y))</md>
+for all multi-indices <m>\alpha\in\N_0^m</m>.</p>
 </statement>
 <proof>
-<p>The projection <m>K</m> of <m>\operatorname{supp}\phi</m> to <m>X</m> is compact, and <m>\operatorname{supp}\phi(\cdot,y)\subset K</m> for all <m>y</m>; the same holds for every <m>\pr_y^\alpha\phi</m>.
-Fix <m>y</m> and small <m>h\in\R^m</m>.
-By Taylor's formula,
-<md>\phi(x,y+h)=\phi(x,y)+\sum_{j=1}^{m}h_j\frac{\pr\phi}{\pr y_j}(x,y)+\Psi(x,y,h),\quad
-        \Psi=\sum_{i,j=1}^{m}h_ih_j\int_0^1(1-t)\frac{\pr^2\phi}{\pr y_i\pr y_j}(x,y+th)\,dt,</md>
-and <m>\operatorname{supp}\Psi(\cdot,y,h)\subset K</m>.
-Differentiating under the integral sign in <m>x</m> and using <m>\abs{h_ih_j}\le\abs h^2</m> and <m>\int_0^1(1-t)\,dt=\frac12</m>, for every <m>\beta\in\N_0^n</m>,
-<md>\sup_x\abs{\pr_x^\beta\Psi(x,y,h)}
-        \le\sum_{i,j=1}^{m}\abs h^2\cdot\frac12\sup_{X\times Y}\abs{\pr_x^\beta\pr_{y_i}\pr_{y_j}\phi}
-        \le C_\beta\abs h^2,\qquad
-        C_\beta\coloneqq\frac{m^2}{2}\max_{i,j}\sup_{X\times Y}\abs{\pr_x^\beta\pr_{y_i}\pr_{y_j}\phi}.</md>
-Applying the linear form <m>u</m> to the Taylor expansion,
-<md>u(\phi(\cdot,y+h))=u(\phi(\cdot,y))+\sum_{j=1}^{m}h_j\,u\left(\frac{\pr\phi}{\pr y_j}(\cdot,y)\right)+u(\Psi(\cdot,y,h)),</md>
-and by the estimate of Definition <xref ref="def-distribution" text="global"/> on <m>K</m> (with constants <m>C,k</m>),
-<md>\abs{u(\Psi(\cdot,y,h))}\le C\sum_{\abs\beta\le k}\sup_x\abs{\pr_x^\beta\Psi(x,y,h)}\le\Bigl(C\sum_{\abs\beta\le k}C_\beta\Bigr)\abs h^2=O(\abs h^2).</md>
-So <m>y\mapsto u(\phi(\cdot,y))</m> is differentiable with <m>\pr_{y_j}u(\phi(\cdot,y))=u(\pr_{y_j}\phi(\cdot,y))</m>.
-Since <m>\pr_{y_j}\phi\in C_c^\infty(X\times Y)</m> again, induction gives all derivatives, each of which is differentiable, hence continuous.</p>
+<p>Let <m>K\Subset X</m> be the projection of <m>\operatorname{supp}\phi</m> to <m>X</m>.
+Then <m>\operatorname{supp}\phi(\cdot,y)\subset K</m> for all <m>y\in Y</m>.
+Fix <m>y\in Y</m>.
+From Taylor's formula,
+<md>\phi(x,y+h)=\phi(x,y)+\sum_{j=1}^mh_j\frac{\pr\phi}{\pr y_j}(x,y)+\Psi(x,y,h),</md>
+where <m>h=(h_1,\dots,h_m)\in\R^m</m> is small,
+<md>\Psi(x,y,h)=\sum_{i,j=1}^mh_ih_j\int_0^1(1-t)\frac{\pr^2\phi}{\pr y_i\pr y_j}(x,y+th)\,dt,</md>
+<m>\operatorname{supp}\Psi(\cdot,y,h)\subset K</m>, and for every multi-index <m>\beta\in\N_0^n</m>, by differentiating under the integral sign,
+<md>\sup_{x\in\R^n}\abs{\pr_x^\beta\Psi(x,y,h)}\le\frac{\abs h^2}2\sum_{i,j=1}^m\sup\abs{\pr_x^\beta\pr_{y_i}\pr_{y_j}\phi}=O(\abs h^2).</md>
+We have
+<md>u(\phi(\cdot,y+h))=u(\phi(\cdot,y))+\sum_{j=1}^mh_j\,u\left( \frac{\pr\phi}{\pr y_j}(\cdot,y) \right)+u(\Psi(\cdot,y,h)).</md>
+From the definition of distributions, <m>\abs{u(\Psi(\cdot,y,h))}\le C\,p_k(\Psi(\cdot,y,h))=O(\abs h^2)</m>.
+Thus <m>u(\phi(\cdot,y))</m> is differentiable and
+<md>\frac{\pr}{\pr y_j}u(\phi(\cdot,y))=u\left( \frac{\pr\phi}{\pr y_j}(\cdot,y) \right),\qquad j=1,\dots,m.</md>
+Since <m>\pr\phi/\pr y_j\in C_c^\infty(X\times Y)</m>, we can continue in this way.
+Then <m>u(\phi(\cdot,y))</m> is smooth and <m>\pr_y^\alpha u(\phi(\cdot,y))=u(\pr_y^\alpha\phi(\cdot,y))</m> for all <m>\alpha</m>.</p>
 </proof>
 </theorem>
 <remark xml:id="rmk-differentiation-under-integral">
-<p>Let <m>E\subset \R^n</m> be any measurable set.
-Then the linear functional <m>u\colon C_c^\infty(\R^n)\to\C</m> defined by
-<md>u(f) = \int_E f(x)\,dx</md>
-is a distribution, i.e. <m>u\in \mathcal D'(\R^n)</m>: it is <m>T_{1_E}</m> from Example <xref ref="ex-L1loc-distribution" text="global"/>, as <m>1_E\in L^1_\mathrm{loc}(\R^n)</m>.
+<p>Let <m>E\subset\R^n</m> be any measurable set.
+Then <m>u\colon C_c^\infty(\R^n)\to\C</m>, <m>u(f)\coloneqq\int_Ef(x)\,dx</m>, is a distribution (<m>u=T_{1_E}</m>).
 Let <m>\phi(x,y)\in C_c^\infty(\R^n\times\R^n)</m>.
-Then
-<md>u(\phi(\cdot,y)) = \int_E \phi(x,y)\,dx.</md>
-Theorem <xref ref="thm-smooth-dependence" text="global"/> then says that <m>y\mapsto\int_E\phi(x,y)\,dx</m> is a smooth function in <m>y\in\R^n</m>, and
-<md>\pr_y^\alpha \int_E \phi(x,y)\,dx
-        = \pr_y^\alpha u(\phi(\cdot,y))
-        = u(\pr_y^\alpha\phi(\cdot,y))
-        = \int_E (\pr_y^\alpha\phi)(x,y)\,dx</md>
-for all <m>\alpha\in\N_0^n</m>.
-(This is differentiation under the integral sign.)</p>
+Then by Theorem <xref ref="thm-smooth-dependence" text="global"/>, <m>u(\phi(\cdot,y))=\int_E\phi(x,y)\,dx</m> is a smooth function of <m>y\in\R^n</m> and
+<md>\pr_y^\alpha\int_E\phi(x,y)\,dx=\pr_y^\alpha u(\phi(\cdot,y))=u(\pr_y^\alpha\phi(\cdot,y))=\int_E(\pr_y^\alpha\phi)(x,y)\,dx</md>
+for all <m>\alpha\in\N_0^n</m>.</p>
 </remark>
-<definition xml:id="def-test-function-convergence">
-<title>Topology on <m>C_c^\infty(X)</m></title>
+<definition xml:id="def-topology-test-functions">
+<title>Topology of <m>C_c^\infty(X)</m></title>
 <statement>
-<p>Let <m>\phi,\phi_j\in C_c^\infty(X)</m>.
-We say that the sequence <m>\phi_j</m> <em>converges to</em> <m>\phi</m> <em>in</em> <m>C_c^\infty(X)</m> if there exists <m>K\Subset X</m> such that <m>\operatorname{supp} \phi_j\subset K</m> for all <m>j</m>, <m>\operatorname{supp}\phi\subset K</m>, and
-<md>\lim_{j\to+\infty} \sup_{x\in X} \abs{(\pr_x^\alpha(\phi_j-\phi))(x)} = 0</md>
-for all <m>\alpha\in\N_0^n</m>.
-(This is the topology of the direct limit, i.e. the union, of the spaces <m>\set{\phi\in C_c^\infty(X)\mid\operatorname{supp}\phi\subset K}</m> over <m>K\Subset X</m>.)</p>
+<p>Let <m>\phi_j,\phi\in C_c^\infty(X)</m>, <m>j=1,2,\dots</m>.
+We say that <m>\lim_{j\to+\infty}\phi_j=\phi</m> in <m>C_c^\infty(X)</m> (direct limit topology) if there is a compact set <m>K\Subset X</m> such that <m>\operatorname{supp}\phi_j\subset K</m> for all <m>j</m>, <m>\operatorname{supp}\phi\subset K</m>, and for all multi-indices <m>\alpha</m>,
+<md>\lim_{j\to+\infty}\sup\set{\abs{\pr_x^\alpha(\phi_j-\phi)(x)}\mathrel{\Big\vert} x\in X}=0.</md></p>
 </statement>
 </definition>
 <theorem xml:id="thm-sequential-continuity">
 <statement>
 <p>Let <m>u\colon C_c^\infty(X)\to\C</m> be a linear form.
-Then <m>u</m> is a distribution if and only if <m>\lim_{j\to+\infty} u(\phi_j) = u(\phi)</m> for any sequence <m>\phi_j\in C_c^\infty(X)</m> converging to <m>\phi\in C_c^\infty(X)</m> in <m>C_c^\infty(X)</m>.
-In other words, <m>u\in \mathcal D'(X)</m> if and only if <m>u</m> is (sequentially) continuous in the topology of <m>C_c^\infty(X)</m>.</p>
+Then <m>u</m> is a distribution if and only if <m>\lim_{j\to+\infty}u(\phi_j)=u(\phi)</m> for all <m>\phi_j,\phi\in C_c^\infty(X)</m> with <m>\lim_{j\to+\infty}\phi_j=\phi</m> in <m>C_c^\infty(X)</m>.</p>
 </statement>
 <proof>
-<p><em>Only if</em>: if <m>\phi_j\to\phi</m> with supports in <m>K</m>, the estimate of Definition <xref ref="def-distribution" text="global"/> on <m>K</m> gives <m>\abs{u(\phi_j)-u(\phi)}\le C\sum_{\abs\alpha\le k}\sup\abs{\pr^\alpha(\phi_j-\phi)}\to0</m>.</p>
-<p><em>If</em>: suppose the estimate fails on some <m>K\Subset X</m>.
-Then for each <m>j</m> (taking <m>C=k=j</m>) there is <m>\phi_j</m> with <m>\operatorname{supp}\phi_j\subset K</m> and <m>\abs{u(\phi_j)}&gt;j\sum_{\abs\alpha\le j}\sup\abs{\pr^\alpha\phi_j}</m>.
-In particular <m>u(\phi_j)\ne0</m>; since the inequality is homogeneous in <m>\phi_j</m>, we may replace <m>\phi_j</m> by <m>\phi_j/\abs{u(\phi_j)}</m> and assume <m>\abs{u(\phi_j)}=1</m>.
+<p>(<m>\Rightarrow</m>)
+Let <m>\lim\phi_j=\phi</m> in <m>C_c^\infty(X)</m>.
+By definition there is <m>K\Subset X</m> with <m>\operatorname{supp}\phi_j,\operatorname{supp}\phi\subset K</m> for all <m>j</m>.
+Since <m>u\in\mathcal D'(X)</m>, there are <m>k\in\N</m> and <m>C&gt;0</m> such that <m>\abs{u(\psi)}\le C\,p_k(\psi)</m> for all <m>\psi\in C_c^\infty(X)</m> with <m>\operatorname{supp}\psi\subset K</m>.
 Then
-<md>\sum_{\abs\alpha\le j}\sup_X\abs{\pr^\alpha\phi_j}&lt;\frac1j,
-        \quad\text{so}\quad
-        \sup_X\abs{\pr^\alpha\phi_j}&lt;\frac1j\to0\quad\text{for every fixed }\alpha\text{ and all }j\ge\abs\alpha.</md>
-As all <m>\phi_j</m> are supported in <m>K</m>, this means <m>\phi_j\to0</m> in <m>C_c^\infty(X)</m>, so continuity gives <m>u(\phi_j)\to u(0)=0</m>, contradicting <m>\abs{u(\phi_j)}=1</m>.</p>
+<md>\abs{u(\phi_j)-u(\phi)}=\abs{u(\phi_j-\phi)}\le C\sum_{\abs\alpha\le k}\sup\abs{\pr_x^\alpha(\phi_j-\phi)}\to0\quad\text{as }j\to+\infty.</md></p>
+<p>(<m>\Leftarrow</m>)
+Let <m>K\Subset X</m>.
+We claim that there are <m>C&gt;0</m> and <m>k\in\N</m> such that
+<md>
+<mrow xml:id="eq-distribution-estimate" number="yes">\abs{u(\phi)}\le C\,p_k(\phi)\quad\text{for all }\phi\in C_c^\infty(X)\text{ with }\operatorname{supp}\phi\subset K.</mrow>
+</md>
+Suppose that <xref ref="eq-distribution-estimate" text="global"/> is not true.
+Then for every <m>j\in\N</m> (taking <m>C=k=j</m>) we can find <m>\phi_j\in C_c^\infty(X)</m> with <m>\operatorname{supp}\phi_j\subset K</m> such that
+<md>\abs{u(\phi_j)}&gt;j\,p_j(\phi_j).</md>
+In particular <m>u(\phi_j)\ne0</m>, and we can replace <m>\phi_j</m> by <m>\phi_j/\abs{u(\phi_j)}</m>; then <m>\abs{u(\phi_j)}=1</m> and <m>p_j(\phi_j)&lt;1/j</m>.
+For each <m>\alpha</m> and <m>j\ge\abs\alpha</m> we get <m>\sup\abs{\pr^\alpha\phi_j}\le p_j(\phi_j)&lt;1/j</m>, so <m>\lim\phi_j=0</m> in <m>C_c^\infty(X)</m>, but <m>\abs{u(\phi_j)}=1\not\to0=u(0)</m>, a contradiction.
+Thus <xref ref="eq-distribution-estimate" text="global"/> holds and <m>u</m> is a distribution.</p>
 </proof>
 </theorem>
-<definition xml:id="def-distribution-convergence">
+<definition xml:id="def-topology-distributions">
 <title>Topology in <m>\mathcal D'(X)</m></title>
 <statement>
-<p>Let <m>u,u_j\in\mathcal D'(X)</m>.
-We say that the sequence <m>u_j</m> <em>converges to</em> <m>u</m> <em>in</em> <m>\mathcal D'(X)</m> if <m>u_j(\phi)\to u(\phi)</m> for every <m>\phi\in C_c^\infty(X)</m>.</p>
+<p>Let <m>u_j,u\in\mathcal D'(X)</m>, <m>j=1,2,\dots</m>.
+We say that <m>\lim_{j\to+\infty}u_j=u</m> in <m>\mathcal D'(X)</m> if <m>\lim_{j\to+\infty}u_j(\phi)=u(\phi)</m> for all <m>\phi\in C_c^\infty(X)</m>.
+This topology is called the weak-<m>^\ast</m> topology.</p>
 </statement>
 </definition>
-<p>In functional analysis, this is called the <em>weak-<m>^\ast</m> topology</em>.</p>
-<theorem xml:id="thm-distribution-completeness">
-<title>Completeness of <m>\mathcal D'(X)</m></title>
+<theorem xml:id="thm-completeness-of-distributions">
+<title>Completeness</title>
 <statement>
-<p>Let <m>u_j\in\mathcal D'(X)</m>.
-Suppose that <m>\lim_{j\to+\infty} u_j(\phi)</m> exists for all <m>\phi\in C_c^\infty(X)</m>.
-Then the linear form
+<p>Let <m>u_j\in\mathcal D'(X)</m>, <m>j=1,2,\dots</m>.
+Assume that <m>\lim_{j\to+\infty}u_j(\phi)</m> exists for all <m>\phi\in C_c^\infty(X)</m>.
+Then the linear form <m>\phi\mapsto u(\phi)\coloneqq\lim_{j\to+\infty}u_j(\phi)</m> is a distribution.
+Moreover, for every compact set <m>K\Subset X</m>, there are <m>C&gt;0</m> and <m>k\in\N</m>, independent of <m>j</m>, such that
 <md>
-<mrow>u\colon
-        \begin{array}{ccc}
-            C_c^\infty(X) &amp; \to &amp; \C  \\
-            \phi &amp; \mapsto &amp; u(\phi)\coloneqq \lim_{j\to+\infty} u_j(\phi)
-        \end{array}</mrow>
-</md>
-is a distribution.
-Moreover, for every <m>K\Subset X</m>, there exist <m>C&gt;0</m> and <m>k\in\N_0</m>, <em>independent of</em> <m>j</m>, such that
-<md>
-<mrow xml:id="eq-uniform-bound" number="yes">\abs{u_j(\phi)} \le C\sum_{\abs{\alpha}\le k}\sup_X \abs{(\pr_x^\alpha\phi)(x)}</mrow>
-</md>
-for all <m>\phi\in C_c^\infty(X)</m> with <m>\operatorname{supp}\phi\subset K</m> and for all <m>j\in\N</m>.</p>
+<mrow xml:id="eq-uniform-bound" number="yes">\abs{u_j(\phi)}\le C\,p_k(\phi)\quad\text{for all }\phi\in C_c^\infty(X)\text{ with }\operatorname{supp}\phi\subset K\text{ and all }j=1,2,\dots</mrow>
+</md></p>
 </statement>
-</theorem>
-<remark xml:id="rmk-uniform-boundedness">
-<p>Theorem <xref ref="thm-distribution-completeness" text="global"/> can be proven by the concept of uniform boundedness and the Baire--Hausdorff method in functional analysis (these two important principles of functional analysis stand behind this proof; they will be introduced in this week's homework).
-We will give a direct proof by contradiction.</p>
-</remark>
 <proof>
-<p>Letting <m>j\to+\infty</m> in <xref ref="eq-uniform-bound" text="global"/> shows that <m>u</m> is a distribution, so it suffices to prove <xref ref="eq-uniform-bound" text="global"/>.
-Fix <m>K</m>, write <m>p_k(\phi)=\sum_{\abs\alpha\le k}\sup_X\abs{\pr^\alpha\phi}</m> (increasing in <m>k</m>), and suppose that for every <m>C,k</m> there are <m>\ell</m> and <m>\phi</m> with <m>\operatorname{supp}\phi\subset K</m> and <m>\abs{u_\ell(\phi)}&gt;C\,p_k(\phi)</m>; such <m>\phi</m> may be rescaled freely.</p>
-<p><em>Claim: there are <m>\ell_1&lt;\ell_2&lt;\cdots</m>, <m>k_1&lt;k_2&lt;\cdots</m> and <m>\phi_j</m> with <m>\operatorname{supp}\phi_j\subset K</m> such that</em>
+<p><xref ref="eq-uniform-bound" text="global"/> implies that <m>u</m> is a distribution (let <m>j\to+\infty</m>).
+Let <m>K\Subset X</m> and suppose that <xref ref="eq-uniform-bound" text="global"/> does not hold.
+Then for every <m>C&gt;0</m> and <m>k\in\N</m> there are <m>\ell\in\N</m> and <m>\phi\in C_c^\infty(X)</m>, <m>\operatorname{supp}\phi\subset K</m>, such that <m>\abs{u_\ell(\phi)}&gt;C\,p_k(\phi)</m>.</p>
+<p><em>Claim</em>: we can find <m>1\le\ell_1&lt;\ell_2&lt;\cdots</m>, <m>1\le k_1&lt;k_2&lt;\cdots</m> and <m>\phi_j\in C_c^\infty(X)</m> with <m>\operatorname{supp}\phi_j\subset K</m>, <m>j=1,2,\dots</m>, such that
 <ol marker="(i)">
 <li>
-<p><m>p_{k_j}(\phi_j)\le 2^{-j}</m>,</p>
+<p><m>p_{k_j}(\phi_j)\le2^{-j}</m>,</p>
 </li>
 <li>
-<p><m>\abs{u_{\ell_j}(\phi_j)} - \abs{u_{\ell_j}(\phi_1)} - \cdots - \abs{u_{\ell_j}(\phi_{j-1})} \ge j</m>, and</p>
+<p><m>\abs{u_{\ell_j}(\phi_j)}-\abs{u_{\ell_j}(\phi_1)}-\cdots-\abs{u_{\ell_j}(\phi_{j-1})}\ge j</m>,</p>
 </li>
 <li>
-<p><m>\abs{u_{\ell_i}(\phi_j)} &lt; 2^{-j}</m> for all <m>i&lt;j</m>.</p>
+<p><m>\abs{u_{\ell_i}(\phi_j)}&lt;2^{-j}</m> for all <m>i&lt;j</m>.</p>
 </li>
 </ol>
-For <m>j=1</m>, take <m>\abs{u_{\ell_1}(\phi_1)}&gt;2p_1(\phi_1)</m>, normalized to <m>\abs{u_{\ell_1}(\phi_1)}=1</m>, and <m>k_1=1</m>.
-Given the first <m>j_0</m> terms, the finitely many <m>u_\ell</m> with <m>\ell\le\ell_{j_0}</m> satisfy a common estimate
+Take <m>C=2</m>, <m>k=1</m>: we can find <m>\ell_1</m> and <m>\phi_1</m> with <m>\abs{u_{\ell_1}(\phi_1)}&gt;2p_1(\phi_1)</m>.
+Replacing <m>\phi_1</m> by <m>\phi_1/\abs{u_{\ell_1}(\phi_1)}</m>, we have <m>\abs{u_{\ell_1}(\phi_1)}=1</m> and <m>p_1(\phi_1)&lt;1/2</m>.
+Let <m>k_1=1</m>.</p>
+<p>Suppose that we have found <m>\ell_1&lt;\cdots&lt;\ell_{j_0}</m>, <m>k_1&lt;\cdots&lt;k_{j_0}</m> and <m>\phi_1,\dots,\phi_{j_0}</m> such that (i)--(iii) hold for <m>j\le j_0</m>.
+Since <m>u_\ell</m>, <m>\ell\le\ell_{j_0}</m>, are finitely many distributions, there are <m>\widehat C&gt;0</m> and <m>\widehat k\in\N</m> such that
 <md>
-<mrow xml:id="eq-finite-bound" number="yes">\abs{u_\ell(\phi)}\le\widehat C\,p_{\widehat k}(\phi)\qquad(\operatorname{supp}\phi\subset K,\ \ell\le\ell_{j_0}),</mrow>
+<mrow xml:id="eq-finite-bound" number="yes">\abs{u_\ell(\phi)}\le\widehat C\,p_{\widehat k}(\phi)\quad\text{for all }\ell\le\ell_{j_0}\text{ and }\phi\in C_c^\infty(X)\text{ with }\operatorname{supp}\phi\subset K.</mrow>
 </md>
-and <m>M=\sum_{i\le j_0}\sup_\ell\abs{u_\ell(\phi_i)}&lt;+\infty</m> since convergent sequences are bounded.
-Let <m>a=j_0+1+M</m>, <m>C'=(a+\widehat C)^22^{j_0+1}</m>, <m>L=\max\set{k_{j_0}+1,\widehat k}</m>, and pick <m>\ell,\phi</m> with <m>\abs{u_\ell(\phi)}&gt;C'p_L(\phi)</m>, rescaled so that <m>\abs{u_\ell(\phi)}=a</m>.
-If <m>\ell\le\ell_{j_0}</m>, then <xref ref="eq-finite-bound" text="global"/> would give <m>\abs{u_\ell(\phi)}\le\widehat C\,p_{\widehat k}(\phi)\le\widehat C\,p_L(\phi)\le C'p_L(\phi)</m>, a contradiction; so <m>\ell&gt;\ell_{j_0}</m>.
-Set <m>\ell_{j_0+1}=\ell</m>, <m>k_{j_0+1}=L</m> and <m>\phi_{j_0+1}=\phi</m>, and check (i)--(iii) for <m>j=j_0+1</m>:
-<md>
-<mrow>\text{(i)}\quad &amp; p_{k_{j_0+1}}(\phi_{j_0+1})&lt;\frac{\abs{u_\ell(\phi)}}{C'}=\frac{a}{(a+\widehat C)^2}\,2^{-j_0-1}\le\frac1a\,2^{-j_0-1}&lt;2^{-j_0-1},</mrow>
-<mrow>\text{(ii)}\quad &amp; \abs{u_{\ell_{j_0+1}}(\phi_{j_0+1})}-\sum_{i=1}^{j_0}\abs{u_{\ell_{j_0+1}}(\phi_i)}\ge a-M=j_0+1,</mrow>
-<mrow>\text{(iii)}\quad &amp; \abs{u_{\ell_i}(\phi_{j_0+1})}\le\widehat C\,p_L(\phi_{j_0+1})&lt;\frac{\widehat C\,a}{(a+\widehat C)^2}\,2^{-j_0-1}\le\frac14\,2^{-j_0-1}&lt;2^{-(j_0+1)}\quad(i\le j_0),</mrow>
-</md>
-where (iii) uses <xref ref="eq-finite-bound" text="global"/> (as <m>\ell_i\le\ell_{j_0}</m>) and <m>(a+\widehat C)^2\ge4a\widehat C</m>.</p>
-<p>Now put <m>\phi=\sum_j\phi_j</m>.
-Since <m>k_j\ge j</m>, (i) gives <m>\sum_jp_N(\phi_j)&lt;+\infty</m> for every <m>N</m>, so the series converges in <m>C_c^\infty(X)</m> with <m>\operatorname{supp}\phi\subset K</m>, and by Theorem <xref ref="thm-sequential-continuity" text="global"/>, <m>u_{\ell_j}(\phi)=\sum_iu_{\ell_j}(\phi_i)</m>.
-Splitting this sum into <m>i=j</m>, <m>i&lt;j</m> and <m>i&gt;j</m>, and using (ii) and (iii) (with the roles <m>\ell_j</m>, <m>i=j+s</m>),
-<md>
-<mrow>\abs{u_{\ell_j}(\phi)}
-        &amp;\ge\abs{u_{\ell_j}(\phi_j)}-\sum_{i=1}^{j-1}\abs{u_{\ell_j}(\phi_i)}-\sum_{s=1}^{+\infty}\abs{u_{\ell_j}(\phi_{j+s})}</mrow>
-<mrow>&amp;\ge j-\sum_{s=1}^{+\infty}2^{-(j+s)}\ge j-1\to+\infty,</mrow>
-</md>
-contradicting the convergence, hence boundedness, of <m>(u_\ell(\phi))_\ell</m>.</p>
+Since <m>\lim_\ell u_\ell(\phi_i)</m> exists, there is <m>M&gt;0</m> such that <m>\sum_{i=1}^{j_0}\abs{u_\ell(\phi_i)}\le M</m> for all <m>\ell\in\N</m>.
+Let <m>a\coloneqq j_0+1+M</m>, <m>C'\coloneqq(a+\widehat C)^22^{j_0+1}</m> and <m>L\coloneqq\max\set{k_{j_0}+1,\widehat k}</m>.
+Since <xref ref="eq-uniform-bound" text="global"/> fails, there are <m>\ell</m> and <m>\phi</m> with <m>\operatorname{supp}\phi\subset K</m> such that <m>\abs{u_\ell(\phi)}&gt;C'p_L(\phi)</m>.
+By <xref ref="eq-finite-bound" text="global"/> (and <m>\widehat C\le C'</m>, <m>p_{\widehat k}\le p_L</m>), <m>\ell&gt;\ell_{j_0}</m>.
+Replacing <m>\phi</m> by a multiple, we may assume <m>\abs{u_\ell(\phi)}=a</m>.
+Let <m>\ell_{j_0+1}\coloneqq\ell</m>, <m>k_{j_0+1}\coloneqq L</m> and <m>\phi_{j_0+1}\coloneqq\phi</m>.
+Then
+<md>p_{k_{j_0+1}}(\phi_{j_0+1})&lt;\frac a{C'}=\frac{a}{(a+\widehat C)^2}2^{-j_0-1}&lt;2^{-j_0-1},</md><md>\abs{u_{\ell_{j_0+1}}(\phi_{j_0+1})}-\sum_{i=1}^{j_0}\abs{u_{\ell_{j_0+1}}(\phi_i)}\ge a-M=j_0+1,</md>
+and, for <m>i\le j_0</m>, by <xref ref="eq-finite-bound" text="global"/> and <m>(a+\widehat C)^2\ge4a\widehat C</m>,
+<md>\abs{u_{\ell_i}(\phi_{j_0+1})}\le\widehat C\,p_L(\phi_{j_0+1})&lt;\frac{\widehat C\,a}{(a+\widehat C)^2}2^{-j_0-1}\le\frac142^{-j_0-1}&lt;2^{-(j_0+1)}.</md>
+By induction, the claim follows.</p>
+<p>Let <m>\phi\coloneqq\sum_{j=1}^{+\infty}\phi_j</m>.
+For every <m>N</m>, <m>p_N(\phi_j)\le p_{k_j}(\phi_j)\le2^{-j}</m> if <m>j\ge N</m> (as <m>k_j\ge j</m>), so <m>\sum_jp_N(\phi_j)&lt;+\infty</m>.
+Thus <m>\phi\in C_c^\infty(X)</m>, <m>\operatorname{supp}\phi\subset K</m>, and the partial sums converge to <m>\phi</m> in <m>C_c^\infty(X)</m>.
+By Theorem <xref ref="thm-sequential-continuity" text="global"/> (applied to <m>u_{\ell_j}</m>),
+<md>u_{\ell_j}(\phi)=u_{\ell_j}(\phi_j)+u_{\ell_j}(\phi_1)+\cdots+u_{\ell_j}(\phi_{j-1})+\sum_{s=1}^{+\infty}u_{\ell_j}(\phi_{j+s}).</md>
+Thus, by (ii) and (iii),
+<md>\abs{u_{\ell_j}(\phi)}\ge\abs{u_{\ell_j}(\phi_j)}-\abs{u_{\ell_j}(\phi_1)}-\cdots-\abs{u_{\ell_j}(\phi_{j-1})}-\sum_{s=1}^{+\infty}\abs{u_{\ell_j}(\phi_{j+s})}\ge j-\sum_{s=1}^{+\infty}2^{-s}= j-1.</md>
+Hence <m>\abs{u_{\ell_j}(\phi)}\to+\infty</m>, and <m>\lim_\ell u_\ell(\phi)</m> does not exist, a contradiction.
+Thus <xref ref="eq-uniform-bound" text="global"/> holds.</p>
 </proof>
+</theorem>
+<remark xml:id="rmk-uniform-boundedness">
+<p>Behind the proof of Theorem <xref ref="thm-completeness-of-distributions" text="global"/> are two important principles of functional analysis: the uniform boundedness theorem and the Baire--Hausdorff theorem.
+They will be introduced in this week's homework.</p>
+</remark>
 </subsection>
 <subsection xml:id="ssec-1112">
 <title>20261112</title>
 <definition xml:id="def-distribution-derivative">
 <statement>
 <p>Let <m>u\in\mathcal D'(X)</m>.
-For <m>k=1,2,\dots,n</m>, let <m>\pr u/\pr x_k</m> be the distribution given by
-<md>\frac{\pr u}{\pr x_k}(\phi) = -u\left( \frac{\pr\phi}{\pr x_k} \right).</md>
-For <m>f\in C^\infty(X)</m>, let <m>f.u</m> be the distribution given by
-<md>f.u(\phi) = u(f\phi).</md></p>
+For <m>k=1,\dots,n</m>, let <m>\pr u/\pr x_k</m> be the distribution given by
+<md>\frac{\pr u}{\pr x_k}(\phi)\coloneqq-u\left( \frac{\pr\phi}{\pr x_k} \right),\qquad\phi\in C_c^\infty(X).</md>
+Let <m>f\in C^\infty(X)</m>.
+Let <m>fu</m> be the distribution given by <m>(fu)(\phi)\coloneqq u(f\phi)</m>, <m>\phi\in C_c^\infty(X)</m>.</p>
 </statement>
 </definition>
-<lemma xml:id="lem-derivative-product-distribution">
-<statement>
-<p>The linear forms <m>\pr u/\pr x_k</m> and <m>f.u</m> in Definition <xref ref="def-distribution-derivative" text="global"/> are indeed distributions.</p>
-</statement>
-<proof>
-<p>Both are well defined and linear, since <m>\pr_{x_k}\phi,f\phi\in C_c^\infty(X)</m> with support in <m>\operatorname{supp}\phi</m>.
-Let <m>K\Subset X</m>, and let <m>C,k_0</m> be the constants of <m>u</m> on <m>K</m>.
-For <m>\operatorname{supp}\phi\subset K</m>, apply the estimate to <m>\pr_{x_k}\phi</m>; each <m>\pr^\alpha\pr_{x_k}</m> with <m>\abs\alpha\le k_0</m> is some <m>\pr^\beta</m> with <m>\abs\beta\le k_0+1</m>, so
-<md>\left\lvert \frac{\pr u}{\pr x_k}(\phi) \right\rvert=\left\lvert u\left( \frac{\pr\phi}{\pr x_k} \right) \right\rvert
-        \le C\sum_{\abs\alpha\le k_0}\sup\abs{\pr^\alpha\pr_{x_k}\phi}
-        \le C\sum_{\abs\beta\le k_0+1}\sup\abs{\pr^\beta\phi}.</md>
-For <m>f.u</m>, let <m>A=\max_{\abs\beta\le k_0}\sup_K\abs{\pr^\beta f}&lt;+\infty</m>.
-By the Leibniz rule <m>\pr^\alpha(f\phi)=\sum_{\beta\le\alpha}\binom\alpha\beta\pr^\beta f\,\pr^{\alpha-\beta}\phi</m> and <m>\sum_{\beta\le\alpha}\binom\alpha\beta=2^{\abs\alpha}</m>, for <m>\abs\alpha\le k_0</m>,
-<md>\sup\abs{\pr^\alpha(f\phi)}
-        \le\sum_{\beta\le\alpha}\binom\alpha\beta\sup_K\abs{\pr^\beta f}\,\sup\abs{\pr^{\alpha-\beta}\phi}
-        \le2^{k_0}A\sum_{\abs\gamma\le k_0}\sup\abs{\pr^\gamma\phi},</md>
-and summing over the <m>\abs\alpha\le k_0</m> in the estimate for <m>u(f\phi)</m>,
-so <m>f.u</m> satisfies the estimate with <m>C'=C\cdot\#\set{\alpha\mid\abs\alpha\le k_0}\cdot2^{k_0}A</m> (or <m>1</m> if this vanishes).</p>
-</proof>
-</lemma>
+<p>(These are distributions: if <m>\abs{u(\psi)}\le C\,p_k(\psi)</m> for <m>\operatorname{supp}\psi\subset K</m>, then <m>\abs{\frac{\pr u}{\pr x_k}(\phi)}\le C\,p_{k+1}(\phi)</m>, and, by the Leibniz formula, <m>\abs{(fu)(\phi)}\le C\,p_k(f\phi)\le C'p_k(\phi)</m> with <m>C'</m> depending on the derivatives of <m>f</m> on <m>K</m>, for <m>\operatorname{supp}\phi\subset K</m>.)</p>
 <example xml:id="ex-distributional-derivative">
 <p>Let <m>f\in L_\mathrm{loc}^1(X)</m>.
-Then <m>T_f</m>, the function given by
-<md>T_f(\phi) = \int_{X}f(x)\phi(x)\,dx,</md>
-is a distribution (Example <xref ref="ex-L1loc-distribution" text="global"/>).
-We sometimes write <m>f</m> to represent <m>T_f</m>.
-Note that if <m>f\in C^1(X)</m>, then
-<md>\frac{\pr T_f}{\pr x_k} (\phi)
-        = -\int_{X}f(x) \frac{\pr\phi}{\pr x_k}\,dx
-        = \int_X \frac{\pr f}{\pr x_k}\phi(x)\,dx
-        = T_{\pr f/\pr x_k}(\phi).</md>
-The middle equality is integration by parts: extend <m>f\phi</m> by zero to a compactly supported <m>C^1</m> function <m>g</m> on <m>\R^n</m>; then <m>\int_{\R^n}\pr_{x_k}g\,dx=0</m> by Fubini's theorem (Theorem <xref ref="thm-fubini-2" text="global"/>) and the fundamental theorem of calculus in the variable <m>x_k</m>, and <m>\pr_{x_k}(f\phi)=\pr_{x_k}f\cdot\phi+f\cdot\pr_{x_k}\phi</m>.
-So the distributional derivative of <m>T_f</m> is <m>T_{\pr f/\pr x_k}</m>, the distribution of the classical derivative.</p>
+Then <m>T_f\in\mathcal D'(X)</m>, <m>T_f(\phi)=\int_Xf\phi</m>, and
+<md>\left( \frac{\pr}{\pr x_k}T_f \right)(\phi)=-T_f\left( \frac{\pr\phi}{\pr x_k} \right)=-\int_Xf\frac{\pr\phi}{\pr x_k}.</md>
+If <m>f\in C^1(X)</m>, then by integration by parts (<m>f\phi</m> has compact support in <m>X</m>),
+<md>\left( \frac{\pr}{\pr x_k}T_f \right)(\phi)=-\int_Xf\frac{\pr\phi}{\pr x_k}=\int_X\frac{\pr f}{\pr x_k}\phi=T_{\pr f/\pr x_k}(\phi).</md></p>
 </example>
-<remark xml:id="rmk-continuous-identification">
-<p>The identification <m>f=T_f</m> is legitimate for continuous functions: if <m>f,g\in C^0(X)</m> and <m>T_f=T_g</m>, then <m>f=g</m>.
-Indeed, let <m>h=f-g</m> and suppose <m>h(x_0)\ne0</m> for some <m>x_0</m>.
-Choose <m>c\in\C</m> with <m>\abs c=1</m> and <m>\operatorname{Re}(ch(x_0))&gt;0</m>; by continuity, <m>\operatorname{Re}(ch)&gt;\eta&gt;0</m> on some ball <m>B_\rho(x_0)\subset X</m>.
-Let <m>F(x)=\phi((x-x_0)/\delta)</m> with <m>\phi</m> from Lemma <xref ref="lem-bump" text="global"/> and <m>\delta&lt;\rho</m> small; then <m>F\ge0</m>, <m>F\not\equiv0</m>, <m>F\in C_c^\infty(B_\rho(x_0))</m>.
-So <m>\operatorname{Re}(c\,T_h(F))=\int\operatorname{Re}(ch)F\ge\eta\int F&gt;0</m>, contradicting <m>T_h=0</m>.
-(More generally, for <m>f,g\in L^1_\mathrm{loc}(X)</m> one has <m>T_f=T_g</m> if and only if <m>f=g</m> almost everywhere; we do not need this.)</p>
-</remark>
 <example xml:id="ex-heaviside">
-<p>Consider the Heaviside function
-<md>
-<mrow>H(x) =
-        \begin{cases}
-            1 &amp; \text{if } x\ge 0 \\
-            0 &amp; \text{if } x&lt;0
-        \end{cases}.</mrow>
-</md>
-It is clear that <m>H\in L_\mathrm{loc}^1(\R)</m>.
-For <m>\phi\in C_c^\infty(\R)</m>, say <m>\operatorname{supp}\phi\subset[-R,R]</m>, we have
-<md>\frac{\pr T_H}{\pr x}(\phi)
-        = -T_H\left( \frac{\pr\phi}{\pr x} \right)
-        = -\int_{0}^{+\infty} \frac{\pr\phi}{\pr x}\,dx
-        = -\left(\phi(R)-\phi(0)\right)
-        = \phi(0)
-        = \delta_0(\phi),</md>
-so <m>T_H' = \delta_0</m>.
-That is, the derivative of the Heaviside function is the delta distribution (Example <xref ref="ex-dirac" text="global"/>), even though <m>H</m> is not differentiable at <m>0</m> in the classical sense.</p>
+<p>Let <m>H(x)=1</m> if <m>x&gt;0</m> and <m>H(x)=0</m> if <m>x\le0</m>.
+<m>H</m> is the Heaviside function.
+Then <m>H\in L_\mathrm{loc}^1(\R)</m> and <m>T_H\in\mathcal D'(\R)</m>.
+For <m>\phi\in C_c^\infty(\R)</m> with <m>\operatorname{supp}\phi\subset[-R,R]</m>,
+<md>\left( \frac{\pr}{\pr x}T_H \right)(\phi)=-T_H\left( \frac{\pr\phi}{\pr x} \right)=-\int_0^{R}\frac{\pr\phi}{\pr x}\,dx=-\bigl(\phi(R)-\phi(0)\bigr)=\phi(0)=\delta_0(\phi).</md>
+Thus <m>H'=\delta_0</m>: the derivative of the Heaviside function is the delta function.</p>
 </example>
 <example xml:id="ex-indicator-derivative">
-<p>Let <m>Y=\set{x\in\R^n\mid r(x)&lt;0}</m>, where <m>r\in C^1(\R^n)</m> and <m>\nabla r(x) \ne 0</m> on <m>\pr Y= \set{x\in\R^n\mid r(x)=0}</m>.
-By the implicit function theorem, <m>\pr Y</m> is a <m>C^1</m> hypersurface and <m>Y</m> lies locally on one side of it.
-We compute the derivative of <m>T_{1_Y}= 1_Y\in L^1_\mathrm{loc}(\R^n)</m>:
-Let <m>N=(N_1,\dots,N_n)</m> be the inward normal vector of <m>\pr Y</m>, that is, <m>N=-\nabla r/\abs{\nabla r}</m>, and let <m>\,dS</m> be the volume form (surface measure) on <m>\pr Y</m>.
-For <m>\phi\in C_c^\infty(\R^n)</m>, the Gauss--Green theorem (Example <xref ref="ex-gauss-green" text="global"/>), applied to the compactly supported vector field <m>\phi\, e_k</m> on <m>Y</m> (whose outward normal is <m>-N</m>), gives <m>\int_Y\pr_{x_k}\phi\,dx=-\int_{\pr Y}N_k\phi\,dS</m>.
-Hence
-<md>\frac{\pr 1_Y}{\pr x_k} (\phi)
-        = - 1_Y\left( \frac{\pr\phi}{\pr x_k} \right)
-        = -\int_Y \frac{\pr\phi}{\pr x_k}\,dx
-        = \int_{\pr Y} N_k\phi\,dS.</md>
-Therefore,
-<md>\frac{\pr 1_Y}{\pr x_k} = N_k \,.\, \delta_{\pr Y},</md>
-where <m>\delta_{\pr Y}</m> is the distribution sending <m>\phi\in C_c^\infty(\R^n)</m> to <m>\int_{\pr Y}\phi\,dS</m>, and <m>N_k\delta_{\pr Y}</m> is the distribution <m>\phi\mapsto\int_{\pr Y}N_k\phi\,dS</m>.
-(These are distributions of order <m>0</m>: <m>\abs{\int_{\pr Y}N_k\phi\,dS}\le\operatorname{area}(\pr Y\cap K)\sup\abs\phi</m> if <m>\operatorname{supp}\phi\subset K</m>, and <m>\operatorname{area}(\pr Y\cap K)&lt;+\infty</m> since <m>\pr Y\cap K</m> is compact.)
-For <m>n=1</m> and <m>r(x)=-x</m>, we have <m>Y=(0,+\infty)</m>, <m>N=1</m>, <m>\delta_{\pr Y}=\delta_0</m>, and we recover <m>T_H'=\delta_0</m> (Example <xref ref="ex-heaviside" text="global"/>).</p>
+<p>Let <m>Y\coloneqq\set{x\in\R^n\mid r(x)&lt;0}</m>, where <m>r\in C^1(\R^n)</m> and <m>\nabla r\ne0</m> on <m>\pr Y=\set{x\in\R^n\mid r(x)=0}</m>.
+Then <m>1_Y\in\mathcal D'(\R^n)</m>, that is, <m>1_Y(\phi)\coloneqq\int_Y\phi</m>, <m>\phi\in C_c^\infty(\R^n)</m>.
+For <m>k=1,\dots,n</m>, by the Gauss--Green theorem (Example <xref ref="ex-gauss-green" text="global"/>),
+<md>\left( \frac{\pr}{\pr x_k}1_Y \right)(\phi)=-1_Y\left( \frac{\pr\phi}{\pr x_k} \right)=-\int_Y\frac{\pr\phi}{\pr x_k}=\int_{\pr Y}N_k\phi\,dS,</md>
+where <m>N=(N_1,\dots,N_n)</m> is the interior unit normal vector on <m>\pr Y</m> and <m>\,dS</m> is the volume form on <m>\pr Y</m>.
+Thus <m>\frac{\pr}{\pr x_k}1_Y=N_k\delta_{\pr Y}</m>, where <m>N_k\delta_{\pr Y}</m> is the distribution <m>\phi\mapsto\int_{\pr Y}N_k\phi\,dS</m>.</p>
 </example>
-<definition xml:id="def-distribution-restriction">
-<statement>
-<p>Let <m>U\subset X</m> be an open set.
-Every <m>\phi\in C_c^\infty(U)</m> extends by zero to an element of <m>C_c^\infty(X)</m>, so we regard <m>C_c^\infty(U)\subset C_c^\infty(X)</m>.
-For <m>u\in\mathcal D'(X)</m>, we denote by <m>u|_{U}\in\mathcal D'(U)</m> the restriction of <m>u</m> to <m>C_c^\infty(U)</m>.
-(It is a distribution: a compact subset of <m>U</m> is a compact subset of <m>X</m>, so the estimate for <m>u</m> gives the same estimate for <m>u|_U</m>.)
-We say that <m>u</m> <em>vanishes on</em> <m>U</m> if <m>u|_U=0</m>, that is, if <m>u(\phi)=0</m> for all <m>\phi\in C_c^\infty(U)</m>.</p>
-</statement>
-</definition>
+<p>For an open set <m>U\subset X</m> we regard <m>C_c^\infty(U)\subset C_c^\infty(X)</m> (extension by <m>0</m>), and for <m>u\in\mathcal D'(X)</m> we write <m>u|_U\in\mathcal D'(U)</m> for the restriction of <m>u</m> to <m>C_c^\infty(U)</m>.
+We say that <m>u|_U=0</m> if <m>u(\phi)=0</m> for every <m>\phi\in C_c^\infty(U)</m>.</p>
 <theorem xml:id="thm-localization">
 <title>Localization</title>
 <statement>
 <p>Let <m>u\in\mathcal D'(X)</m>.
-If for every <m>p\in X</m>, there exists an open neighborhood <m>U_p\subset X</m> such that <m>u|_{U_p}=0</m>, then <m>u=0</m>.</p>
+If for every <m>p\in X</m> there is an open neighborhood <m>U_p</m> of <m>p</m> such that <m>u|_{U_p}=0</m>, then <m>u=0</m>.</p>
 </statement>
 <proof>
 <p>Let <m>\phi\in C_c^\infty(X)</m>.
-Finitely many of the <m>U_p</m>, say <m>U_1,\dots,U_N</m>, cover <m>\operatorname{supp}\phi</m>.
-By Theorem <xref ref="thm-partition-of-unity" text="global"/>, <m>\phi=\sum_j\phi_j</m> with <m>\phi_j\in C_c^\infty(U_j)</m>, so <m>u(\phi)=\sum_ju|_{U_j}(\phi_j)=0</m>.</p>
+Since <m>\operatorname{supp}\phi</m> is compact, <m>\operatorname{supp}\phi\subset U_1\cup\cdots\cup U_N</m> with <m>u|_{U_j}=0</m>.
+By Theorem <xref ref="thm-partition-of-unity" text="global"/>, <m>\phi=\sum_{j=1}^N\phi_j</m> with <m>\phi_j\in C_c^\infty(U_j)</m>.
+Then <m>u(\phi)=\sum_{j=1}^Nu(\phi_j)=0</m>.</p>
 </proof>
 </theorem>
 <definition xml:id="def-distribution-support">
 <statement>
 <p>Let <m>u\in\mathcal D'(X)</m>.
-The support of <m>u</m>, denoted by <m>\operatorname{supp} u</m>, is the set of points <m>p</m> in <m>X</m> such that <m>u|_{U_p}\ne 0</m> for every open neighborhood <m>U_p\subset X</m>.
+The <em>support</em> of <m>u</m>, denoted by <m>\operatorname{supp} u</m>, is the set of points in <m>X</m> having no neighborhood to which the restriction of <m>u</m> is <m>0</m>.
 That is,
-<md>X\setminus\operatorname{supp} u=\set{x\in X\mid \text{there is an open set }U_x\subset X\text{ with }x\in U_x\text{ and }u|_{U_x}=0}.</md></p>
+<md>(\operatorname{supp} u)^c=\set{x\in X\mid\text{there is an open neighborhood }U_x\subset X\text{ of }x\text{ such that }u|_{U_x}=0}.</md></p>
 </statement>
 </definition>
-<lemma xml:id="lem-support-closed">
-<statement>
-<p>Let <m>u\in\mathcal D'(X)</m>.
-Then <m>\operatorname{supp} u</m> is closed in <m>X</m>, and <m>u</m> vanishes on the open set <m>X\setminus\operatorname{supp} u</m>.</p>
-</statement>
-<proof>
-<p>If <m>u|_{U_x}=0</m>, then every point of <m>U_x</m> lies outside <m>\operatorname{supp} u</m>, so <m>X\setminus\operatorname{supp} u</m> is open.
-Every point of <m>X\setminus\operatorname{supp} u</m> has a neighborhood on which <m>u</m> vanishes, so <m>u|_{X\setminus\operatorname{supp} u}=0</m> by Theorem <xref ref="thm-localization" text="global"/>.</p>
-</proof>
-</lemma>
+<p>Note that <m>\operatorname{supp} u</m> is closed in <m>X</m> (its complement is a union of open sets), and <m>u|_{X\setminus\operatorname{supp} u}=0</m> by Theorem <xref ref="thm-localization" text="global"/>.</p>
 <definition xml:id="def-compactly-supported-distributions">
 <statement>
-<p>Let <m>\mathcal E'(X)</m> be the set of <m>u\in\mathcal D'(X)</m> such that <m>\operatorname{supp} u</m> is a compact subset of <m>X</m>.</p>
+<p><m>\mathcal E'(X)\coloneqq\set{u\in\mathcal D'(X)\mid\operatorname{supp} u\text{ is a compact subset of }X}</m>.</p>
 </statement>
 </definition>
 <example xml:id="ex-dirac-support">
-<p>For <m>p\in X</m>, let <m>\delta_p</m> be the distribution sending <m>\phi</m> to <m>\phi(p)</m>.
-Then <m>\operatorname{supp}\delta_p = \set{p}</m>: if <m>x\ne p</m>, then <m>\delta_p</m> vanishes on <m>X\setminus\set p</m> (as <m>\phi(p)=0</m> for every <m>\phi\in C_c^\infty(X\setminus\set p)</m>), so <m>x\notin\operatorname{supp}\delta_p</m>; and every neighborhood <m>U</m> of <m>p</m> contains a test function <m>F\ge0</m> with <m>F(p)&gt;0</m> (Remark <xref ref="rmk-scaled-bump" text="global"/>), so <m>\delta_p|_U\ne0</m> and <m>p\in\operatorname{supp}\delta_p</m>.
-Thus <m>\delta_p\in\mathcal E'(X)</m>.</p>
+<p>Let <m>p\in X</m>.
+Then <m>\operatorname{supp}\delta_p=\set p</m> and <m>\delta_p\in\mathcal E'(X)</m>.
+(If <m>x\ne p</m>, then <m>\delta_p</m> vanishes on <m>X\setminus\set p</m>; and every neighborhood of <m>p</m> carries a test function <m>F\ge0</m> with <m>F(p)&gt;0</m> by Remark <xref ref="rmk-scaled-bump" text="global"/>.)</p>
 </example>
 <example xml:id="ex-test-functions-compact-support">
-<p>Under the identification <m>f=T_f</m>, we have <m>C_c^\infty(X)\subset\mathcal E'(X)</m>.
-Indeed, if <m>x\notin\operatorname{supp} f</m>, then <m>f</m> vanishes on a neighborhood <m>U</m> of <m>x</m>, so <m>T_f|_U=0</m> and <m>x\notin\operatorname{supp} T_f</m>.
-Hence <m>\operatorname{supp} T_f\subset\operatorname{supp} f</m>, and <m>\operatorname{supp} T_f</m> is a closed subset of <m>X</m> contained in the compact set <m>\operatorname{supp} f</m>, so it is compact.</p>
+<p><m>C_c^\infty(X)\subset\mathcal E'(X)</m> (via <m>f\mapsto T_f</m>), since <m>\operatorname{supp} T_f\subset\operatorname{supp} f</m>.</p>
 </example>
 <theorem xml:id="thm-glueing">
 <title>Glueing</title>
 <statement>
-<p>Let <m>X_1,X_2,\dots</m> be open sets and let <m>X=\bigcup_{j=1}^{+\infty}X_j</m>.
-If <m>u_j\in\mathcal D'(X_j)</m> is such that <m>u_j=u_k</m> on <m>X_j\cap X_k</m> for all <m>j</m> and for all <m>k</m> (that is, <m>u_j|_{X_j\cap X_k}=u_k|_{X_j\cap X_k}</m>), then there exists a unique <m>u\in\mathcal D'(X)</m> such that <m>u|_{X_j} = u_j</m> for all <m>j</m>.</p>
+<p>Let <m>X_1,X_2,\dots</m> be open sets and let <m>X\coloneqq\bigcup_{j=1}^{+\infty}X_j</m>.
+If <m>u_j\in\mathcal D'(X_j)</m> and <m>u_j=u_k</m> in <m>X_j\cap X_k</m> for all <m>j,k</m>, then there exists one and only one <m>u\in\mathcal D'(X)</m> such that <m>u|_{X_j}=u_j</m> for all <m>j</m>.</p>
 </statement>
 <proof>
-<p>For <m>\phi\in C_c^\infty(X)</m>, Theorem <xref ref="thm-partition-of-unity" text="global"/> gives a finite decomposition <m>\phi=\sum_j\phi_j</m> with <m>\phi_j\in C_c^\infty(X_j)</m>; define <m>u(\phi)=\sum_ju_j(\phi_j)</m>.</p>
-<p><em>Well-definedness.</em>
-Let <m>\phi=\sum_j\widetilde\phi_j</m> be another such decomposition, and let <m>K=\bigcup_j\operatorname{supp}(\widetilde\phi_j-\phi_j)</m>, a compact set.
-By Theorems <xref ref="thm-cutoff" text="global"/> and <xref ref="thm-partition-of-unity" text="global"/>, there are <m>\Psi_k\in C_c^\infty(X_k)</m>, finitely many nonzero, with <m>\sum_k\Psi_k=1</m> near <m>K</m>.
-Since <m>\Psi_k(\widetilde\phi_j-\phi_j)\in C_c^\infty(X_j\cap X_k)</m> and <m>u_j=u_k</m> there,
-<md>\sum_ju_j(\widetilde\phi_j-\phi_j)
-        =\sum_{j,k}u_k\bigl(\Psi_k(\widetilde\phi_j-\phi_j)\bigr)
-        =\sum_ku_k\Bigl(\Psi_k\sum_j(\widetilde\phi_j-\phi_j)\Bigr)=0.</md>
-Hence <m>u</m> is well defined and linear, and <m>u|_{X_j}=u_j</m> (take the decomposition <m>\phi=\phi_j</m>).
-Uniqueness follows from Theorem <xref ref="thm-localization" text="global"/>.</p>
-<p><em><m>u</m> is a distribution.</em>
-For <m>K\Subset X</m>, take <m>\varphi_j\in C_c^\infty(X_j)</m>, finitely many nonzero, with <m>\sum_j\varphi_j=1</m> near <m>K</m>, and let <m>C_j,k_j</m> be the constants of <m>u_j</m> on <m>\operatorname{supp}\varphi_j</m>.
-Let <m>J</m> be the finite set of <m>j</m> with <m>\varphi_j\ne0</m>, <m>C=\max_{j\in J}C_j</m>, <m>k=\max_{j\in J}k_j</m> and <m>A=\max_{j\in J}\max_{\abs\beta\le k}\sup\abs{\pr^\beta\varphi_j}</m>.
-For <m>\operatorname{supp}\phi\subset K</m> we have <m>\phi=\sum_{j\in J}\varphi_j\phi</m> with <m>\varphi_j\phi\in C_c^\infty(X_j)</m> supported in <m>\operatorname{supp}\varphi_j</m>, so by the definition of <m>u</m> and the Leibniz rule (as in Lemma <xref ref="lem-derivative-product-distribution" text="global"/>),
-<md>\abs{u(\phi)}
-        \le\sum_{j\in J}\abs{u_j(\varphi_j\phi)}
-        \le\sum_{j\in J}C_j\sum_{\abs\alpha\le k_j}\sup\abs{\pr^\alpha(\varphi_j\phi)}
-        \le\#J\cdot C\cdot\#\set{\alpha\mid\abs\alpha\le k}\cdot2^kA\sum_{\abs\gamma\le k}\sup\abs{\pr^\gamma\phi}.</md></p>
+<p>Let <m>\phi\in C_c^\infty(X)</m>.
+Since <m>\operatorname{supp}\phi</m> is compact, it is covered by finitely many <m>X_j</m>, and by Theorem <xref ref="thm-partition-of-unity" text="global"/>, <m>\phi=\sum_{j}\phi_j</m> with <m>\phi_j\in C_c^\infty(X_j)</m> and only finitely many <m>\phi_j\ne0</m>.
+Define <m>u(\phi)\coloneqq\sum_ju_j(\phi_j)</m>.</p>
+<p><em>Claim</em>: <m>u</m> is well-defined.
+Let <m>\phi=\sum_j\widetilde\phi_j</m> be another such decomposition.
+We need to check that <m>\sum_ju_j(\widetilde\phi_j-\phi_j)=0</m>.
+Let <m>K\coloneqq\bigcup_j\operatorname{supp}(\widetilde\phi_j-\phi_j)</m>, a compact subset of <m>X</m>.
+By Theorem <xref ref="thm-cutoff" text="global"/> and Theorem <xref ref="thm-partition-of-unity" text="global"/>, we can find <m>\Psi_k\in C_c^\infty(X_k)</m>, <m>k=1,2,\dots</m>, only finitely many nonzero, such that <m>\sum_k\Psi_k=1</m> near <m>K</m>.
+Since <m>\Psi_k(\widetilde\phi_j-\phi_j)\in C_c^\infty(X_j\cap X_k)</m> and <m>u_j=u_k</m> on <m>X_j\cap X_k</m>,
+<md>
+<mrow>\sum_ju_j(\widetilde\phi_j-\phi_j)
+        &amp;=\sum_j\sum_ku_j\bigl(\Psi_k(\widetilde\phi_j-\phi_j)\bigr)
+        =\sum_j\sum_ku_k\bigl(\Psi_k(\widetilde\phi_j-\phi_j)\bigr)</mrow>
+<mrow>&amp;=\sum_ku_k\Bigl(\Psi_k\sum_j(\widetilde\phi_j-\phi_j)\Bigr)
+        =\sum_ku_k\bigl(\Psi_k(\phi-\phi)\bigr)=0.</mrow>
+</md>
+Hence <m>u</m> is well-defined; it is clearly linear, and <m>u|_{X_j}=u_j</m> (take the decomposition <m>\phi=\phi_j</m> for <m>\phi\in C_c^\infty(X_j)</m>).</p>
+<p>Let <m>K\Subset X</m>.
+We can find <m>\varphi_j\in C_c^\infty(X_j)</m>, <m>j=1,\dots,N</m>, <m>N&lt;+\infty</m>, such that <m>\sum_{j=1}^N\varphi_j=1</m> near <m>K</m>.
+Let <m>K_j\coloneqq\operatorname{supp}\varphi_j\Subset X_j</m>.
+For every <m>j</m> there are <m>C_j&gt;0</m> and <m>k_j</m> such that <m>\abs{u_j(\phi)}\le C_jp_{k_j}(\phi)</m> for all <m>\phi\in C_c^\infty(X_j)</m> with <m>\operatorname{supp}\phi\subset K_j</m>.
+Let <m>C=\max C_j</m> and <m>k=\max k_j</m>.
+Let <m>\phi\in C_c^\infty(X)</m> with <m>\operatorname{supp}\phi\subset K</m>.
+Then <m>\phi=\sum_j\varphi_j\phi</m> and, by the Leibniz formula,
+<md>\abs{u(\phi)}=\left\lvert \sum_{j=1}^Nu_j(\varphi_j\phi) \right\rvert\le\sum_{j=1}^NC\,p_k(\varphi_j\phi)\le\widehat C\,p_k(\phi).</md>
+Thus <m>u\in\mathcal D'(X)</m>.
+By Theorem <xref ref="thm-localization" text="global"/>, <m>u</m> is unique.</p>
 </proof>
 </theorem>
-<paragraphs>
-<title>Supplement</title>
-<p>Theorem <xref ref="thm-localization" text="global"/> and Theorem <xref ref="thm-glueing" text="global"/> say that the presheaf of distributions is a sheaf.
-Recall the definitions.
-A <em>presheaf</em> <m>\mathcal F</m> of vector spaces on a topological space <m>X</m> assigns to every open set <m>U\subset X</m> a vector space <m>\mathcal F(U)</m> and to every pair of open sets <m>V\subset U</m> a linear <em>restriction map</em> <m>\mathcal F(U)\to\mathcal F(V)</m>, <m>s\mapsto s|_V</m>, such that <m>s|_U=s</m> and <m>(s|_V)|_W=s|_W</m> for <m>W\subset V\subset U</m>.
-It is a <em>sheaf</em> if for every open set <m>U</m> and every open cover <m>U=\bigcup_{i}U_i</m>, the following hold.
-<ol marker="(i)">
-<li>
-<p>(Locality) If <m>s\in\mathcal F(U)</m> and <m>s|_{U_i}=0</m> for all <m>i</m>, then <m>s=0</m>.</p>
-</li>
-<li>
-<p>(Glueing) If <m>s_i\in\mathcal F(U_i)</m> satisfy <m>s_i|_{U_i\cap U_j}=s_j|_{U_i\cap U_j}</m> for all <m>i,j</m>, then there is an <m>s\in\mathcal F(U)</m> with <m>s|_{U_i}=s_i</m> for all <m>i</m> (unique by locality).</p>
-</li>
-</ol>
-The assignment <m>U\mapsto\mathcal D'(U)</m> for open sets <m>U\subset\R^n</m>, with the restriction maps <m>u\mapsto u|_V</m> above, is a presheaf.
-Locality is Theorem <xref ref="thm-localization" text="global"/> (applied to the open set <m>U</m>) and glueing is Theorem <xref ref="thm-glueing" text="global"/>.
-The same is true for <m>U\mapsto C^\infty(U)</m> and <m>U\mapsto L^1_\mathrm{loc}(U)</m> (identified with <m>T_f</m>, up to almost everywhere equality), and the embedding <m>f\mapsto T_f</m> is compatible with restrictions.</p>
-</paragraphs>
 <definition xml:id="def-distribution-convolution">
 <statement>
-<p>Let <m>u\in\mathcal D'(\R^n)</m> and let <m>v\in C_c^\infty(\R^n)</m>.
-The convolution <m>u\ast v</m> is the function defined by
-<md>(u\ast v)(x)
-        = u(v(x-\cdot )).</md>
-(For every <m>x</m>, <m>y\mapsto v(x-y)</m> is in <m>C_c^\infty(\R^n)</m>, so the right-hand side makes sense.)</p>
+<p>The <em>convolution</em> <m>u\ast\phi</m> of a distribution <m>u\in\mathcal D'(\R^n)</m> and <m>\phi\in C_c^\infty(\R^n)</m> is defined by
+<md>(u\ast\phi)(x)\coloneqq u\bigl(\phi(x-\cdot)\bigr).</md></p>
 </statement>
 </definition>
-<lemma xml:id="lem-distribution-convolution">
-<statement>
-<p><ol marker="(i)">
-<li>
-<p><m>u\ast v\in C^\infty(\R^n)</m> and <m>\pr_x^\alpha(u\ast v) = u\ast (\pr_x^\alpha v)</m> for all <m>\alpha\in\N_0^n</m>.</p>
-</li>
-<li>
-<p><m>\operatorname{supp}(u\ast v) \subset \operatorname{supp} u + \operatorname{supp} v = \set{x+y\mid x\in\operatorname{supp} u, y\in\operatorname{supp} v}</m>.
-Therefore, if <m>u\in \mathcal E'(\R^n)</m>, then <m>u\ast v\in C_c^\infty(\R^n)</m>.</p>
-</li>
-</ol></p>
-</statement>
-<proof>
-<p>(i) Fix <m>x_0</m> and let <m>K_0=\overline B_1(x_0)-\operatorname{supp} v</m>.
-By Theorem <xref ref="thm-cutoff" text="global"/>, take <m>\chi\in C_c^\infty(\R^n)</m> with <m>\chi=1</m> near <m>K_0</m> and <m>\theta\in C_c^\infty(B_2(x_0))</m> with <m>\theta=1</m> near <m>\overline B_1(x_0)</m>, and put <m>\Phi(y,x)=\chi(y)\theta(x)v(x-y)\in C_c^\infty(\R^n\times B_2(x_0))</m>.
-For <m>x\in B_1(x_0)</m>: <m>\theta=1</m> near <m>x</m>, and <m>v(x-y)\ne0</m> forces <m>y\in x-\operatorname{supp} v\subset K_0</m>, where <m>\chi=1</m>; hence
-<md>\Phi(y,x)=v(x-y),\qquad\pr_x^\alpha\Phi(y,x)=(\pr^\alpha v)(x-y)\qquad(y\in\R^n,\ x\in B_1(x_0)),</md>
-the second identity by the same argument applied to <m>\pr^\alpha v</m> (note <m>\operatorname{supp}\pr^\alpha v\subset\operatorname{supp} v</m>).
-By Theorem <xref ref="thm-smooth-dependence" text="global"/>, <m>x\mapsto u(\Phi(\cdot,x))</m> is smooth, and for <m>x\in B_1(x_0)</m>,
-<md>\pr_x^\alpha(u\ast v)(x)=\pr_x^\alpha u(\Phi(\cdot,x))=u(\pr_x^\alpha\Phi(\cdot,x))=u\bigl((\pr^\alpha v)(x-\cdot)\bigr)=(u\ast\pr^\alpha v)(x).</md></p>
-<p>(ii) The set <m>\operatorname{supp} u+\operatorname{supp} v</m> is closed (closed plus compact).
-If <m>x_0\notin\operatorname{supp} u+\operatorname{supp} v</m>, then <m>x_0-\operatorname{supp} v</m> is compact and disjoint from <m>\operatorname{supp} u</m>, so it has positive distance <m>d</m> from <m>\operatorname{supp} u</m>.
-For <m>\abs{x-x_0}&lt;d</m>, <m>v(x-\cdot)\in C_c^\infty(\R^n\setminus\operatorname{supp} u)</m>, so <m>(u\ast v)(x)=0</m> by Lemma <xref ref="lem-support-closed" text="global"/>.
-If <m>u\in\mathcal E'(\R^n)</m>, then <m>\operatorname{supp} u+\operatorname{supp} v</m> is compact.</p>
-</proof>
-</lemma>
+<remark xml:id="rmk-distribution-convolution">
+<p>(i) By Theorem <xref ref="thm-smooth-dependence" text="global"/>, <m>u\ast\phi\in C^\infty(\R^n)</m> and <m>\pr_x^\alpha(u\ast\phi)=u\ast(\pr_x^\alpha\phi)</m> for all multi-indices <m>\alpha</m>.
+(Apply Theorem <xref ref="thm-smooth-dependence" text="global"/> to <m>\Psi(y,x)=\zeta(y)\rho(x)\phi(x-y)\in C_c^\infty(\R^n\times\R^n)</m>, where <m>\rho\in C_c^\infty(\R^n)</m> is <m>1</m> on a ball <m>B</m> and <m>\zeta\in C_c^\infty(\R^n)</m> is <m>1</m> near <m>\overline B-\operatorname{supp}\phi</m>; then <m>\Psi(\cdot,x)=\phi(x-\cdot)</m> for <m>x\in B</m>.)</p>
+<p>(ii) <m>\operatorname{supp}(u\ast\phi)\subset\operatorname{supp} u+\operatorname{supp}\phi=\set{x+y\mid x\in\operatorname{supp} u,\ y\in\operatorname{supp}\phi}</m>.
+Indeed, if <m>x_0\notin\operatorname{supp} u+\operatorname{supp}\phi</m>, then <m>x_0-\operatorname{supp}\phi</m> is a compact set disjoint from the closed set <m>\operatorname{supp} u</m>.
+So there is a small ball <m>B</m> around <m>x_0</m> such that <m>x-\operatorname{supp}\phi</m> is disjoint from <m>\operatorname{supp} u</m> for every <m>x\in B</m>.
+Then <m>\phi(x-\cdot)\in C_c^\infty(\R^n\setminus\operatorname{supp} u)</m> and <m>u(\phi(x-\cdot))=0</m> for <m>x\in B</m>.
+Thus <m>x_0\notin\operatorname{supp}(u\ast\phi)</m>.
+In particular, if <m>u\in\mathcal E'(\R^n)</m>, then <m>u\ast\phi\in C_c^\infty(\R^n)</m>.</p>
+</remark>
 <example xml:id="ex-delta-convolution">
 <p>Let <m>\phi\in C_c^\infty(\R^n)</m>.
-Then <m>\delta_0\ast \phi = \delta_0(\phi(x-\cdot)) = \phi(x)</m>, that is, <m>\delta_0\ast\phi=\phi\in C_c^\infty(\R^n)</m>.</p>
+Then <m>(\delta_0\ast\phi)(x)=\delta_0(\phi(x-\cdot))=\phi(x)</m>.</p>
 </example>
 <example xml:id="ex-Lloc-convolution">
-<p>Let <m>f\in L_\mathrm{loc}^1(\R^n)</m> and let <m>\phi\in C_c^\infty(\R^n)</m>.
-Then
-<md>(f\ast\phi)(x) = (T_f\ast\phi)(x) = T_f(\phi(x-\cdot)) = \int_{\R^n}f(y)\phi(x-y)\,dy,</md>
-which is the convolution of the function <m>f</m> with <m>\phi</m> defined before (Remark <xref ref="rmk-convolution-Lloc" text="global"/>).</p>
+<p>Let <m>f\in L_\mathrm{loc}^1(\R^n)</m> and <m>\phi\in C_c^\infty(\R^n)</m>.
+Then <m>(f\ast\phi)(x)=(T_f\ast\phi)(x)=T_f(\phi(x-\cdot))=\int_{\R^n}f(y)\phi(x-y)\,dy</m>.</p>
 </example>
 <theorem xml:id="thm-convolution-associative">
 <statement>
-<p>If <m>u\in\mathcal D'(\R^n)</m> and <m>\phi,\psi\in C_c^\infty(\R^n)</m>, then <m>(u\ast \phi)\ast\psi = u\ast (\phi\ast \psi)</m>.</p>
+<p>If <m>u\in\mathcal D'(\R^n)</m> and <m>\phi,\psi\in C_c^\infty(\R^n)</m>, then <m>(u\ast\phi)\ast\psi=u\ast(\phi\ast\psi)</m>.</p>
 </statement>
 <proof>
-<p>Both sides make sense by Lemmas <xref ref="lem-distribution-convolution" text="global"/> and <xref ref="lem-convolution-properties" text="global"/>.
-For <m>h&gt;0</m>, consider the Riemann sums
-<md>f_h(x)\coloneqq\sum_{k\in\Z^n}\phi(x-kh)\psi(kh)h^n,</md>
-finitely many terms, with <m>\operatorname{supp} f_h\subset\operatorname{supp}\phi+\operatorname{supp}\psi</m> for all <m>h</m>.
-<em>Claim: <m>f_h\to\phi\ast\psi</m> in <m>C_c^\infty(\R^n)</m> as <m>h\to0^+</m>.</em>
-Fix <m>\alpha</m> and let <m>G(x,y)=(\pr^\alpha\phi)(x-y)\psi(y)</m>.
-By Lemma <xref ref="lem-convolution-properties" text="global"/>(ii),
-<md>\pr^\alpha(\phi\ast\psi)(x)=\int_{\R^n}G(x,y)\,dy,\qquad
-        \pr^\alpha f_h(x)=\sum_{k\in\Z^n}G(x,kh)h^n=\sum_{k\in\Z^n}\int_{Q_k}G(x,kh)\,dy,</md>
-where <m>Q_k=kh+[0,h)^n</m> are the cubes of volume <m>h^n</m> tiling <m>\R^n</m>.
-Hence
-<md>\pr^\alpha f_h(x)-\pr^\alpha(\phi\ast\psi)(x)=\sum_{k\in\Z^n}\int_{Q_k}\bigl(G(x,kh)-G(x,y)\bigr)\,dy.</md>
-<m>G</m> is continuous with compact support, hence uniformly continuous; let <m>\omega(t)=\sup\set{\abs{G(x,y)-G(x,y')}\mid x\in\R^n,\ \abs{y-y'}\le t}</m>, so <m>\omega(t)\to0</m> as <m>t\to0</m>.
-For <m>y\in Q_k</m> we have <m>\abs{y-kh}\le\sqrt n\,h</m>, and a term is nonzero only if <m>Q_k</m> meets <m>\operatorname{supp}\psi</m>, in which case <m>Q_k\subset S_1\coloneqq\set{y\mid\operatorname{dist}(y,\operatorname{supp}\psi)\le\sqrt n}</m> (for <m>h\le1</m>).
-Therefore
-<md>\sup_x\abs{\pr^\alpha f_h(x)-\pr^\alpha(\phi\ast\psi)(x)}\le\omega(\sqrt n\,h)\,\abs{S_1}\to0.</md></p>
-<p>Fix <m>x</m>.
-Since <m>\pr_y^\alpha[g(x-y)]=(-1)^{\abs\alpha}(\pr^\alpha g)(x-y)</m>, the claim gives <m>f_h(x-\cdot)\to(\phi\ast\psi)(x-\cdot)</m> in <m>C_c^\infty(\R^n)</m>, so by Theorem <xref ref="thm-sequential-continuity" text="global"/>,
-<md>(u\ast(\phi\ast\psi))(x)=u\bigl((\phi\ast\psi)(x-\cdot)\bigr)=\lim_{h\to0}u\bigl(f_h(x-\cdot)\bigr).</md>
-By linearity of <m>u</m> (the sum is finite),
-<md>u\bigl(f_h(x-\cdot)\bigr)
-        =\sum_{k\in\Z^n}u\bigl(\phi(x-kh-\cdot)\bigr)\psi(kh)h^n
-        =\sum_{k\in\Z^n}(u\ast\phi)(x-kh)\psi(kh)h^n.</md>
-The last sums are Riemann sums of the continuous compactly supported function <m>y\mapsto(u\ast\phi)(x-y)\psi(y)</m>, so they converge to <m>((u\ast\phi)\ast\psi)(x)</m>.</p>
+<p>Consider the Riemann sum
+<md>f_h(x)\coloneqq\sum_{k\in\Z^n}\phi(x-kh)\psi(kh)h^n\in C_c^\infty(\R^n),\qquad h&gt;0.</md>
+Then <m>\lim_{h\to0^+}f_h=\phi\ast\psi</m> in <m>C_c^\infty(\R^n)</m>.
+(The supports lie in <m>\operatorname{supp}\phi+\operatorname{supp}\psi</m>, and <m>\pr^\alpha f_h(x)=\sum_k(\pr^\alpha\phi)(x-kh)\psi(kh)h^n</m> is a Riemann sum of the function <m>y\mapsto(\pr^\alpha\phi)(x-y)\psi(y)</m>, which is uniformly continuous with compact support, uniformly in <m>x</m>.
+So <m>\pr^\alpha f_h\to\int(\pr^\alpha\phi)(x-y)\psi(y)\,dy=\pr^\alpha(\phi\ast\psi)</m> uniformly.)
+Since <m>u</m> is a continuous linear form on <m>C_c^\infty(\R^n)</m> (Theorem <xref ref="thm-sequential-continuity" text="global"/>), and the sums are finite,
+<md>
+<mrow>(u\ast(\phi\ast\psi))(x)
+        &amp;=u\bigl((\phi\ast\psi)(x-\cdot)\bigr)=\lim_{h\to0}u\bigl(f_h(x-\cdot)\bigr)</mrow>
+<mrow>&amp;=\lim_{h\to0}u\Bigl(\sum_{k\in\Z^n}\phi(x-kh-\cdot)\psi(kh)h^n\Bigr)</mrow>
+<mrow>&amp;=\lim_{h\to0}\sum_{k\in\Z^n}u\bigl(\phi(x-kh-\cdot)\bigr)\psi(kh)h^n</mrow>
+<mrow>&amp;=\int_{\R^n}u\bigl(\phi(x-y-\cdot)\bigr)\psi(y)\,dy</mrow>
+<mrow>&amp;=\int_{\R^n}(u\ast\phi)(x-y)\psi(y)\,dy=((u\ast\phi)\ast\psi)(x).</mrow>
+</md>
+(The fourth line is a Riemann sum of the continuous function <m>y\mapsto(u\ast\phi)(x-y)\psi(y)</m> with compact support.)</p>
 </proof>
 </theorem>
 </subsection>
 <subsection xml:id="ssec-1117">
 <title>20261117</title>
-<p>Throughout this lecture, <m>\chi\in C_c^\infty(\R^n)</m> is the function from the previous lectures: <m>\chi\ge 0</m>, <m>\operatorname{supp}\chi\subset B_1(0)</m> and <m>\int_{\R^n}\chi=1</m>.
-(We do not require <m>\chi\le1</m>: for large <m>n</m> the unit ball has volume less than <m>1</m>, so the bound <m>\chi\le1</m> would be incompatible with <m>\int\chi=1</m>.)
-For <m>\eps&gt;0</m>, let <m>\chi_\eps(x) = \eps^{-n}\chi(x/\eps)</m>.
-Then <m>\chi_\eps\in C_c^\infty(B_\eps(0))</m>, <m>\chi_\eps\ge0</m>, and, by the substitution <m>x=\eps y</m> (so <m>\,dx=\eps^n\,dy</m>),
-<md>\int_{\R^n}\chi_\eps(x)\,dx=\int_{\R^n}\eps^{-n}\chi(y)\,\eps^n\,dy=\int_{\R^n}\chi(y)\,dy=1.</md></p>
-<p><em>Notation</em>: for a function <m>f</m> on <m>\R^n</m>, we write <m>\check f(x)\coloneqq f(-x)</m>.
-For a longer expression we write <m>(\cdots)^\vee</m> for the same operation; for example, <m>(\chi_\eps\ast\check\Psi)^\vee(x)=(\chi_\eps\ast\check\Psi)(-x)</m>.
-Applying the operation twice gives back the function: <m>\check{\check f}=f</m>.</p>
-<lemma xml:id="lem-reflection">
-<statement>
-<p>Let <m>\phi,\psi\in C_c^\infty(\R^n)</m>.
-<ol marker="(i)">
-<li>
-<p><m>\check\phi\in C_c^\infty(\R^n)</m>, <m>\operatorname{supp}\check\phi=-\operatorname{supp}\phi</m>, and <m>\pr^\alpha\check\phi=(-1)^{\abs\alpha}(\pr^\alpha\phi)^\vee</m> for every <m>\alpha\in\N_0^n</m>.</p>
-</li>
-<li>
-<p><m>(\phi\ast\psi)^\vee=\check\phi\ast\check\psi</m>.</p>
-</li>
-<li>
-<p>If <m>\phi_j\to\phi</m> in <m>C_c^\infty(\R^n)</m>, then <m>\check\phi_j\to\check\phi</m> in <m>C_c^\infty(\R^n)</m>.</p>
-</li>
-</ol></p>
-</statement>
-<proof>
-<p>(i) <m>\check\phi</m> is the composition of <m>\phi</m> with the linear map <m>x\mapsto-x</m>, so it is smooth, and <m>\check\phi(x)\ne0</m> if and only if <m>-x\in\set{\phi\ne0}</m>; taking closures gives <m>\operatorname{supp}\check\phi=-\operatorname{supp}\phi</m>, which is compact.
-By the chain rule, <m>\pr_{x_i}\bigl[\phi(-x)\bigr]=-(\pr_{x_i}\phi)(-x)</m>.
-Applying this once for each of the <m>\abs\alpha</m> derivatives in <m>\pr^\alpha</m> gives <m>\pr^\alpha\check\phi=(-1)^{\abs\alpha}(\pr^\alpha\phi)^\vee</m>.</p>
-<p>(ii) Fix <m>x\in\R^n</m>.
-By the definition of the convolution and the substitution <m>y\mapsto-y</m> (which does not change the Lebesgue integral),
+<p>Let <m>\chi\in C_c^\infty(B(0,1))</m>, <m>\chi\ge0</m>, <m>\int_{\R^n}\chi=1</m>.
+For <m>\eps&gt;0</m>, let <m>\chi_\eps(x)=\eps^{-n}\chi(x/\eps)\in C_c^\infty(B(0,\eps))</m>, so <m>\int_{\R^n}\chi_\eps=1</m>.
+For a function <m>f</m> on <m>\R^n</m>, let <m>\check f(x)\coloneqq f(-x)</m>.</p>
+<p>Let <m>w\in\mathcal D'(\R^n)</m> and <m>\phi,\Psi\in C_c^\infty(\R^n)</m>.
+Then, regarding <m>w\ast\phi\in C^\infty(\R^n)</m> as a distribution,
+<md>(w\ast\phi)(\Psi)=\int_{\R^n}(w\ast\phi)(x)\Psi(x)\,dx=\bigl((w\ast\phi)\ast\check\Psi\bigr)(0).</md>
+By Theorem <xref ref="thm-convolution-associative" text="global"/>, and since (substituting <m>y\mapsto-y</m>)
+<md>(\phi\ast\check\Psi)^\vee(x)=\int_{\R^n}\phi(y)\Psi(x+y)\,dy=\int_{\R^n}\phi(-y)\Psi(x-y)\,dy=(\check\phi\ast\Psi)(x),</md>
+we have
 <md>
-<mrow>(\phi\ast\psi)^\vee(x)
-        &amp;=(\phi\ast\psi)(-x)
-        =\int_{\R^n}\phi(y)\psi(-x-y)\,dy</mrow>
-<mrow>&amp;=\int_{\R^n}\phi(-y)\psi(-x+y)\,dy
-        =\int_{\R^n}\check\phi(y)\,\check\psi(x-y)\,dy
-        =(\check\phi\ast\check\psi)(x),</mrow>
-</md>
-where we used <m>\check\psi(x-y)=\psi(-(x-y))=\psi(-x+y)</m>.</p>
-<p>(iii) Let <m>K</m> be a compact set with <m>\operatorname{supp}\phi_j\subset K</m> for all <m>j</m> and <m>\operatorname{supp}\phi\subset K</m>.
-By (i), <m>\operatorname{supp}\check\phi_j\subset-K</m> and <m>\operatorname{supp}\check\phi\subset-K</m>, and <m>-K</m> is compact.
-For every <m>\alpha</m>, (i) gives <m>\pr^\alpha(\check\phi_j-\check\phi)=(-1)^{\abs\alpha}\bigl(\pr^\alpha(\phi_j-\phi)\bigr)^\vee</m>, and reflecting a function does not change its supremum, so
-<md>\sup_{\R^n}\abs{\pr^\alpha(\check\phi_j-\check\phi)}=\sup_{\R^n}\abs{\pr^\alpha(\phi_j-\phi)}\to0\quad(j\to+\infty).</md></p>
-</proof>
-</lemma>
-<p>The following identity is the heart of the two approximation theorems of this lecture.</p>
-<lemma xml:id="lem-convolution-pairing">
-<statement>
-<p>Let <m>u\in\mathcal D'(\R^n)</m> and <m>\phi,\Psi\in C_c^\infty(\R^n)</m>.
-Then, regarding the smooth function <m>u\ast\phi</m> as a distribution,
-<md>(u\ast\phi)(\Psi)=\int_{\R^n}(u\ast\phi)(x)\Psi(x)\,dx=\bigl(u\ast(\phi\ast\check\Psi)\bigr)(0)=u(\check\phi\ast\Psi).</md></p>
-</statement>
-<proof>
-<p>Write <m>w\coloneqq u\ast\phi</m>, which lies in <m>C^\infty(\R^n)</m> by Lemma <xref ref="lem-distribution-convolution" text="global"/>(i).
-The first equality is the definition of <m>T_w</m> (Example <xref ref="ex-L1loc-distribution" text="global"/>).
-For the second, evaluate the convolution of <m>w</m> with <m>\check\Psi\in C_c^\infty(\R^n)</m> at <m>0</m>:
-<md>(w\ast\check\Psi)(0)=\int_{\R^n}w(y)\check\Psi(0-y)\,dy=\int_{\R^n}w(y)\Psi(y)\,dy.</md>
-On the other hand, by the associativity of convolutions (Theorem <xref ref="thm-convolution-associative" text="global"/>, applied to <m>\phi</m> and <m>\check\Psi</m>),
-<md>(w\ast\check\Psi)(0)=\bigl((u\ast\phi)\ast\check\Psi\bigr)(0)=\bigl(u\ast(\phi\ast\check\Psi)\bigr)(0).</md>
-For the third equality, put <m>g\coloneqq\phi\ast\check\Psi\in C_c^\infty(\R^n)</m> (Lemma <xref ref="lem-convolution-properties" text="global"/>).
-By the definition of <m>u\ast g</m>, then Lemma <xref ref="lem-reflection" text="global"/>(ii), and <m>\check{\check\Psi}=\Psi</m>,
-<md>(u\ast g)(0)=u\bigl(g(0-\cdot)\bigr)=u(\check g)=u\bigl((\phi\ast\check\Psi)^\vee\bigr)=u\bigl(\check\phi\ast\check{\check\Psi}\bigr)=u(\check\phi\ast\Psi).</md></p>
-</proof>
-</lemma>
+<mrow xml:id="eq-convolution-pairing" number="yes">(w\ast\phi)(\Psi)=\bigl(w\ast(\phi\ast\check\Psi)\bigr)(0)=w\bigl((\phi\ast\check\Psi)(-\cdot)\bigr)=w(\check\phi\ast\Psi).</mrow>
+</md></p>
 <theorem xml:id="thm-mollify-distribution">
 <statement>
 <p>Let <m>u\in\mathcal D'(\R^n)</m>.
-For <m>\eps&gt;0</m>, let <m>u_\eps\coloneqq u\ast \chi_\eps\in C^\infty(\R^n)</m>.
-Then <m>u_\eps\to u</m> in <m>\mathcal D'(\R^n)</m> as <m>\eps\to0^+</m>, that is,
-<md>\lim_{\eps\to0^+}u_\eps(\Psi)=\lim_{\eps\to0^+}\int_{\R^n}u_\eps(x)\Psi(x)\,dx=u(\Psi)\quad\text{for all }\Psi\in C_c^\infty(\R^n).</md></p>
+Then <m>u_\eps\coloneqq u\ast\chi_\eps\in C^\infty(\R^n)</m> and <m>\lim_{\eps\to0^+}u_\eps=u</m> in <m>\mathcal D'(\R^n)</m>.
+That is, <m>\lim_{\eps\to0^+}u_\eps(\Psi)=\lim_{\eps\to0^+}\int_{\R^n}u_\eps(x)\Psi(x)\,dx=u(\Psi)</m> for all <m>\Psi\in C_c^\infty(\R^n)</m>.</p>
 </statement>
 <proof>
 <p>Let <m>\Psi\in C_c^\infty(\R^n)</m>.
-By Lemma <xref ref="lem-convolution-pairing" text="global"/> with <m>\phi=\chi_\eps</m>, and then Lemma <xref ref="lem-reflection" text="global"/>(ii) together with <m>\check{\check\Psi}=\Psi</m>,
-<md>u_\eps(\Psi)=\bigl(u\ast(\chi_\eps\ast\check\Psi)\bigr)(0)=u(\check\chi_\eps\ast\Psi)=u\bigl((\chi_\eps\ast\check\Psi)^\vee\bigr).</md>
-So it suffices to show that <m>(\chi_\eps\ast\check\Psi)^\vee\to\Psi</m> in <m>C_c^\infty(\R^n)</m> along every sequence <m>\eps_k\to0^+</m>; then the sequential continuity of <m>u</m> (Theorem <xref ref="thm-sequential-continuity" text="global"/>) gives <m>u_{\eps_k}(\Psi)\to u(\Psi)</m>, and since the sequence was arbitrary, <m>u_\eps(\Psi)\to u(\Psi)</m>.</p>
-<p><em>Supports.</em>
-For <m>0&lt;\eps\le1</m>, a point <m>x</m> with <m>(\chi_\eps\ast\check\Psi)(x)=\int\check\Psi(x-y)\chi_\eps(y)\,dy\ne0</m> must have <m>x-y\in\operatorname{supp}\check\Psi</m> for some <m>y</m> with <m>\abs y&lt;\eps</m>, so
-<md>\operatorname{supp}(\chi_\eps\ast\check\Psi)\subset\operatorname{supp}\check\Psi+\overline B_1(0),</md>
-a compact set independent of <m>\eps</m>.</p>
-<p><em>Derivatives.</em>
-The convolution is commutative, so <m>\chi_\eps\ast\check\Psi=\check\Psi\ast\chi_\eps</m>.
-Since <m>\check\Psi\in C_c^\infty(\R^n)\subset C_c^j(\R^n)</m> for every <m>j</m>, Theorem <xref ref="thm-mollification" text="global"/> gives, for every <m>\alpha\in\N_0^n</m>,
-<md>\sup_{x\in\R^n}\abs{\pr^\alpha(\check\Psi\ast\chi_\eps-\check\Psi)(x)}\to0\quad\text{as }\eps\to0^+.</md>
-Together with the support statement, this says that <m>\chi_{\eps_k}\ast\check\Psi\to\check\Psi</m> in <m>C_c^\infty(\R^n)</m>.
-By Lemma <xref ref="lem-reflection" text="global"/>(iii), <m>(\chi_{\eps_k}\ast\check\Psi)^\vee\to\check{\check\Psi}=\Psi</m> in <m>C_c^\infty(\R^n)</m>, as required.</p>
+By <xref ref="eq-convolution-pairing" text="global"/>, <m>u_\eps(\Psi)=u(\check\chi_\eps\ast\Psi)</m>.
+Note that <m>\check\chi</m> satisfies the same assumptions as <m>\chi</m>, and <m>\check\chi_\eps\ast\Psi=\Psi\ast\check\chi_\eps</m>.
+By Theorem <xref ref="thm-mollification" text="global"/>, <m>\Psi\ast\check\chi_\eps\to\Psi</m> in <m>C_c^\infty(\R^n)</m> as <m>\eps\to0^+</m> (all derivatives converge uniformly, and the supports lie in <m>\operatorname{supp}\Psi+\overline B_1(0)</m> for <m>\eps\le1</m>).
+Since <m>u</m> is a continuous linear form on <m>C_c^\infty(\R^n)</m> (Theorem <xref ref="thm-sequential-continuity" text="global"/>),
+<md>\lim_{\eps\to0^+}u_\eps(\Psi)=\lim_{\eps\to0^+}u(\check\chi_\eps\ast\Psi)=u(\Psi).</md></p>
 </proof>
 </theorem>
-<remark xml:id="rmk-convolution-of-distributions">
-<p>In the proof above we used the identity
-<md>u_\eps(\Psi)=\bigl(u\ast (\chi_\eps\ast\check\Psi)\bigr)(0).</md>
-This motivates the definition of the convolution of two distributions <m>u,v\in\mathcal D'(\R^n)</m>:
-<md>(u\ast v)(\phi) \coloneqq \bigl(u\ast (v\ast\check\phi)\bigr)(0),\qquad \phi\in C_c^\infty(\R^n).</md>
-For this to make sense, <m>v\ast\check\phi</m> has to be a test function, which is the case if <m>v\in\mathcal E'(\R^n)</m>, by Lemma <xref ref="lem-distribution-convolution" text="global"/>(ii).
-(We will not need this definition below.)
-It is consistent with what we had before.
-If <m>v\in C_c^\infty(\R^n)</m>, then Lemma <xref ref="lem-convolution-pairing" text="global"/> says that <m>\bigl(u\ast(v\ast\check\phi)\bigr)(0)=\int(u\ast v)\phi</m>, the old convolution <m>u\ast v</m> regarded as a distribution.
-If <m>v=\delta_0</m>, then <m>\delta_0\ast\check\phi=\check\phi</m> (Example <xref ref="ex-delta-convolution" text="global"/>), and
-<md>(u\ast\delta_0)(\phi)=(u\ast\check\phi)(0)=u\bigl(\check\phi(0-\cdot)\bigr)=u(\phi),</md>
-so <m>u\ast\delta_0=u</m>.</p>
+<remark xml:id="rmk-convolution-motivation">
+<p>We have the identity <m>(u\ast(\chi_\eps\ast\check\Psi))(0)=u_\eps(\Psi)</m>.
+This motivates the definition of the convolution of two distributions <m>u,v</m> by <m>(u\ast v)(\phi)=(u\ast(v\ast\check\phi))(0)</m> (Definition <xref ref="def-convolution-distributions" text="global"/> below).</p>
 </remark>
 <theorem xml:id="thm-density-test-functions">
 <statement>
-<p>Let <m>X\subset\R^n</m> be an open set and let <m>u\in\mathcal D'(X)</m>.
-Then there are <m>u_j\in C_c^\infty(X)\subset \mathcal D'(X)</m> such that <m>u_j\to u</m> in <m>\mathcal D'(X)</m>.</p>
+<p>Let <m>u\in\mathcal D'(X)</m>, where <m>X\subset\R^n</m> is an open set.
+Then we can find <m>u_j\in C_c^\infty(X)</m>, <m>j=1,2,\dots</m>, such that <m>\lim_{j\to+\infty}u_j=u</m> in <m>\mathcal D'(X)</m>.</p>
 </statement>
 <proof>
-<p>For a set <m>A\subset\R^n</m> we write <m>\operatorname{dist}(x,A)=\inf_{a\in A}\abs{x-a}</m>, with the convention <m>\operatorname{dist}(x,\varnothing)=+\infty</m> (this covers the case <m>X=\R^n</m>).
-For <m>j\in\N</m>, let
-<md>K_j \coloneqq \set{x\in \R^n \mid \abs{x}\le j,\ \operatorname{dist}(x,\R^n\setminus X) \ge 1/j}.</md>
-(In the lecture this is written with <m>\operatorname{dist}(x,\pr X)</m>, which is the same thing for <m>x\in X</m>.)
-The function <m>x\mapsto\operatorname{dist}(x,\R^n\setminus X)</m> is continuous, so <m>K_j</m> is closed; it is bounded, hence compact; and <m>K_j\subset X</m> because points of <m>\R^n\setminus X</m> have distance <m>0</m> to it.
-By the cutoff theorem (Theorem <xref ref="thm-cutoff" text="global"/>), there is <m>\tau_j\in C_c^\infty(X)</m> with <m>0\le\tau_j\le1</m> and <m>\tau_j\equiv 1</m> on a neighborhood of <m>K_j</m>.</p>
-<p><em>Step 1: the approximants.</em>
-For each <m>j</m>, define <m>v_j\colon C_c^\infty(\R^n)\to\C</m> by
-<md>v_j(\phi)\coloneqq u\bigl(\tau_j\phi|_X\bigr).</md>
-(This is the distribution <m>\tau_j.u</m>, extended by <m>0</m> to <m>\R^n</m>.)
-It is well defined because <m>\tau_j\phi|_X\in C_c^\infty(X)</m> with support in <m>L_j\coloneqq\operatorname{supp}\tau_j\Subset X</m>, and it is linear.
-It is a distribution on <m>\R^n</m>: since <m>u\in\mathcal D'(X)</m>, there are <m>C&gt;0</m> and <m>k\in\N_0</m> with <m>\abs{u(\psi)}\le C\sum_{\abs\beta\le k}\sup\abs{\pr^\beta\psi}</m> for all <m>\psi</m> supported in <m>L_j</m>, and the Leibniz rule estimate from the proof of Lemma <xref ref="lem-derivative-product-distribution" text="global"/> gives, for every <m>\phi\in C_c^\infty(\R^n)</m>,
-<md>\abs{v_j(\phi)}\le C\sum_{\abs\beta\le k}\sup\abs{\pr^\beta(\tau_j\phi)}\le C\cdot\#\set{\beta\mid\abs\beta\le k}\cdot2^kA_j\sum_{\abs\gamma\le k}\sup\abs{\pr^\gamma\phi},</md>
-where <m>A_j=\max_{\abs\beta\le k}\sup\abs{\pr^\beta\tau_j}</m>.
-So <m>v_j\in\mathcal D'(\R^n)</m>.
-If <m>\phi\in C_c^\infty(\R^n\setminus L_j)</m>, then <m>\tau_j\phi=0</m> and <m>v_j(\phi)=0</m>; so <m>v_j</m> vanishes on the open set <m>\R^n\setminus L_j</m>, that is, <m>\operatorname{supp} v_j\subset L_j</m>.
-In particular <m>v_j\in\mathcal E'(\R^n)</m>.</p>
-<p>Let <m>d_j\coloneqq\operatorname{dist}(L_j,\R^n\setminus X)</m>.
-This is positive, since <m>L_j</m> is compact, <m>\R^n\setminus X</m> is closed and the two sets are disjoint (<m>d_j=+\infty</m> if <m>X=\R^n</m>).
-Choose
-<md>0&lt;\eps_j\le\min\set{\frac1j,\frac{d_j}2}</md>
-and define <m>u_j\coloneqq v_j\ast\chi_{\eps_j}</m>.
-By Lemma <xref ref="lem-distribution-convolution" text="global"/>, <m>u_j\in C^\infty(\R^n)</m> and
-<md>\operatorname{supp} u_j\subset\operatorname{supp} v_j+\operatorname{supp}\chi_{\eps_j}\subset L_j+\overline B_{\eps_j}(0).</md>
-The right-hand side is compact, and it is contained in <m>X</m>: a point <m>x+y</m> with <m>x\in L_j</m> and <m>\abs y\le\eps_j\le d_j/2&lt;d_j</m> cannot lie in <m>\R^n\setminus X</m>.
-Hence <m>u_j\in C_c^\infty(X)</m>.
-(The condition <m>\eps_j\le d_j/2</m> is what makes <m>\operatorname{supp} v_j+\operatorname{supp}\chi_{\eps_j}\Subset X</m>; the condition <m>\eps_j\le1/j</m> is used in Step 2.)</p>
-<p><em>Step 2: convergence.</em>
-Let <m>\Psi\in C_c^\infty(X)</m>, extended by <m>0</m> to a function in <m>C_c^\infty(\R^n)</m>, and let <m>K\coloneqq\operatorname{supp}\Psi\Subset X</m>.
-By Lemma <xref ref="lem-convolution-pairing" text="global"/> (applied to <m>v_j\in\mathcal D'(\R^n)</m> and <m>\phi=\chi_{\eps_j}</m>) and the definition of <m>v_j</m>,
-<md>u_j(\Psi)
-        =\int_{\R^n}(v_j\ast\chi_{\eps_j})\Psi\,dx
-        =v_j\bigl(\check\chi_{\eps_j}\ast\Psi\bigr)
-        =u\bigl(\tau_j\cdot(\check\chi_{\eps_j}\ast\Psi)\bigr).</md>
-Since <m>\operatorname{supp}\check\chi_{\eps_j}\subset\overline B_{\eps_j}(0)</m>, we have <m>\operatorname{supp}(\check\chi_{\eps_j}\ast\Psi)\subset K+\overline B_{\eps_j}(0)</m>.</p>
-<p>We now show that <m>\tau_j=1</m> there for large <m>j</m>.
-Choose <m>R&gt;0</m> with <m>K\subset\overline B_R(0)</m>, let <m>d\coloneqq\operatorname{dist}(K,\R^n\setminus X)&gt;0</m>, and choose <m>j_0\in\N</m> with <m>j_0\ge R+1</m> and <m>j_0\ge2/d</m>.
-Let <m>j\ge j_0</m> and <m>x\in K+\overline B_{1/j}(0)</m>, say <m>x=y+z</m> with <m>y\in K</m> and <m>\abs z\le1/j</m>.
-Then
-<md>\abs x\le\abs y+\abs z\le R+\frac1j\le R+1\le j,
-        \qquad
-        \operatorname{dist}(x,\R^n\setminus X)\ge\operatorname{dist}(y,\R^n\setminus X)-\abs z\ge d-\frac1j\ge\frac2j-\frac1j=\frac1j,</md>
-so <m>x\in K_j</m>.
-Since <m>\eps_j\le1/j</m>, this gives <m>K+\overline B_{\eps_j}(0)\subset K_j</m>, where <m>\tau_j\equiv1</m>.
-Therefore, for <m>j\ge j_0</m>, using Lemma <xref ref="lem-reflection" text="global"/>(ii),
-<md>\tau_j\cdot(\check\chi_{\eps_j}\ast\Psi)=\check\chi_{\eps_j}\ast\Psi=(\chi_{\eps_j}\ast\check\Psi)^\vee.</md>
-As in the proof of Theorem <xref ref="thm-mollify-distribution" text="global"/>, <m>(\chi_{\eps_j}\ast\check\Psi)^\vee\to\Psi</m> uniformly with all derivatives, since <m>\eps_j\le1/j\to0</m>.
-For <m>j\ge j_0</m> all these functions, and <m>\Psi</m>, are supported in <m>K'\coloneqq K+\overline B_{d_0}(0)</m> with <m>d_0=\min\set{d/2,1}</m>, because <m>\eps_j\le1/j\le d/2</m> and <m>\eps_j\le1</m>.
-The set <m>K'</m> is compact and contained in <m>X</m> (its points have distance at least <m>d-d_0\ge d/2&gt;0</m> from <m>\R^n\setminus X</m>), so the convergence takes place in <m>C_c^\infty(X)</m>.
-Since <m>u</m> is sequentially continuous on <m>C_c^\infty(X)</m> (Theorem <xref ref="thm-sequential-continuity" text="global"/>),
-<md>\lim_{j\to+\infty}u_j(\Psi)=\lim_{j\to+\infty}u\bigl((\chi_{\eps_j}\ast\check\Psi)^\vee\bigr)=u(\Psi).</md>
-As <m>\Psi\in C_c^\infty(X)</m> was arbitrary, <m>u_j\to u</m> in <m>\mathcal D'(X)</m>.</p>
+<p>For <m>j=1,2,\dots</m>, let <m>K_j\coloneqq\set{x\in X\mid\abs x\le j,\ \operatorname{dist}(x,\R^n\setminus X)\ge1/j}</m>.
+Then <m>K_j</m> is a compact subset of <m>X</m> and <m>\bigcup_{j=1}^{+\infty}K_j=X</m>.
+By Theorem <xref ref="thm-cutoff" text="global"/>, we can choose <m>\tau_j\in C_c^\infty(X)</m> such that <m>\tau_j=1</m> near <m>K_j</m>.
+Then <m>\tau_ju\in\mathcal E'(X)</m>, and we regard it as a distribution in <m>\R^n</m> (extension by <m>0</m>: <m>(\tau_ju)(\phi)\coloneqq u(\tau_j\phi|_X)</m> for <m>\phi\in C_c^\infty(\R^n)</m>).
+For every <m>j</m>, let <m>\eps_j&gt;0</m> be so small that <m>\operatorname{supp}\chi_{\eps_j}+\operatorname{supp}\tau_j\Subset X</m> and <m>\eps_j\le1/j</m> (so <m>\abs x&lt;1/j</m> if <m>x\in\operatorname{supp}\chi_{\eps_j}</m>).
+Put
+<md>u_j(x)\coloneqq((\tau_ju)\ast\chi_{\eps_j})(x)=(\tau_ju)\bigl(\chi_{\eps_j}(x-\cdot)\bigr)=u\bigl(\tau_j\chi_{\eps_j}(x-\cdot)\bigr).</md>
+By Remark <xref ref="rmk-distribution-convolution" text="global"/>, <m>u_j\in C^\infty(\R^n)</m> and <m>\operatorname{supp} u_j\subset\operatorname{supp}\tau_j+\operatorname{supp}\chi_{\eps_j}\Subset X</m>, so <m>u_j\in C_c^\infty(X)</m>.</p>
+<p>Let <m>\Psi\in C_c^\infty(X)</m> and <m>K\coloneqq\operatorname{supp}\Psi</m>.
+By <xref ref="eq-convolution-pairing" text="global"/> (with <m>w=\tau_ju</m>),
+<md>u_j(\Psi)=(\tau_ju)(\check\chi_{\eps_j}\ast\Psi)=u\bigl(\tau_j\cdot(\check\chi_{\eps_j}\ast\Psi)\bigr).</md>
+If <m>j</m> is large, then <m>K+\overline B_{1/j}(0)\subset K_j</m> (as <m>K</m> is compact and has positive distance to <m>\R^n\setminus X</m>), so <m>\tau_j=1</m> on <m>\operatorname{supp}(\check\chi_{\eps_j}\ast\Psi)\subset K+\overline B_{\eps_j}(0)</m>.
+Hence <m>u_j(\Psi)=u(\check\chi_{\eps_j}\ast\Psi)</m> for <m>j</m> large.
+As in the proof of Theorem <xref ref="thm-mollify-distribution" text="global"/>, <m>\check\chi_{\eps_j}\ast\Psi\to\Psi</m> in <m>C_c^\infty(X)</m> (for <m>j\ge j_0</m> the supports stay in the compact set <m>K+\overline B_{1/j_0}(0)\subset X</m>, where <m>j_0</m> is so large that <m>1/j_0&lt;\operatorname{dist}(K,\R^n\setminus X)</m>).
+Thus <m>\lim_{j\to+\infty}u_j(\Psi)=u(\Psi)</m>.</p>
 </proof>
 </theorem>
 </subsection>
 </section>
 <section xml:id="sec-fundamental-solutions">
-<title>Fundamental Solutions of Partial Differential Operators</title>
+<title>Fundamental Solutions and Convolutions of Distributions</title>
 <subsection xml:id="ssec-1117b">
 <title>20261117 (continued)</title>
-<p>A <em>partial differential operator</em> (PDO) of order at most <m>m</m> on an open set <m>X\subset\R^n</m> is an operator of the form
-<md>
-<mrow>P = \sum_{\substack{\alpha\in \N_0^n</mrow>
-<mrow>\abs{\alpha}\le m}} a_\alpha(x)\, \pr_x^\alpha,</mrow>
-</md>
-where <m>a_\alpha\in C^\infty(X)</m>.
-It maps <m>C^\infty(X)</m> to itself, and it maps <m>\mathcal D'(X)</m> to itself: for distributions, <m>\pr^\alpha u</m> and <m>a_\alpha.u</m> are distributions by Definition <xref ref="def-distribution-derivative" text="global"/> and Lemma <xref ref="lem-derivative-product-distribution" text="global"/>.
-Solving PDEs has always been a central topic of pure and applied mathematics, and next semester a very general point of view will be introduced.
-Here we only consider operators with constant coefficients <m>a_\alpha(x)=a_\alpha\in\C</m>.</p>
+<p>A partial differential operator (PDO) is
+<md>P=\sum_{\abs\alpha\le m}a_\alpha(x)\pr_x^\alpha,\qquad a_\alpha\in C^\infty(X).</md>
+It maps <m>C^\infty(X)</m> and <m>\mathcal D'(X)</m> to themselves (Definition <xref ref="def-distribution-derivative" text="global"/>).
+From now on the <m>a_\alpha</m> are constants.</p>
 <definition xml:id="def-fundamental-solution">
 <statement>
-<p>Let <m>P=\sum_{\abs{\alpha}\le m}a_\alpha\pr_x^\alpha</m> be a PDO with constant coefficients.
-A distribution <m>E\in\mathcal D'(\R^n)</m> is called a <em>fundamental solution</em> of <m>P</m> if <m>PE=\delta_0</m>.</p>
+<p><m>E\in\mathcal D'(\R^n)</m> is a <em>fundamental solution</em> of <m>P=\sum_{\abs\alpha\le m}a_\alpha\pr_x^\alpha</m> if <m>PE=\delta_0</m>, i.e. (since <m>(\pr^\alpha E)(\phi)=(-1)^{\abs\alpha}E(\pr^\alpha\phi)</m>)
+<md>E\Bigl(\sum_{\abs\alpha\le m}(-1)^{\abs\alpha}a_\alpha\pr_x^\alpha\phi\Bigr)=\phi(0)\qquad\text{for all }\phi\in C_c^\infty(\R^n).</md></p>
 </statement>
 </definition>
-<remark xml:id="rmk-fundamental-solution-test">
-<p>A fundamental solution is not unique: if <m>h\in\mathcal D'(\R^n)</m> satisfies <m>Ph=0</m> (for example, a harmonic polynomial <m>h</m> for <m>P=\triangle</m>), then <m>P(E+h)=\delta_0</m> as well.</p>
-<p>Let us write out the equation <m>PE=\delta_0</m>.
-By Definition <xref ref="def-distribution-derivative" text="global"/>, each derivative moves to the test function with a factor <m>-1</m>, so <m>(\pr^\alpha E)(\phi)=(-1)^{\abs\alpha}E(\pr^\alpha\phi)</m>.
-Hence, for <m>\phi\in C_c^\infty(\R^n)</m>,
-<md>(PE)(\phi)
-        = \sum_{\abs{\alpha}\le m}a_\alpha (\pr_x^\alpha E)(\phi)
-        = \sum_{\abs{\alpha}\le m}a_\alpha (-1)^{\abs{\alpha}}E(\pr_x^\alpha\phi)
-        = E\left(\sum_{\abs{\alpha}\le m}(-1)^{\abs{\alpha}}a_\alpha\pr_x^\alpha\phi\right).</md>
-Therefore <m>E</m> is a fundamental solution of <m>P</m> if and only if
-<md>E\left(\sum_{\abs{\alpha}\le m}(-1)^{\abs{\alpha}}a_\alpha\pr_x^\alpha\phi\right) = \phi(0)\qquad\text{for all }\phi\in C_c^\infty(\R^n).</md></p>
-</remark>
+<p>(Fundamental solutions are not unique: <m>E+h</m> with <m>Ph=0</m> is another one.)</p>
 <lemma xml:id="lem-PDO-convolution">
 <statement>
-<p>Let <m>u\in\mathcal D'(\R^n)</m> and let <m>P=\sum_{\abs{\alpha}\le m} a_\alpha\pr_x^\alpha</m> be a PDO with constant coefficients.
-Then <m>P(u\ast g) = (Pu)\ast g</m> for every <m>g\in C_c^\infty(\R^n)</m>.</p>
+<p>Let <m>u\in\mathcal D'(\R^n)</m>, <m>g\in C_c^\infty(\R^n)</m> and let <m>P</m> be a PDO with constant coefficients.
+Then <m>P(u\ast g)=(Pu)\ast g</m>.</p>
 </statement>
 <proof>
-<p><em>First proof.</em>
-Recall that <m>(u\ast g)(x)=u(g(x-\cdot))</m>.
-Fix <m>\alpha\in\N_0^n</m> and <m>x\in\R^n</m>.
-By Lemma <xref ref="lem-distribution-convolution" text="global"/>(i),
-<md>\pr_x^\alpha(u\ast g)(x)=\bigl(u\ast\pr^\alpha g\bigr)(x)=u\bigl((\pr^\alpha g)(x-\cdot)\bigr).</md>
-On the other hand, by the chain rule, <m>\pr_y^\alpha\bigl[g(x-y)\bigr]=(-1)^{\abs\alpha}(\pr^\alpha g)(x-y)</m> (each derivative in <m>y</m> produces a factor <m>-1</m>).
-So the definition of the distributional derivative gives
-<md>\bigl((\pr^\alpha u)\ast g\bigr)(x)
-        =(\pr^\alpha u)\bigl(g(x-\cdot)\bigr)
-        =(-1)^{\abs\alpha}u\bigl(\pr_y^\alpha[g(x-y)]\bigr)
-        =(-1)^{\abs\alpha}(-1)^{\abs\alpha}u\bigl((\pr^\alpha g)(x-\cdot)\bigr)
-        =u\bigl((\pr^\alpha g)(x-\cdot)\bigr).</md>
-Hence <m>\pr_x^\alpha(u\ast g)=(\pr^\alpha u)\ast g</m> for every <m>\alpha</m>.
-The convolution with <m>g</m> is linear in <m>u</m>, so multiplying by the constants <m>a_\alpha</m> and summing over <m>\abs\alpha\le m</m> gives
-<md>P(u\ast g)=\sum_{\abs\alpha\le m}a_\alpha\pr^\alpha(u\ast g)=\sum_{\abs\alpha\le m}a_\alpha\bigl((\pr^\alpha u)\ast g\bigr)=\Bigl(\sum_{\abs\alpha\le m}a_\alpha\pr^\alpha u\Bigr)\ast g=(Pu)\ast g.</md>
-(Here the coefficients must be constant: a function <m>a_\alpha(x)</m> could not be moved inside the convolution.)</p>
-<p><em>Second proof.</em>
-By Theorem <xref ref="thm-density-test-functions" text="global"/> (with <m>X=\R^n</m>), there are <m>u_j\in C_c^\infty(\R^n)</m> with <m>u_j\to u</m> in <m>\mathcal D'(\R^n)</m>.
-For the smooth functions <m>u_j</m>, the identity <m>P(u_j\ast g)=(Pu_j)\ast g</m> is classical: by Lemma <xref ref="lem-convolution-properties" text="global"/>(ii), <m>\pr^\alpha(u_j\ast g)=(\pr^\alpha u_j)\ast g</m> for every <m>\alpha</m>.
-We pass to the limit at a fixed <m>x\in\R^n</m>.
-Since <m>g(x-\cdot)</m> and <m>(\pr^\alpha g)(x-\cdot)</m> are test functions, the first proof's formula <m>\pr^\alpha(v\ast g)(x)=v\bigl((\pr^\alpha g)(x-\cdot)\bigr)</m> (valid for every distribution <m>v</m>) gives
-<md>P(u_j\ast g)(x)=\sum_{\abs\alpha\le m}a_\alpha u_j\bigl((\pr^\alpha g)(x-\cdot)\bigr)\to\sum_{\abs\alpha\le m}a_\alpha u\bigl((\pr^\alpha g)(x-\cdot)\bigr)=P(u\ast g)(x).</md>
-Also <m>Pu_j\to Pu</m> in <m>\mathcal D'(\R^n)</m>: with <m>P^t\phi\coloneqq\sum_{\abs\alpha\le m}(-1)^{\abs\alpha}a_\alpha\pr^\alpha\phi</m>, Remark <xref ref="rmk-fundamental-solution-test" text="global"/> shows that <m>(Pv)(\phi)=v(P^t\phi)</m> for every distribution <m>v</m>, so <m>(Pu_j)(\phi)=u_j(P^t\phi)\to u(P^t\phi)=(Pu)(\phi)</m>.
-Hence
-<md>\bigl((Pu_j)\ast g\bigr)(x)=(Pu_j)\bigl(g(x-\cdot)\bigr)\to(Pu)\bigl(g(x-\cdot)\bigr)=\bigl((Pu)\ast g\bigr)(x).</md>
-The two sequences are equal term by term, so their limits are equal: <m>P(u\ast g)(x)=\bigl((Pu)\ast g\bigr)(x)</m>.</p>
+<p>By linearity it suffices to take <m>P=\pr^\alpha</m>.
+By Remark <xref ref="rmk-distribution-convolution" text="global"/>, <m>\pr_x^\alpha(u\ast g)(x)=u\bigl((\pr^\alpha g)(x-\cdot)\bigr)</m>.
+On the other hand, <m>\pr_y^\alpha[g(x-y)]=(-1)^{\abs\alpha}(\pr^\alpha g)(x-y)</m> by the chain rule, so
+<md>((\pr^\alpha u)\ast g)(x)=(\pr^\alpha u)\bigl(g(x-\cdot)\bigr)=(-1)^{\abs\alpha}u\bigl(\pr_y^\alpha[g(x-y)]\bigr)=u\bigl((\pr^\alpha g)(x-\cdot)\bigr).</md></p>
 </proof>
 </lemma>
 <remark xml:id="rmk-solving-with-fundamental-solution">
-<p>Let <m>E\in\mathcal D'(\R^n)</m> be a fundamental solution of <m>P=\sum_{\abs{\alpha}\le m}a_\alpha \pr_x^\alpha</m>.
-Let <m>v\in C_c^\infty(\R^n)</m> and put <m>u \coloneqq E\ast v</m>, which lies in <m>C^\infty(\R^n)</m> by Lemma <xref ref="lem-distribution-convolution" text="global"/>(i).
-By Lemma <xref ref="lem-PDO-convolution" text="global"/> and Example <xref ref="ex-delta-convolution" text="global"/>,
-<md>(Pu)(x)
-        = P(E\ast v)(x)
-        = \bigl((PE)\ast v\bigr)(x)
-        = (\delta_0\ast v)(x)
-        = \delta_0\bigl(v(x-\cdot)\bigr)
-        = v(x).</md>
-Therefore, once we have a fundamental solution, the equation <m>Pu=v</m> can be solved for every <m>v\in C_c^\infty(\R^n)</m>, namely by <m>u=E\ast v</m>.</p>
+<p>Let <m>E</m> be a fundamental solution of <m>P</m> and <m>v\in C_c^\infty(\R^n)</m>.
+Then <m>u=E\ast v\in C^\infty(\R^n)</m> solves <m>Pu=v</m>, by Lemma <xref ref="lem-PDO-convolution" text="global"/> and Example <xref ref="ex-delta-convolution" text="global"/>:
+<md>Pu=P(E\ast v)=(PE)\ast v=\delta_0\ast v=v.</md></p>
 </remark>
-<p>We use polar coordinates in the following form: if <m>g\colon(0,+\infty)\to[0,+\infty]</m> is measurable, then
-<md>\int_{\set{\abs x&lt;\rho}}g(\abs x)\,dx=c_n\int_0^\rho g(r)\,r^{n-1}\,dr,</md>
-where <m>c_n</m> is the area of the unit sphere <m>\set{\abs x=1}\subset\R^n</m> (so <m>c_2=2\pi</m>); and the sphere <m>\set{\abs x=\eps}</m> has area <m>c_n\eps^{n-1}</m>.</p>
 <theorem xml:id="thm-laplace-fundamental">
 <statement>
-<p>Let <m>n\ge2</m> and let <m>\triangle = \pr_{x_1}^2 + \cdots + \pr_{x_n}^2</m> be the Laplacian.
-For <m>x\in\R^n\setminus\set0</m>, put
+<p>Let <m>n\ge2</m> and <m>\triangle=\sum_{j=1}^n\pr_{x_j}^2</m>.
+Let
 <md>
-<mrow>E(x) \coloneqq
+<mrow>E(x)\coloneqq
         \begin{cases}
-            \dfrac{1}{2\pi} \log \abs{x} &amp; \text{if } n=2, \\[3mm]
-            -\dfrac{\abs{x}^{2-n}}{(n-2)c_n} &amp; \text{if } n&gt;2,
+            (2\pi)^{-1}\log\abs x &amp; n=2,\\[1mm]
+            -\dfrac{\abs x^{2-n}}{(n-2)c_n} &amp; n&gt;2,
         \end{cases}</mrow>
 </md>
-where <m>\abs x=\sqrt{x_1^2+\cdots+x_n^2}</m>.
-Then <m>E\in L_\mathrm{loc}^1(\R^n)\subset \mathcal D'(\R^n)</m> and <m>\triangle E = \delta_0</m>, that is, <m>E</m> is a fundamental solution of <m>\triangle</m>.</p>
+where <m>c_n</m> is the area of the unit sphere <m>\set{\abs x=1}\subset\R^n</m>.
+Then <m>E\in L_\mathrm{loc}^1(\R^n)</m> and <m>\triangle E=\delta_0</m>.</p>
 </statement>
 <proof>
-<p><em>Step 0: <m>E</m> is locally integrable, and <m>\triangle E=0</m> away from <m>0</m>.</em>
-<m>E</m> is continuous on <m>\R^n\setminus\set0</m>, so it is integrable on every compact set not containing <m>0</m>; it remains to check integrability near <m>0</m>.
-By polar coordinates, for <m>n&gt;2</m>,
-<md>\int_{\abs x&lt;1}\abs x^{2-n}\,dx=c_n\int_0^1r^{2-n}\,r^{n-1}\,dr=c_n\int_0^1r\,dr=\frac{c_n}2&lt;+\infty,</md>
-and for <m>n=2</m>, integrating by parts with <m>\frac{d}{dr}\bigl(\frac{r^2}{2}\log r-\frac{r^2}{4}\bigr)=r\log r</m>,
-<md>\int_{\abs x&lt;1}\abs{\log\abs x}\,dx=2\pi\int_0^1r\abs{\log r}\,dr=-2\pi\int_0^1r\log r\,dr=-2\pi\left[\frac{r^2}2\log r-\frac{r^2}4\right]_{0^+}^1=\frac\pi2&lt;+\infty,</md>
-using <m>r^2\log r\to0</m> as <m>r\to0^+</m>.
-Hence <m>E\in L^1_\mathrm{loc}(\R^n)</m>.</p>
-<p>On <m>\R^n\setminus\set{0}</m>, <m>E</m> is smooth.
-Since <m>\pr_{x_j}\abs x=x_j/\abs x</m>, for <m>n&gt;2</m>
-<md>\pr_{x_j}E=-\frac{1}{(n-2)c_n}(2-n)\abs x^{1-n}\frac{x_j}{\abs x}=\frac{x_j}{c_n\abs x^n},</md>
-and for <m>n=2</m>, <m>\pr_{x_j}E=\frac1{2\pi}\cdot\frac1{\abs x}\cdot\frac{x_j}{\abs x}=\frac{x_j}{c_2\abs x^2}</m>.
-So in all cases
-<md>\nabla E(x)=\frac{x}{c_n\abs x^{n}},\qquad x\ne0.</md>
-Differentiating once more, by the product rule,
-<md>\pr_{x_j}\bigl(x_j\abs x^{-n}\bigr)=\abs x^{-n}+x_j\cdot(-n)\abs x^{-n-1}\frac{x_j}{\abs x}=\abs x^{-n}-nx_j^2\abs x^{-n-2},</md>
-and summing over <m>j=1,\dots,n</m> (with <m>x_1^2+\cdots+x_n^2=\abs x^2</m>),
-<md>c_n\triangle E=n\abs x^{-n}-n\abs x^2\abs x^{-n-2}=0\qquad\text{on }\R^n\setminus\set0.</md></p>
-<p><em>Step 1: cutting out a small ball.</em>
-Let <m>\phi\in C_c^\infty(\R^n)</m>, and choose <m>R&gt;0</m> with <m>\operatorname{supp}\phi\subset B_R(0)</m>.
-Two derivatives each give a factor <m>-1</m>, so <m>(\pr_{x_j}^2E)(\phi)=E(\pr_{x_j}^2\phi)</m> and
-<md>(\triangle E)(\phi)=E(\triangle\phi)=\int_{\R^n}E\,\triangle\phi\,dx.</md>
-The function <m>E\triangle\phi</m> is integrable (Step 0, and <m>\triangle\phi</m> is bounded with compact support), and <m>E\triangle\phi\,1_{\set{\abs x&gt;\eps}}\to E\triangle\phi</m> pointwise on <m>\R^n\setminus\set0</m> as <m>\eps\to0^+</m>, with <m>\abs{E\triangle\phi\,1_{\set{\abs x&gt;\eps}}}\le\abs{E\triangle\phi}</m>.
-By Lebesgue's dominated convergence theorem,
-<md>(\triangle E)(\phi)=\lim_{\eps\to0^+}\int_{\abs x&gt;\eps}E\,\triangle\phi\,dx.</md>
-Fix <m>0&lt;\eps&lt;R</m>.
-On <m>\set{\abs x&gt;\eps}</m> we have <m>\triangle E=0</m> by Step 0, and
-<md>\operatorname{div}\bigl(E\nabla\phi-\phi\nabla E\bigr)
-        =\nabla E\cdot\nabla\phi+E\triangle\phi-\nabla\phi\cdot\nabla E-\phi\triangle E
-        =E\triangle\phi-\phi\triangle E,</md>
-so
-<md>\int_{\abs{x}&gt;\eps}E\,\triangle\phi\,dx
-        =\int_{\abs{x}&gt;\eps}\bigl(E\triangle\phi-\phi\triangle E\bigr)\,dx
-        =\int_{\abs{x}&gt;\eps}\operatorname{div}F\,dx,\qquad F\coloneqq E\nabla\phi-\phi\nabla E.</md></p>
-<p><em>Step 2: the divergence theorem.</em>
-Write <m>\set{\abs x&gt;\eps}=\set{r_\eps&lt;0}</m> with <m>r_\eps(x)=\eps^2-\abs x^2</m>; then <m>\nabla r_\eps=-2x\ne0</m> on the boundary sphere <m>\set{\abs x=\eps}</m>, and the outward unit normal there is <m>\nabla r_\eps/\abs{\nabla r_\eps}=-x/\abs x</m> (it points towards the origin, out of the region <m>\set{\abs x&gt;\eps}</m>).
-The vector field <m>F</m> is smooth on <m>\R^n\setminus\set0</m> and vanishes for <m>\abs x\ge R</m>.
-(To apply the Gauss--Green formula to a field defined on all of <m>\R^n</m>, replace <m>E</m> by <m>(1-\theta)E</m>, where <m>\theta\in C_c^\infty(B_{\eps/2}(0))</m> equals <m>1</m> near <m>0</m>; this changes nothing on <m>\set{\abs x\ge\eps/2}</m>.)
-By the Gauss--Green formula (Example <xref ref="ex-gauss-green" text="global"/>, written with the outward normal), with <m>\,dS</m> the surface element of the sphere <m>\set{\abs x=\eps}</m>,
-<md>\int_{\abs{x}&gt;\eps}\operatorname{div}F\,dx
-        =\int_{\abs x=\eps}\Bigl\langle F,-\frac x{\abs x}\Bigr\rangle\,dS
-        =\int_{\abs x=\eps}\phi\Bigl\langle\nabla E,\frac x{\abs x}\Bigr\rangle\,dS-\int_{\abs x=\eps}E\Bigl\langle\nabla\phi,\frac x{\abs x}\Bigr\rangle\,dS.</md>
-By Step 0, <m>\langle\nabla E,x/\abs x\rangle=\langle x,x\rangle/(c_n\abs x^{n}\abs x)=\abs x^{1-n}/c_n</m>.
-Hence
-<md>(\triangle E)(\phi)=\lim_{\eps\to0^+}\bigl(I_\eps+II_\eps\bigr),\qquad
-        I_\eps\coloneqq\int_{\abs x=\eps}\frac{\phi(x)\abs x^{1-n}}{c_n}\,dS,\quad
-        II_\eps\coloneqq-\int_{\abs x=\eps}E(x)\Bigl\langle\nabla\phi(x),\frac x{\abs x}\Bigr\rangle\,dS.</md>
-(Explicitly, <m>\langle\nabla\phi,x/\abs x\rangle=\frac1{\abs x}\bigl(x_1\pr_{x_1}\phi+\cdots+x_n\pr_{x_n}\phi\bigr)</m>, so for <m>n&gt;2</m>, <m>II_\eps=\int_{\abs x=\eps}\frac{\abs x^{2-n}}{(n-2)c_n}\cdot\frac1{\abs x}\bigl(x_1\pr_{x_1}\phi+\cdots+x_n\pr_{x_n}\phi\bigr)\,dS</m>, as written in the lecture.)</p>
-<p><em>Step 3: the limits.</em>
-On <m>\set{\abs x=\eps}</m> we have <m>\abs x^{1-n}=\eps^{1-n}</m>, and the sphere has area <m>c_n\eps^{n-1}</m>, so <m>\phi(0)=\frac1{c_n\eps^{n-1}}\int_{\abs x=\eps}\phi(0)\,dS</m> and
-<md>\abs{I_\eps-\phi(0)}
-        =\left\lvert \frac1{c_n\eps^{n-1}}\int_{\abs x=\eps}\bigl(\phi(x)-\phi(0)\bigr)\,dS \right\rvert
-        \le\frac1{c_n\eps^{n-1}}\cdot c_n\eps^{n-1}\sup_{\abs x=\eps}\abs{\phi(x)-\phi(0)}
-        =\sup_{\abs x=\eps}\abs{\phi(x)-\phi(0)},</md>
-which tends to <m>0</m> as <m>\eps\to0^+</m> because <m>\phi</m> is continuous at <m>0</m>.</p>
-<p>For <m>II_\eps</m>, let <m>M\coloneqq\sup_{\R^n}\abs{\nabla\phi}&lt;+\infty</m>.
-By the Cauchy--Schwarz inequality, <m>\abs{\langle\nabla\phi,x/\abs x\rangle}\le\abs{\nabla\phi}\le M</m>.
-If <m>n&gt;2</m>, then <m>\abs{E(x)}=\frac{\eps^{2-n}}{(n-2)c_n}</m> on <m>\set{\abs x=\eps}</m>, so
-<md>\abs{II_\eps}\le M\cdot\frac{\eps^{2-n}}{(n-2)c_n}\cdot c_n\eps^{n-1}=\frac M{n-2}\,\eps\to0.</md>
-If <m>n=2</m>, then <m>\abs{E(x)}=\frac1{2\pi}\abs{\log\eps}</m> on <m>\set{\abs x=\eps}</m>, and the circle has length <m>2\pi\eps</m>, so
-<md>\abs{II_\eps}\le M\cdot\frac{\abs{\log\eps}}{2\pi}\cdot2\pi\eps=M\eps\abs{\log\eps}\to0,</md>
-since <m>\eps\log\eps\to0</m> as <m>\eps\to0^+</m> (for instance by l'Hôpital's rule applied to <m>\log\eps/(1/\eps)</m>).
-(The lecture bounds these terms by <m>\widehat C\eps^{2-n}\eps^{n-1}</m> and <m>\widehat C\eps\abs{\log\eps}</m>; above we computed the constants.)</p>
-<p>Therefore, for every <m>n\ge2</m>,
-<md>(\triangle E)(\phi)=\lim_{\eps\to0^+}(I_\eps+II_\eps)=\phi(0)+0=\delta_0(\phi).</md>
-Since <m>\phi\in C_c^\infty(\R^n)</m> was arbitrary, <m>\triangle E=\delta_0</m>.</p>
+<p><m>E\in L_\mathrm{loc}^1</m> by polar coordinates: <m>\int_{\abs x&lt;1}\abs x^{2-n}\,dx=c_n\int_0^1r\,dr=\frac{c_n}2</m> and <m>\int_{\abs x&lt;1}\abs{\log\abs x}\,dx=c_n\int_0^1r\abs{\log r}\,dr=\frac{c_n}4</m>.
+For <m>x\ne0</m>, since <m>\pr_{x_j}\abs x=x_j/\abs x</m>,
+<md>\nabla E(x)=\frac{x}{c_n\abs x^n},\qquad\triangle E(x)=0,</md>
+because <m>\pr_{x_j}(x_j\abs x^{-n})=\abs x^{-n}-nx_j^2\abs x^{-n-2}</m>, and summing over <m>j</m> gives <m>n\abs x^{-n}-n\abs x^{-n}=0</m>.</p>
+<p>Let <m>\phi\in C_c^\infty(\R^n)</m>, <m>\operatorname{supp}\phi\subset B_R(0)</m>, <m>0&lt;\eps&lt;R</m>.
+By dominated convergence and <m>\triangle E=0</m> for <m>\abs x&gt;\eps</m>,
+<md>(\triangle E)(\phi)=E(\triangle\phi)=\lim_{\eps\to0^+}\int_{\abs x&gt;\eps}\bigl(E\triangle\phi-\phi\triangle E\bigr)\,dx=\lim_{\eps\to0^+}\int_{\abs x&gt;\eps}\operatorname{div}\bigl(E\nabla\phi-\phi\nabla E\bigr)\,dx.</md>
+By the divergence theorem on <m>\set{\eps&lt;\abs x&lt;R}</m> (the outward normal on <m>\abs x=\eps</m> is <m>-x/\abs x</m>, and the integrand vanishes near <m>\abs x=R</m>),
+<md>(\triangle E)(\phi)=\lim_{\eps\to0^+}\Bigl(\underbrace{\int_{\abs x=\eps}\phi\,\Bigl\langle\nabla E,\frac x{\abs x}\Bigr\rangle\,dS}_{I_\eps}\ \underbrace{-\int_{\abs x=\eps}E\,\Bigl\langle\nabla\phi,\frac x{\abs x}\Bigr\rangle\,dS}_{II_\eps}\Bigr).</md>
+On <m>\abs x=\eps</m>, <m>\langle\nabla E,x/\abs x\rangle=\eps^{1-n}/c_n</m> and <m>\int_{\abs x=\eps}\,dS=c_n\eps^{n-1}</m>, so
+<md>\abs{I_\eps-\phi(0)}=\left\lvert \frac1{c_n\eps^{n-1}}\int_{\abs x=\eps}(\phi-\phi(0))\,dS \right\rvert\le\sup_{\abs x=\eps}\abs{\phi-\phi(0)}\to0.</md>
+With <m>M=\sup\abs{\nabla\phi}</m>: <m>\abs{II_\eps}\le M\frac{\eps^{2-n}}{(n-2)c_n}c_n\eps^{n-1}=\frac M{n-2}\eps</m> if <m>n&gt;2</m>, and <m>\abs{II_\eps}\le M\frac{\abs{\log\eps}}{2\pi}2\pi\eps=M\eps\abs{\log\eps}</m> if <m>n=2</m>.
+Both tend to <m>0</m>.
+Hence <m>(\triangle E)(\phi)=\phi(0)</m>.</p>
 </proof>
 </theorem>
 <remark xml:id="rmk-poisson-equation">
-<p>Combining Theorem <xref ref="thm-laplace-fundamental" text="global"/> with Remark <xref ref="rmk-solving-with-fundamental-solution" text="global"/>: for every <m>v\in C_c^\infty(\R^n)</m> (<m>n\ge2</m>), the function <m>u=E\ast v\in C^\infty(\R^n)</m> solves the Poisson equation <m>\triangle u=v</m> on <m>\R^n</m>.
-Since <m>E\in L^1_\mathrm{loc}(\R^n)</m>, Example <xref ref="ex-Lloc-convolution" text="global"/> and the substitution <m>y\mapsto x-y</m> give the explicit formula
-<md>u(x)=\int_{\R^n}E(y)v(x-y)\,dy=\int_{\R^n}E(x-y)v(y)\,dy.</md></p>
+<p>For <m>v\in C_c^\infty(\R^n)</m>, <m>u(x)=\int E(x-y)v(y)\,dy</m> solves the Poisson equation <m>\triangle u=v</m> (Remark <xref ref="rmk-solving-with-fundamental-solution" text="global"/> and Example <xref ref="ex-Lloc-convolution" text="global"/>).</p>
 </remark>
 </subsection>
 <subsection xml:id="ssec-1119">
 <title>20261119</title>
 <theorem xml:id="thm-heat-fundamental">
-<title>Fundamental solution of the heat operator</title>
 <statement>
-<p>Consider the heat operator
-<md>\frac{\pr}{\pr t} - \triangle_x,\qquad \triangle_x=\sum_{j=1}^n\frac{\pr^2}{\pr x_j^2},</md>
-on <m>\R^{n+1}</m>, where <m>(x,t)=(x_1,\dots,x_n,t)\in\R^n\times\R =\R^{n+1}</m>.
-Let
+<p>Let
 <md>
-<mrow>E(x,t) \coloneqq
-        \begin{cases}
-            (4\pi t)^{-n/2}e^{-\abs{x}^2/4t} &amp; \text{if } t&gt;0, \\
-            0 &amp; \text{if } t\le 0.
-        \end{cases}</mrow>
+<mrow>E(x,t)=\begin{cases}(4\pi t)^{-n/2}e^{-\abs x^2/4t}&amp;t&gt;0,\\0&amp;t\le0.\end{cases}</mrow>
 </md>
-Then <m>E\in L_\mathrm{loc}^1(\R^{n+1})\subset\mathcal D'(\R^{n+1})</m> and
-<md>\left(\frac{\pr}{\pr t}-\triangle_x\right)E = \delta_0.</md></p>
+Then <m>E\in L_\mathrm{loc}^1(\R^{n+1})</m> and <m>(\pr_t-\triangle_x)E=\delta_0</m> in <m>\mathcal D'(\R^{n+1})</m>.</p>
 </statement>
 <proof>
-<p><em>Step 0: <m>E\in L^1_\mathrm{loc}(\R^{n+1})</m>.</em>
-Recall <m>\int_\R e^{-s^2}\,ds=\sqrt\pi</m>.
-For <m>t&gt;0</m>, the substitution <m>s=\sigma/\sqrt{4t}</m> (<m>\,ds=\,d\sigma/\sqrt{4t}</m>) gives <m>\int_\R e^{-\sigma^2/4t}\,d\sigma=\sqrt{4t}\int_\R e^{-s^2}\,ds=\sqrt{4\pi t}</m>.
-Since <m>e^{-\abs x^2/4t}=\prod_{j=1}^ne^{-x_j^2/4t}</m>, Fubini's theorem gives
-<md>\int_{\R^n}e^{-\abs{x}^2/4t}\,dx=\prod_{j=1}^n\int_\R e^{-x_j^2/4t}\,dx_j=(4\pi t)^{n/2},
-        \qquad\text{hence}\qquad
-        \int_{\R^n}E(x,t)\,dx=1\quad(t&gt;0).</md>
-Let <m>K\subset\R^{n+1}</m> be compact.
-Then <m>K\subset\R^n\times[-C,C]</m> for some <m>C&gt;0</m>, and by Tonelli's theorem (Theorem <xref ref="thm-tonelli" text="global"/>; <m>E\ge0</m> and <m>E=0</m> for <m>t\le0</m>),
-<md>\int_{K} E(x,t)\,dx \,dt
-        \le \int_{0}^{C}\left(\int_{\R^n} E(x,t)\,dx\right)\,dt
-        = \int_0^C1\,dt=C
-        &lt; +\infty.</md>
-So <m>E\in L_\mathrm{loc}^1(\R^{n+1})</m>, and <m>E</m> is a distribution by Example <xref ref="ex-L1loc-distribution" text="global"/>.</p>
-<p><em>Step 1: <m>E</m> solves the equation for <m>t&gt;0</m>.</em>
-For <m>t&gt;0</m>, <m>E</m> is smooth.
-By the chain rule, <m>\pr_{x_j}\bigl(-\abs x^2/4t\bigr)=-x_j/2t</m>, so
-<md>\frac{\pr E}{\pr x_j}=-\frac{x_j}{2t}E,\qquad
-        \frac{\pr^2E}{\pr x_j^2}=-\frac1{2t}E-\frac{x_j}{2t}\cdot\left(-\frac{x_j}{2t}E\right)=-\frac1{2t}E+\frac{x_j^2}{4t^2}E,</md>
-and summing over <m>j</m>,
-<md>\triangle_xE=-\frac n{2t}E+\frac{\abs x^2}{4t^2}E.</md>
-By the product rule, <m>\pr_t(4\pi t)^{-n/2}=-\frac n{2t}(4\pi t)^{-n/2}</m> and <m>\pr_t\bigl(-\abs x^2/4t\bigr)=\abs x^2/4t^2</m>, so
-<md>\frac{\pr E}{\pr t}=-\frac n{2t}E+\frac{\abs x^2}{4t^2}E.</md>
-Hence <m>\pr_tE-\triangle_xE=0</m> on <m>\set{t&gt;0}</m>.</p>
-<p><em>Step 2: the distributional equation.</em>
+<p>For <m>t&gt;0</m>, <m>\int_{\R^n}E(x,t)\,dx=(4\pi t)^{-n/2}\prod_{j=1}^n\int_\R e^{-x_j^2/4t}\,dx_j=(4\pi t)^{-n/2}(4\pi t)^{n/2}=1</m>.
+So <m>\int_KE\le C</m> for <m>K\subset\R^n\times[-C,C]</m> (Tonelli), and <m>E\in L_\mathrm{loc}^1</m>.
+For <m>t&gt;0</m>,
+<md>\pr_{x_j}E=-\frac{x_j}{2t}E,\qquad\triangle_xE=\sum_{j=1}^n\Bigl(-\frac1{2t}+\frac{x_j^2}{4t^2}\Bigr)E=\Bigl(-\frac n{2t}+\frac{\abs x^2}{4t^2}\Bigr)E=\pr_tE.</md>
 Let <m>\phi\in C_c^\infty(\R^{n+1})</m>.
-By Definition <xref ref="def-distribution-derivative" text="global"/>, <m>(\pr_tE)(\phi)=-E(\pr_t\phi)</m>, and <m>(\pr_{x_j}^2E)(\phi)=(-1)^2E(\pr_{x_j}^2\phi)</m>, so
-<md>\left(\left(\frac{\pr}{\pr t}-\triangle_x\right)E\right)(\phi)
-        = E\left(-\frac{\pr\phi}{\pr t}-\triangle_x\phi\right)
-        = \int_{\R^{n+1}}E\left(-\frac{\pr\phi}{\pr t}-\triangle_x\phi\right)\,dx\,dt.</md>
-The integrand is in <m>L^1(\R^{n+1})</m> (<m>E\in L^1_\mathrm{loc}</m>, and <m>\pr_t\phi+\triangle_x\phi</m> is bounded with compact support), and it vanishes for <m>t\le0</m>.
-By Lebesgue's dominated convergence theorem (the integrands <m>1_{\set{t&gt;\eps}}E(\cdots)</m> are dominated by <m>\abs{E(\cdots)}</m>),
-<md>
-<mrow xml:id="eq-heat-limit" number="yes">\left(\left(\frac{\pr}{\pr t}-\triangle_x\right)E\right)(\phi)
-        = \lim_{\eps\to 0^+} \int_{t&gt;\eps}E(x,t)\left(-\frac{\pr\phi}{\pr t} - \triangle_x\phi\right)\,dx\,dt.</mrow>
-</md>
-On <m>\set{t\ge\eps}</m> the function <m>E</m> is smooth and bounded, and <m>\phi</m> has compact support, so Fubini's theorem and integration by parts are legitimate.
-In <m>t</m> (for fixed <m>x</m>; <m>\phi(x,t)=0</m> for large <m>t</m>),
-<md>\int_{t&gt;\eps}-E\frac{\pr\phi}{\pr t}\,dx\,dt
-        = \int_{\R^n}\left(\Bigl[-E\phi\Bigr]_{t=\eps}^{t=+\infty}+\int_\eps^{+\infty}\frac{\pr E}{\pr t}\phi\,dt\right)\,dx,</md>
-and since <m>\phi(x,t)=0</m> for large <m>t</m>, the bracket equals <m>E(x,\eps)\phi(x,\eps)</m>, so
-<md>
-<mrow xml:id="eq-heat-ibp-t" number="yes">\int_{t&gt;\eps}-E\frac{\pr\phi}{\pr t}\,dx\,dt
-        = \int_{\R^n}E(x,\eps)\phi(x,\eps)\,dx+\int_{t&gt;\eps}\frac{\pr E}{\pr t}\,\phi\,dx\,dt.</mrow>
-</md>
-In <m>x</m> (for fixed <m>t&gt;\eps</m>; <m>\phi(\cdot,t)</m> has compact support, so there are no boundary terms), integrating by parts twice in each variable <m>x_j</m>,
-<md>
-<mrow xml:id="eq-heat-ibp-x" number="yes">\int_{t&gt;\eps}-E\,\triangle_x\phi\,dx\,dt=\int_{t&gt;\eps}-(\triangle_xE)\,\phi\,dx\,dt.</mrow>
-</md>
-Combining <xref ref="eq-heat-limit" text="global"/>, <xref ref="eq-heat-ibp-t" text="global"/> and <xref ref="eq-heat-ibp-x" text="global"/>, and using <m>\pr_tE-\triangle_xE=0</m> on <m>\set{t&gt;0}</m> (Step 1),
-<md>
-<mrow>\left(\left(\frac{\pr}{\pr t}-\triangle_x\right)E\right)(\phi)
-        &amp;= \lim_{\eps\to 0^+}\left(\int_{\R^n}E(x,\eps)\phi(x,\eps)\,dx+\int_{t&gt;\eps}\left(\frac{\pr E}{\pr t}-\triangle_xE\right)\phi\,dx\,dt\right)</mrow>
-<mrow>&amp;= \lim_{\eps\to 0^+}\int_{\R^n}E(x,\eps)\phi(x,\eps)\,dx.</mrow>
-</md>
-Finally, substituting <m>x=\sqrt\eps\,y</m>, <m>\,dx=\eps^{n/2}\,dy</m>, so that <m>\abs x^2/4\eps=\abs y^2/4</m>,
-<md>
-<mrow>\int_{\R^n}E(x,\eps)\phi(x,\eps)\,dx
-        &amp;= (4\pi\eps)^{-n/2} \int_{\R^n} e^{-\abs{x}^2/4\eps}\phi(x,\eps)\,dx</mrow>
-<mrow>&amp;= (4\pi\eps)^{-n/2}\eps^{n/2}\int_{\R^n} e^{-\abs{y}^2/4} \phi(\sqrt{\eps}\,y, \eps) \,dy</mrow>
-<mrow>&amp;= (4\pi)^{-n/2}\int_{\R^n} e^{-\abs{y}^2/4} \phi(\sqrt{\eps}\,y, \eps) \,dy.</mrow>
-</md>
-The integrand is dominated by <m>\sup\abs\phi\cdot e^{-\abs y^2/4}\in L^1(\R^n)</m>, and it converges to <m>e^{-\abs y^2/4}\phi(0,0)</m> as <m>\eps\to0^+</m> for every <m>y</m>, by the continuity of <m>\phi</m>.
-By Lebesgue's dominated convergence theorem and <m>\int_{\R^n}e^{-\abs y^2/4}\,dy=(4\pi)^{n/2}</m> (Step 0 with <m>t=1</m>),
-<md>\lim_{\eps\to0^+}\int_{\R^n}E(x,\eps)\phi(x,\eps)\,dx=(4\pi)^{-n/2}\cdot(4\pi)^{n/2}\phi(0,0)=\phi(0,0)=\delta_0(\phi).</md>
-So <m>E</m> is a fundamental solution of the heat operator.</p>
+Then, by dominated convergence,
+<md>\bigl((\pr_t-\triangle_x)E\bigr)(\phi)=E\bigl(-\pr_t\phi-\triangle_x\phi\bigr)=\lim_{\eps\to0^+}\int_{t&gt;\eps}E\,(-\pr_t\phi-\triangle_x\phi)\,dx\,dt.</md>
+On <m>\set{t\ge\eps}</m> integrate by parts, once in <m>t</m> (boundary term at <m>t=\eps</m>) and twice in <m>x</m>:
+<md>\int_{t&gt;\eps}E(-\pr_t\phi-\triangle_x\phi)\,dx\,dt=\int_{\R^n}E(x,\eps)\phi(x,\eps)\,dx+\int_{t&gt;\eps}(\pr_tE-\triangle_xE)\phi\,dx\,dt.</md>
+The last integral is <m>0</m>.
+Substituting <m>x=\sqrt\eps\,y</m> (<m>\,dx=\eps^{n/2}\,dy</m>),
+<md>\int_{\R^n}E(x,\eps)\phi(x,\eps)\,dx=(4\pi)^{-n/2}\int_{\R^n}e^{-\abs y^2/4}\phi(\sqrt\eps\,y,\eps)\,dy\to\phi(0,0)</md>
+by dominated convergence, using <m>\int e^{-\abs y^2/4}\,dy=(4\pi)^{n/2}</m>.</p>
 </proof>
 </theorem>
-<p>Next we consider the <em>Schrödinger operator</em>
+<p>Now consider the <em>Schrödinger operator</em>
 <md>
-<mrow xml:id="eq-schrodinger-operator" number="yes">L = \frac{\pr}{\pr t} - \sum_{j,k=1}^{n}A_{j,k}\frac{\pr^2}{\pr x_j\pr x_k},</mrow>
+<mrow xml:id="eq-schrodinger-operator" number="yes">L=\pr_t-\sum_{j,k=1}^nA_{j,k}\pr_{x_j}\pr_{x_k},</mrow>
 </md>
-where <m>A=(A_{j,k})_{j,k=1}^{n}</m> is a complex symmetric matrix (i.e. <m>A=A^{\mathsf T}</m>, <m>A_{j,k}=A_{k,j}</m>) such that <m>\operatorname{Re} A</m> is positive semi-definite (denoted by <m>\operatorname{Re} A\ge 0</m>) and <m>\det A\ne 0</m>.
-Here, for a complex matrix <m>B=M_1+iM_2</m> with <m>M_1,M_2</m> real, <m>\operatorname{Re}B\coloneqq M_1</m> is the entrywise real part, and <m>\operatorname{Re}B\ge0</m> (resp. <m>&gt;0</m>) means that the real symmetric matrix <m>M_1</m> is positive semi-definite (resp. positive definite).
-We write <m>\ags{Bx,x}\coloneqq x^{\mathsf T}Bx=\sum_{j,k}B_{j,k}x_jx_k</m> (a bilinear pairing, without complex conjugation).
-For <m>x\in\R^n</m>,
-<md>\operatorname{Re}\ags{Bx,x}=\sum_{j,k}\operatorname{Re}(B_{j,k})x_jx_k=\ags{(\operatorname{Re}B)x,x}\ge0\qquad(\operatorname{Re}B\ge0),</md>
-so that <m>\abs{e^{-\ags{Bx,x}/t}}=e^{-\operatorname{Re}\ags{Bx,x}/t}\le 1</m> for all <m>t&gt;0</m>.
-(The case <m>A=I</m> is the heat operator, and <m>A=iI</m> gives the free Schrödinger operator <m>\pr_t-i\triangle_x</m>.)</p>
-<p>We will need the square root <m>(\det B)^{-1/2}</m> for such matrices, and it has to be defined carefully, since the square root of a complex number is only defined up to a sign.
+where <m>A=A^{\mathsf T}\in\C^{n\times n}</m>, <m>\operatorname{Re}A\ge0</m> and <m>\det A\ne0</m>.
+Here <m>\operatorname{Re}B</m> is the entrywise real part and <m>\ags{Bx,x}\coloneqq x^{\mathsf T}Bx</m> (no complex conjugation).
+Then <m>\operatorname{Re}\ags{Bx,x}=\ags{(\operatorname{Re}B)x,x}\ge0</m> for <m>x\in\R^n</m> if <m>\operatorname{Re}B\ge0</m>, so <m>\abs{e^{-\ags{Bx,x}/t}}\le1</m> for <m>t&gt;0</m>.
+(<m>A=I</m> is the heat operator, <m>A=iI</m> the free Schrödinger operator.)</p>
+<p>We need <m>(\det B)^{-1/2}</m>.
 Let
-<md>
-<mrow>H&amp;\coloneqq\set{B\in\C^{n\times n}\mid B=B^{\mathsf T},\ \operatorname{Re}B&gt;0},</mrow>
-<mrow>S&amp;\coloneqq\set{B\in\C^{n\times n}\mid B=B^{\mathsf T},\ \operatorname{Re}B\ge0,\ \det B\ne0}.</mrow>
-</md>
-Both are subsets of the space of symmetric matrices, which we identify with <m>\C^{n(n+1)/2}</m> via the entries <m>B_{j,k}</m>, <m>j\le k</m>.
-<m>H</m> is open and convex.
-The matrix <m>A</m> in <xref ref="eq-schrodinger-operator" text="global"/> belongs to <m>S</m>.</p>
+<md>H=\set{B=B^{\mathsf T}\mid\operatorname{Re}B&gt;0},\qquad S=\set{B=B^{\mathsf T}\mid\operatorname{Re}B\ge0,\ \det B\ne0}.</md>
+<m>H</m> is open and convex in <m>\C^{n(n+1)/2}</m>.</p>
 <lemma xml:id="lem-det-branch">
 <statement>
 <p><ol marker="(i)">
 <li>
-<p>For every <m>B\in H</m>, <m>\det B\ne0</m>.
-There is a unique continuous function <m>D\colon H\to\C</m> such that <m>D(B)^2\det B=1</m> for all <m>B\in H</m> and <m>D(B)&gt;0</m> whenever <m>B</m> is real.
+<p>For <m>B\in H</m>, <m>\det B\ne0</m>, and there is a unique continuous <m>D\colon H\to\C</m> with <m>D(B)^2\det B=1</m> and <m>D(B)&gt;0</m> for real <m>B</m>.
 We write <m>D(B)=(\det B)^{-1/2}</m>.
-<m>D</m> is holomorphic, <m>D(sB)=s^{-n/2}D(B)</m> for <m>s&gt;0</m>, and for <m>B=M_1+iM_2\in H</m>,
+<m>D</m> is holomorphic and <m>D(sB)=s^{-n/2}D(B)</m> for <m>s&gt;0</m>.
+For <m>B=M_1+iM_2\in H</m>,
 <md>D(B)=(\det M_1)^{-1/2}\prod_{j=1}^n(1+i\lambda_j)^{-1/2},</md>
-where <m>\lambda_1,\dots,\lambda_n\in\R</m> are the eigenvalues of <m>M_1^{-1/2}M_2M_1^{-1/2}</m> and <m>z^{-1/2}</m> is the principal branch on <m>\operatorname{Re}z&gt;0</m>.</p>
+where <m>\lambda_j\in\R</m> are the eigenvalues of <m>M_1^{-1/2}M_2M_1^{-1/2}</m> and <m>z^{-1/2}</m> is the principal branch on <m>\operatorname{Re}z&gt;0</m>.</p>
 </li>
 <li>
-<p>For every <m>B\in S</m> and <m>\delta&gt;0</m> we have <m>B+\delta I\in H</m>, and the limit <m>D(B)\coloneqq\lim_{\delta\to0^+}D(B+\delta I)</m> exists.
-With this definition, <m>D\colon H\cup S\to\C</m> is continuous, and <m>D(B)^2\det B=1</m> on <m>S</m>.</p>
+<p>For <m>B\in S</m>, <m>D(B)\coloneqq\lim_{\delta\to0^+}D(B+\delta I)</m> exists.
+Then <m>D</m> is continuous on <m>H\cup S</m> and <m>D(B)^2\det B=1</m>.</p>
 </li>
 <li>
-<p>If <m>B\in S</m>, then <m>B^{-1}\in S</m>, <m>sB\in S</m> for <m>s&gt;0</m>, and
-<md>D(B^{-1})=D(B)^{-1},\qquad D(sB)=s^{-n/2}D(B).</md></p>
+<p>If <m>B\in S</m>, then <m>B^{-1}\in S</m> and <m>D(B^{-1})=D(B)^{-1}</m>.</p>
 </li>
 <li>
-<p>Every partial derivative of order <m>m</m> of <m>D</m> (with respect to the entries <m>B_{j,k}</m>, <m>j\le k</m>) is of the form <m>D(B)\,P(B^{-1})</m>, where <m>P</m> is a polynomial in the entries of <m>B^{-1}</m> which depends only on the derivative taken, not on <m>B</m>.</p>
+<p>The derivatives of <m>D</m> (in the entries <m>B_{j,k}</m>, <m>j\le k</m>) of order <m>m</m> are <m>D(B)P(B^{-1})</m>, with <m>P</m> a polynomial depending only on the order and the indices.</p>
 </li>
 </ol></p>
 </statement>
 <proof>
-<p>(i) Let <m>B=M_1+iM_2\in H</m> and <m>z\in\C^n\setminus\set0</m>.
-Since <m>M_1,M_2</m> are real symmetric, <m>z^*M_1z</m> and <m>z^*M_2z</m> are real (each equals its own complex conjugate), so
-<md>\operatorname{Re}(z^*Bz)=\operatorname{Re}\bigl(z^*M_1z+i\,z^*M_2z\bigr)=z^*M_1z&gt;0.</md>
-In particular <m>Bz\ne0</m>, so <m>\det B\ne0</m>.
-The set <m>H</m> is convex (if <m>\operatorname{Re}B,\operatorname{Re}B'&gt;0</m> then <m>\operatorname{Re}(sB+(1-s)B')=s\operatorname{Re}B+(1-s)\operatorname{Re}B'&gt;0</m> for <m>s\in[0,1]</m>), hence simply connected, and <m>B\mapsto\det B</m> is a nowhere vanishing holomorphic function on <m>H</m>.
-So it has a holomorphic logarithm <m>g</m> with <m>g(I)=0</m>, and <m>D\coloneqq e^{-g/2}</m> satisfies <m>D^2\det=e^{-g}e^{g}=1</m>.
-If <m>B\in H</m> is real, then along the segment <m>s\mapsto(1-s)I+sB</m>, <m>s\in[0,1]</m>, all matrices are real positive definite, so <m>\det</m> is a positive real number there; <m>g</m> restricted to the segment is a continuous logarithm of a positive function that vanishes at <m>s=0</m>, hence it is the real logarithm, and <m>D(B)=e^{-g(B)/2}&gt;0</m>.
-If <m>D'</m> is another continuous function with the same properties, then <m>(D'/D)^2=1</m>, so <m>D'/D</m> is continuous with values in <m>\set{\pm1}</m> on the connected set <m>H</m>; hence it is constant, and it equals <m>1</m> at <m>B=I</m> (both are positive there).
-This proves existence and uniqueness.
-For <m>s&gt;0</m>, the function <m>B\mapsto s^{n/2}D(sB)</m> is continuous on <m>H</m>, positive on real matrices, and its square times <m>\det B</m> is <m>s^nD(sB)^2\det B=D(sB)^2\det(sB)=1</m> (as <m>\det(sB)=s^n\det B</m>); by uniqueness it equals <m>D</m>.</p>
-<p>For the last formula, <m>M_1^{-1/2}M_2M_1^{-1/2}</m> is real symmetric, so its eigenvalues <m>\lambda_j</m> are real, and
-<md>B=M_1^{1/2}\bigl(I+iM_1^{-1/2}M_2M_1^{-1/2}\bigr)M_1^{1/2}
-        \quad\Longrightarrow\quad
-        \det B=\det M_1\prod_{j=1}^n(1+i\lambda_j).</md>
-Let <m>G(B)\coloneqq(\det M_1)^{-1/2}\prod_j(1+i\lambda_j)^{-1/2}</m>.
-The eigenvalues depend continuously on <m>B</m> (as an unordered <m>n</m>-tuple), the principal branch is continuous on <m>\operatorname{Re}z&gt;0</m>, and the product is symmetric in the <m>\lambda_j</m>, so <m>G</m> is continuous on <m>H</m>.
-Moreover <m>G^2\det B=(\det M_1)^{-1}\prod_j(1+i\lambda_j)^{-1}\cdot\det M_1\prod_j(1+i\lambda_j)=1</m>, and <m>G&gt;0</m> for real <m>B</m> (where all <m>\lambda_j=0</m>).
-By uniqueness, <m>G=D</m>.</p>
-<p><em>Warning.</em>
-<m>D(B)</m> is in general <em>not</em> <m>r^{-1/2}e^{-i\theta/2}</m> for the polar form <m>\det B=re^{i\theta}</m> with <m>\theta\in(-\pi,\pi]</m> when <m>n\ge3</m>, because <m>\sum_j\arg(1+i\lambda_j)</m> lies in <m>(-n\pi/2,n\pi/2)</m>, which is larger than <m>(-\pi,\pi]</m>.
-For example, let <m>n=3</m> and <m>B=(\delta+i)I</m> with small <m>\delta&gt;0</m>.
-Then <m>M_1=\delta I</m>, <m>M_2=I</m>, all <m>\lambda_j=1/\delta</m>, and
-<md>D(B)=\delta^{-3/2}\Bigl(\bigl(1+i/\delta\bigr)^{-1/2}\Bigr)^3\to e^{-3\pi i/4}\quad(\delta\to0^+),</md>
-since <m>\bigl(1+i/\delta\bigr)^{-1/2}=\abs{1+i/\delta}^{-1/2}e^{-\frac i2\arg(1+i/\delta)}</m>, <m>\arg(1+i/\delta)\to\pi/2</m>, and <m>\delta^{-3/2}\abs{1+i/\delta}^{-3/2}\to1</m>.
-But <m>\det B\to i^3=-i=e^{-i\pi/2}</m>, and the polar formula would give <m>e^{+i\pi/4}=-e^{-3\pi i/4}</m>.
-For <m>n\le2</m> the polar formula is correct on <m>H</m>, since then <m>\sum_j\arg(1+i\lambda_j)\in(-\pi,\pi)</m>.
-In general <m>D</m> has to be used.</p>
-<p>(ii) <m>\operatorname{Re}(B+\delta I)=\operatorname{Re}B+\delta I&gt;0</m>, so <m>B+\delta I\in H</m>.
-The function <m>\delta\mapsto\det(B+\delta I)</m> is continuous and nowhere zero on <m>[0,+\infty)</m> (for <m>\delta=0</m> because <m>B\in S</m>, for <m>\delta&gt;0</m> by (i)).
-Hence there are exactly two continuous square roots of <m>1/\det(B+\delta I)</m> on the interval <m>[0,+\infty)</m>, differing by a sign.
-On <m>(0,+\infty)</m>, <m>\delta\mapsto D(B+\delta I)</m> is a continuous square root, so it is the restriction of one of them, and the limit as <m>\delta\to0^+</m> exists.
-For the continuity of <m>D</m> on <m>H\cup S</m>, let <m>B_0\in S</m>.
-Since <m>\det B_0\ne0</m>, there is an open ball <m>U</m> (in the space of symmetric matrices) around <m>B_0</m> on which <m>\det\ne0</m>, and <m>U</m>, being convex, carries a holomorphic function <m>D_U</m> with <m>D_U^2\det=1</m>.
-The set <m>U\cap H</m> is convex and nonempty (it contains <m>B_0+\delta I</m> for small <m>\delta</m>), so <m>D=\pm D_U</m> on it, and we choose the sign of <m>D_U</m> so that <m>D=D_U</m> on <m>U\cap H</m>.
-For <m>B\in U\cap S</m>, <m>B+\delta I\in U\cap H</m> for small <m>\delta</m>, so <m>D(B)=\lim D(B+\delta I)=\lim D_U(B+\delta I)=D_U(B)</m>.
-Hence <m>D=D_U</m> on <m>U\cap(H\cup S)</m>, which is continuous.
-The identity <m>D^2\det=1</m> on <m>S</m> follows by letting <m>\delta\to0^+</m> in <m>D(B+\delta I)^2\det(B+\delta I)=1</m>.</p>
-<p>(iii) Let <m>B=M_1+iM_2\in S</m> and <m>w\in\C^n</m>, and put <m>z\coloneqq B^{-1}w</m>.
-Note that <m>B^{-1}</m> is symmetric, <m>(B^{-1})^*=(B^*)^{-1}</m>, and <m>B^*=\overline B</m> since <m>B</m> is symmetric.
-Then
-<md>w^*B^{-1}w=(Bz)^*B^{-1}(Bz)=z^*B^*B^{-1}Bz=z^*\overline Bz=\overline{z^*Bz},</md>
-because <m>z^*\overline Bz</m> is the conjugate of the number <m>z^{\mathsf T}B\overline z=(z^{\mathsf T}B\overline z)^{\mathsf T}=z^*B^{\mathsf T}z=z^*Bz</m>.
-So <m>\operatorname{Re}(w^*B^{-1}w)=\operatorname{Re}(z^*Bz)=z^*M_1z\ge0</m> (as in (i)).
-For real <m>x</m>, <m>x^{\mathsf T}\operatorname{Re}(B^{-1})x=\operatorname{Re}(x^*B^{-1}x)\ge0</m>, i.e. <m>\operatorname{Re}B^{-1}\ge0</m>, and <m>\det B^{-1}=1/\det B\ne0</m>.
-Thus <m>B^{-1}\in S</m>; the same computation with strict inequalities shows <m>B\in H\Rightarrow B^{-1}\in H</m>.
-The claim <m>sB\in S</m> is clear.
-The identity <m>D(sB)=s^{-n/2}D(B)</m> holds on <m>H</m> by (i), and for <m>B\in S</m> we let <m>\delta\to0^+</m> in <m>D(sB+s\delta I)=s^{-n/2}D(B+\delta I)</m>.
-Next, <m>B\mapsto D(B)D(B^{-1})</m> is continuous on <m>H</m>, and its square is <m>\frac1{\det B}\cdot\frac1{\det B^{-1}}=1</m>; so it is <m>\pm1</m>-valued, hence constant on the connected set <m>H</m>, and it equals <m>1</m> at <m>B=I</m>.
-Thus <m>D(B)D(B^{-1})=1</m> on <m>H</m>.
-For <m>B\in S</m>, apply this to <m>B_\delta\coloneqq B+\delta I\in H</m>: <m>D(B_\delta)\to D(B)</m>, and <m>B_\delta^{-1}\to B^{-1}</m> in <m>H\cup S</m>, so <m>D(B_\delta^{-1})\to D(B^{-1})</m> by the continuity in (ii).
-Hence <m>D(B)D(B^{-1})=1</m>.</p>
-<p>(iv) <m>D</m> is holomorphic on <m>H</m> and <m>D^2\det=1</m>, so <m>D=(\det)^{-1/2}</m> locally and <m>\pr D=-\frac12D\,\pr\log\det</m>.
-By Jacobi's formula <m>\pr\log\det B=\operatorname{tr}(B^{-1}\pr B)</m>,
-<md>\pr_{B_{j,k}}D=-\tfrac12D\operatorname{tr}\bigl(B^{-1}\pr_{B_{j,k}}B\bigr),</md>
-which is <m>D</m> times a linear polynomial in the entries of <m>B^{-1}</m> (<m>\pr_{B_{j,k}}B=E_{jj}</m> if <m>j=k</m> and <m>E_{jk}+E_{kj}</m> if <m>j&lt;k</m>, with <m>E_{jk}</m> the matrix units).
-Moreover, differentiating <m>BB^{-1}=I</m> gives <m>\pr_{B_{j,k}}B^{-1}=-B^{-1}(\pr_{B_{j,k}}B)B^{-1}</m>, whose entries are quadratic polynomials in the entries of <m>B^{-1}</m>.
-So if a derivative has the form <m>D\,P(B^{-1})</m>, its next derivative is <m>(\pr D)P(B^{-1})+D\,(\pr P(B^{-1}))</m>, again of this form.
-By induction on the order, all derivatives have the stated form.</p>
+<p>(i) For <m>z\in\C^n\setminus\set0</m>, <m>\operatorname{Re}(z^*Bz)=z^*(\operatorname{Re}B)z&gt;0</m> (as <m>z^*M_1z</m> and <m>z^*M_2z</m> are real).
+So <m>Bz\ne0</m> and <m>\det B\ne0</m>.
+<m>H</m> is convex, hence simply connected, so <m>\det</m> has a holomorphic logarithm <m>g</m> on <m>H</m> with <m>g(I)=0</m>.
+Put <m>D=e^{-g/2}</m>.
+For real <m>B</m>, <m>\det</m> is positive along the segment from <m>I</m> to <m>B</m>, so <m>g</m> is real there and <m>D(B)&gt;0</m>.
+Two such functions differ by a continuous <m>\pm1</m>-valued function on the connected set <m>H</m>, equal to <m>1</m> at <m>I</m>.
+This gives uniqueness.
+<m>s^{n/2}D(sB)</m> has the same properties as <m>D</m> (as <m>\det(sB)=s^n\det B</m>), so <m>D(sB)=s^{-n/2}D(B)</m>.
+For the formula, <m>B=M_1^{1/2}(I+iM_1^{-1/2}M_2M_1^{-1/2})M_1^{1/2}</m> gives <m>\det B=\det M_1\prod_j(1+i\lambda_j)</m>.
+The right-hand side <m>G(B)</m> of the formula is continuous on <m>H</m> (the eigenvalues depend continuously on <m>B</m>, and the product is symmetric in the <m>\lambda_j</m>), <m>G^2\det=1</m>, and <m>G&gt;0</m> for real <m>B</m>.
+By uniqueness <m>G=D</m>.</p>
+<p>(ii) <m>B+\delta I\in H</m> for <m>\delta&gt;0</m>.
+<m>\det(B+\delta I)\ne0</m> on <m>[0,+\infty)</m>, so <m>1/\det(B+\delta I)</m> has exactly two continuous square roots on <m>[0,+\infty)</m>.
+<m>\delta\mapsto D(B+\delta I)</m> is one of them for <m>\delta&gt;0</m>.
+So the limit exists.
+Continuity: near <m>B_0\in S</m> there is a ball <m>U</m> with <m>\det\ne0</m> on <m>U</m> and a holomorphic <m>D_U</m> with <m>D_U^2\det=1</m>.
+On the convex set <m>U\cap H</m>, <m>D=\pm D_U</m>; choose the sign so that <m>D=D_U</m> there.
+Then <m>D=D_U</m> on <m>U\cap(H\cup S)</m>.</p>
+<p>(iii) For <m>w\in\C^n</m> and <m>z=B^{-1}w</m>, <m>\operatorname{Re}(w^*B^{-1}w)=\operatorname{Re}(z^*\overline Bz)=\operatorname{Re}\overline{(z^*Bz)}\ge0</m>.
+So <m>\operatorname{Re}B^{-1}\ge0</m>.
+On <m>H</m>, <m>D(B)D(B^{-1})</m> is continuous with square <m>1</m>, hence constant, equal to <m>1</m> at <m>B=I</m>.
+For <m>B\in S</m> let <m>\delta\to0^+</m> in <m>D(B+\delta I)D((B+\delta I)^{-1})=1</m>, using (ii).</p>
+<p>(iv) By Jacobi's formula, <m>\pr_{B_{j,k}}D=-\frac12D\operatorname{tr}\bigl(B^{-1}\pr_{B_{j,k}}B\bigr)</m>, and <m>\pr_{B_{j,k}}B^{-1}=-B^{-1}(\pr_{B_{j,k}}B)B^{-1}</m>.
+Induction.</p>
 </proof>
 </lemma>
-<p>Now let
-<md>E(x,t) \coloneqq
-    (4\pi t)^{-n/2} (\det A)^{-1/2}e^{-\ags{A^{-1}x,x}/4t}\quad(t&gt;0),\qquad E(x,t)\coloneqq0\quad(t\le0),</md>
-where <m>(\det A)^{-1/2}\coloneqq D(A)</m> is as in Lemma <xref ref="lem-det-branch" text="global"/>.
-(Note that <m>A^{-1}\in S</m> by Lemma <xref ref="lem-det-branch" text="global"/>(iii), so <m>\abs{e^{-\ags{A^{-1}x,x}/4t}}\le1</m>.)
-In general <m>E\notin L^1_\mathrm{loc}(\R^{n+1})</m>: for <m>A=iI</m>, <m>\abs{E(x,t)}=(4\pi t)^{-n/2}</m>, and <m>\int_{\abs x&lt;1,\,0&lt;t&lt;1}t^{-n/2}\,dx\,dt=\abs{B_1(0)}\int_0^1t^{-n/2}\,dt=+\infty</m> when <m>n\ge2</m>.
-So <m>E</m> has to be defined as a distribution by integrating first in <m>x</m> (where the oscillation of <m>e^{-\ags{A^{-1}x,x}/4t}</m> helps) and then in <m>t</m>.</p>
+<remark xml:id="rmk-det-branch-polar">
+<p>For <m>n\ge3</m> one cannot define <m>(\det B)^{-1/2}</m> by the polar angle of <m>\det B</m> in <m>(-\pi,\pi]</m>.
+For example, let <m>B=(\delta+i)I</m>, <m>n=3</m>, <m>\delta\to0^+</m>.
+Then <m>\lambda_j=1/\delta</m> and <m>D(B)=\delta^{-3/2}\bigl((1+i/\delta)^{-1/2}\bigr)^3\to e^{-3\pi i/4}</m>, while the polar angle <m>-\pi/2</m> of <m>\det B\to-i</m> gives <m>e^{i\pi/4}=-e^{-3\pi i/4}</m>.</p>
+</remark>
+<p>Let <m>E(x,t)=(4\pi t)^{-n/2}(\det A)^{-1/2}e^{-\ags{A^{-1}x,x}/4t}</m> for <m>t&gt;0</m> and <m>E=0</m> for <m>t\le0</m>, where <m>(\det A)^{-1/2}=D(A)</m>.
+For <m>A=iI</m>, <m>\abs E=(4\pi t)^{-n/2}</m> is not locally integrable if <m>n\ge2</m>.
+So <m>E</m> is defined as a distribution, integrating in <m>x</m> first.</p>
 <theorem xml:id="thm-schrodinger-fundamental">
-<title>Fundamental solution of the Schrödinger operator</title>
 <statement>
-<p>With the notation and assumptions above, for every <m>\phi\in C_c^\infty(\R^{n+1})</m> the iterated integral
-<md>E(\phi)
-        \coloneqq \int_{0}^{+\infty}(4\pi t)^{-n/2}(\det A)^{-1/2}\left(\int_{\R^n}e^{-\ags{A^{-1}x,x}/4t} \phi(x,t)\,dx\right)\,dt</md>
-converges absolutely, <m>E</m> is a distribution in <m>\mathcal D'(\R^{n+1})</m>, and <m>LE=\delta_0</m>, where <m>L</m> is given by <xref ref="eq-schrodinger-operator" text="global"/>.
-(If <m>\operatorname{Re}A^{-1}&gt;0</m>, then <m>E\in L^1_\mathrm{loc}(\R^{n+1})</m> and <m>E(\phi)=\int_{\R^{n+1}}E\phi</m> is the usual integral.)</p>
+<p>For every <m>\phi\in C_c^\infty(\R^{n+1})</m> the iterated integral
+<md>E(\phi)\coloneqq\int_0^{+\infty}(4\pi t)^{-n/2}D(A)\Bigl(\int_{\R^n}e^{-\ags{A^{-1}x,x}/4t}\phi(x,t)\,dx\Bigr)\,dt</md>
+converges absolutely, <m>E\in\mathcal D'(\R^{n+1})</m>, and <m>LE=\delta_0</m>.</p>
 </statement>
 </theorem>
-<p>The proof uses three lemmas on Gaussian integrals.</p>
 <lemma xml:id="lem-gaussian-integral">
 <statement>
-<p>Let <m>B\in H</m>, i.e. <m>B</m> is a symmetric <m>n\times n</m> complex matrix with <m>\operatorname{Re} B&gt;0</m>.
-Then
-<md>\int_{\R^n}e^{-\ags{Bx,x}}\,dx
-        = \pi^{n/2}(\det B)^{-1/2}=\pi^{n/2}D(B).</md></p>
+<p>For <m>B\in H</m>: <m>\displaystyle\int_{\R^n}e^{-\ags{Bx,x}}\,dx=\pi^{n/2}(\det B)^{-1/2}</m>.</p>
 </statement>
 <proof>
-<p><em>First proof (direct computation).</em>
-Write <m>B=M_1+iM_2</m> with <m>M_1,M_2</m> real symmetric and <m>M_1&gt;0</m>.
-Substitute <m>x=M_1^{-1/2}y</m>, so <m>\,dx=(\det M_1)^{-1/2}\,dy</m>, and
-<md>\ags{Bx,x}=y^{\mathsf T}M_1^{-1/2}(M_1+iM_2)M_1^{-1/2}y=\abs y^2+i\,y^{\mathsf T}M_1^{-1/2}M_2M_1^{-1/2}y.</md>
-So
-<md>\int_{\R^n} e^{-\ags{Bx,x}}\,dx
-        = (\det M_1)^{-1/2}\int_{\R^n} e^{-\ags{(I+iM_1^{-1/2}M_2M_1^{-1/2})y,y}}\,dy.</md>
-The real symmetric matrix <m>M_1^{-1/2}M_2M_1^{-1/2}</m> is <m>O^{\mathsf T}\Lambda O</m> with <m>O</m> orthogonal and <m>\Lambda=\operatorname{diag}(\lambda_1,\dots,\lambda_n)</m>.
-Substituting <m>z=Oy</m> (<m>\,dz=\,dy</m>, <m>\abs z=\abs y</m>), the quadratic form becomes <m>\sum_j(1+i\lambda_j)z_j^2</m>, and by Fubini's theorem
-<md>\int_{\R^n}e^{-\ags{Bx,x}}\,dx
-        = (\det M_1)^{-1/2}\prod_{j=1}^n\int_{\R} e^{-(1+i\lambda_j)z_j^2}\,dz_j.</md>
-For <m>\lambda\in\R</m> let <m>I(\lambda)\coloneqq\int_{\R}e^{-(1+i\lambda)s^2}\,ds</m>.
-By Fubini's theorem and polar coordinates <m>(s,u)=(r\cos\theta,r\sin\theta)</m>, <m>\,ds\,du=r\,dr\,d\theta</m>,
-<md>
-<mrow>I(\lambda)^2
-        &amp;= \int_{\R^2} e^{-(1+i\lambda)(s^2+u^2)}\,ds\,du
-        = \int_{0}^{2\pi}\int_{0}^{+\infty} e^{-(1+i\lambda)r^2}r \,dr\,d\theta</mrow>
-<mrow>&amp;= 2\pi\left[-\frac{e^{-(1+i\lambda)r^2}}{2(1+i\lambda)}\right]_{r=0}^{r=+\infty}
-        = 2\pi\cdot\frac1{2(1+i\lambda)}=\frac{\pi}{1+i\lambda},</mrow>
-</md>
-where <m>e^{-(1+i\lambda)r^2}\to0</m> as <m>r\to+\infty</m> because <m>\abs{e^{-(1+i\lambda)r^2}}=e^{-r^2}</m>.
+<p>Write <m>B=M_1+iM_2</m> with <m>M_1,M_2</m> real symmetric, <m>M_1&gt;0</m>.
+Substituting <m>x=M_1^{-1/2}y</m> (<m>\,dx=(\det M_1)^{-1/2}\,dy</m>),
+<md>\int_{\R^n}e^{-\ags{Bx,x}}\,dx=(\det M_1)^{-1/2}\int_{\R^n}e^{-\ags{(I+iM_1^{-1/2}M_2M_1^{-1/2})y,y}}\,dy.</md>
+Diagonalize <m>M_1^{-1/2}M_2M_1^{-1/2}</m> by an orthogonal matrix (this does not change <m>I</m> or <m>\abs y^2</m>), with eigenvalues <m>\lambda_1,\dots,\lambda_n</m>.
+By Fubini's theorem,
+<md>\int_{\R^n}e^{-\ags{Bx,x}}\,dx=(\det M_1)^{-1/2}\prod_{j=1}^nI(\lambda_j),\qquad I(\lambda)\coloneqq\int_\R e^{-(1+i\lambda)s^2}\,ds.</md>
+In polar coordinates,
+<md>I(\lambda)^2=\int_{\R^2}e^{-(1+i\lambda)(s^2+u^2)}\,ds\,du=2\pi\int_0^{+\infty}e^{-(1+i\lambda)r^2}r\,dr=2\pi\cdot\frac1{2(1+i\lambda)}=\frac\pi{1+i\lambda}.</md>
 So <m>I(\lambda)=\pm\sqrt\pi(1+i\lambda)^{-1/2}</m>.
-The function <m>\lambda\mapsto I(\lambda)</m> is continuous (dominated convergence, with dominating function <m>e^{-s^2}</m>), and so is the principal branch <m>\lambda\mapsto(1+i\lambda)^{-1/2}</m>; their quotient is a continuous function with values in <m>\set{\pm\sqrt\pi}</m>, hence constant, and it equals <m>\sqrt\pi</m> at <m>\lambda=0</m> since <m>I(0)=\sqrt\pi</m>.
-Therefore <m>I(\lambda)=\sqrt\pi(1+i\lambda)^{-1/2}</m> (principal branch), and by the formula in Lemma <xref ref="lem-det-branch" text="global"/>(i),
-<md>\int_{\R^n}e^{-\ags{Bx,x}}\,dx=\pi^{n/2}(\det M_1)^{-1/2}\prod_{j=1}^n(1+i\lambda_j)^{-1/2}=\pi^{n/2}D(B).</md></p>
-<p><em>Second proof (complex analysis).</em>
-Regard both sides as functions of <m>B\in H</m>, an open convex (in particular connected) subset of <m>\C^{n(n+1)/2}</m>.
-The left-hand side is holomorphic in the entries of <m>B</m>: on a small ball around a point of <m>H</m> we have <m>\operatorname{Re}\ags{Bx,x}\ge c\abs x^2</m> with a uniform <m>c&gt;0</m>, so differentiation under the integral sign is justified by the dominating function <m>\mathrm{poly}(x)e^{-c\abs x^2}</m>.
-The right-hand side is holomorphic by Lemma <xref ref="lem-det-branch" text="global"/>(i).
-For real positive definite <m>B</m>, the equality holds by the standard computation (diagonalize <m>B</m> by an orthogonal matrix and use <m>\int_\R e^{-\mu s^2}\,ds=\sqrt{\pi/\mu}</m> for <m>\mu&gt;0</m>), and the real positive definite matrices form a totally real open subset of <m>H</m> of full dimension.
-By the identity theorem for holomorphic functions of several variables, the two sides agree on all of <m>H</m>.
-(This is the point of view of the lecture: the formula is known for real <m>B</m>, and holomorphy together with the connectedness of <m>H</m> gives a unique extension; the branch of <m>(\det B)^{-1/2}</m> is the unique continuous one that is positive for real <m>B</m>.)</p>
+<m>I</m> is continuous and nowhere zero, the principal branch is continuous on <m>\R</m>, and <m>I(0)=\sqrt\pi</m>.
+Hence the sign is <m>+</m>, and
+<md>\int_{\R^n}e^{-\ags{Bx,x}}\,dx=\pi^{n/2}(\det M_1)^{-1/2}\prod_j(1+i\lambda_j)^{-1/2}=\pi^{n/2}D(B)</md>
+by Lemma <xref ref="lem-det-branch" text="global"/>(i).</p>
 </proof>
 </lemma>
+<remark xml:id="rmk-gaussian-holomorphic">
+<p>Another proof: both sides are holomorphic in <m>B</m> on the connected set <m>H</m> (the integrand is bounded by <m>e^{-c\abs x^2}</m> locally uniformly in <m>B</m>).
+They agree on real positive definite <m>B</m> (diagonalize <m>B</m>), which form a nonempty open subset of the real symmetric matrices.
+By the identity theorem they agree on <m>H</m>.</p>
+</remark>
 <lemma xml:id="lem-gaussian-moments">
 <statement>
-<p>Let <m>B\in S</m>, i.e. <m>B</m> is a symmetric <m>n\times n</m> complex matrix with <m>\operatorname{Re} B\ge 0</m> and <m>\det B\ne 0</m>.
+<p>Let <m>B\in S</m>.
 <ol marker="(i)">
 <li>
-<p>For all <m>t&gt;0</m>, <m>\displaystyle (\pi t)^{-n/2}\int_{\R^n} e^{-\ags{Bx,x}/t} e^{-\abs{x}^2} \,dx = D(B+tI)</m>, and hence
-<md>
-<mrow xml:id="eq-gauss-limit" number="yes">\lim_{t\to 0^+}(\pi t)^{-n/2}\int_{\R^n} e^{-\ags{Bx,x}/t} e^{-\abs{x}^2} \,dx
-            = (\det B)^{-1/2}.</mrow>
-</md></p>
+<p><m>(\pi t)^{-n/2}\displaystyle\int_{\R^n}e^{-\ags{Bx,x}/t}e^{-\abs x^2}\,dx=D(B+tI)\to(\det B)^{-1/2}</m> as <m>t\to0^+</m>.</p>
 </li>
 <li>
-<p>For every <m>\beta\in\N_0^n</m> with <m>\abs\beta=2k</m> even, there are <m>C_\beta&gt;0</m> and <m>t_0\in(0,1]</m> (depending on <m>B</m>) such that
-<md>
-<mrow xml:id="eq-gauss-even" number="yes">\left\lvert \int_{\R^n}e^{-\ags{Bx,x}/t}x^{\beta}e^{-\abs{x}^2}\,dx \right\rvert \le C_\beta\, t^{n/2+k}\qquad(0&lt;t\le t_0).</mrow>
-</md>
-(In particular, for <m>\beta=2\alpha</m> the bound is <m>O(t^{n/2+\abs\alpha})</m>.)</p>
+<p>If <m>\abs\beta=2k</m> is even, then <m>\bigl|\int_{\R^n}e^{-\ags{Bx,x}/t}x^\beta e^{-\abs x^2}\,dx\bigr|\le C_\beta t^{n/2+k}</m> for <m>0&lt;t\le 1</m>.</p>
 </li>
 <li>
-<p>For every <m>\beta\in\N_0^n</m> with <m>\abs\beta</m> odd,
-<md>
-<mrow xml:id="eq-gauss-odd" number="yes">\int_{\R^n}e^{-\ags{Bx,x}/t}x^{\beta}e^{-\abs{x}^2}\,dx = 0\qquad(t&gt;0).</mrow>
-</md></p>
+<p>If <m>\abs\beta</m> is odd, then <m>\int_{\R^n}e^{-\ags{Bx,x}/t}x^\beta e^{-\abs x^2}\,dx=0</m>.</p>
 </li>
 </ol></p>
 </statement>
 <proof>
-<p>All the integrals converge absolutely, since <m>\abs{e^{-\ags{Bx,x}/t}}\le1</m> and <m>\abs{x^\beta}e^{-\abs x^2}</m> is integrable.</p>
-<p>(iii) The substitution <m>x\mapsto-x</m> does not change <m>e^{-\ags{Bx,x}/t}e^{-\abs x^2}</m> (as <m>\ags{B(-x),-x}=\ags{Bx,x}</m>) and multiplies <m>x^\beta</m> by <m>(-1)^{\abs\beta}=-1</m>, so the integral equals minus itself, hence <m>0</m>.
-(The lecture states this for <q>some <m>\beta_j</m> odd</q>.
-That is true only for diagonal <m>B</m>, because <m>\ags{Bx,x}</m> contains the mixed terms <m>B_{j,k}x_jx_k</m>; for general <m>B</m> what is true is the vanishing for <m>\abs\beta</m> odd, and this is what is needed below.)</p>
-<p>(i) We have <m>\ags{Bx,x}/t+\abs x^2=\ags{Mx,x}</m> with <m>M\coloneqq t^{-1}(B+tI)</m>, and <m>\operatorname{Re}M=t^{-1}\operatorname{Re}B+I&gt;0</m>, so <m>M\in H</m>.
-By Lemma <xref ref="lem-gaussian-integral" text="global"/> and <m>D(sB)=s^{-n/2}D(B)</m> with <m>s=1/t</m> (Lemma <xref ref="lem-det-branch" text="global"/>(i)),
-<md>\int_{\R^n}e^{-\ags{Bx,x}/t-\abs x^2}\,dx=\pi^{n/2}D\bigl(t^{-1}(B+tI)\bigr)=\pi^{n/2}t^{n/2}D(B+tI)=(\pi t)^{n/2}D(B+tI).</md>
-Dividing by <m>(\pi t)^{n/2}</m> gives the identity, and <m>D(B+tI)\to D(B)=(\det B)^{-1/2}</m> as <m>t\to0^+</m> by the definition of <m>D</m> on <m>S</m> (Lemma <xref ref="lem-det-branch" text="global"/>(ii)).</p>
-<p>(ii) Let <m>\Lambda</m> be a complex symmetric matrix with <m>\norm{\Lambda-I}&lt;1/2</m> (operator norm).
-For real <m>x</m>, <m>x^{\mathsf T}(\operatorname{Re}\Lambda)x=\abs x^2+\operatorname{Re}\bigl(x^{\mathsf T}(\Lambda-I)x\bigr)\ge\abs x^2-\tfrac12\abs x^2=\tfrac12\abs x^2</m>, so <m>\operatorname{Re}\Lambda&gt;0</m> and <m>t^{-1}(B+t\Lambda)\in H</m>.
-As in (i),
-<md>\Phi(\Lambda)\coloneqq\int_{\R^n}e^{-\ags{Bx,x}/t-\ags{\Lambda x,x}}\,dx=\pi^{n/2}D\bigl(t^{-1}(B+t\Lambda)\bigr)=(\pi t)^{n/2}D(B+t\Lambda).</md>
-Regard both sides as functions of the independent entries <m>\Lambda_{j,l}</m>, <m>j\le l</m>, so that <m>\ags{\Lambda x,x}=\sum_j\Lambda_{j,j}x_j^2+2\sum_{j&lt;l}\Lambda_{j,l}x_jx_l</m>.
-Differentiation under the integral sign is allowed, because <m>\abs{e^{-\ags{Bx,x}/t}}\le1</m> and <m>\abs{e^{-\ags{\Lambda x,x}}}\le e^{-\abs x^2/2}</m>, so the differentiated integrands are dominated by <m>\mathrm{poly}(x)e^{-\abs x^2/2}</m>.
-Differentiating <m>e^{-\ags{\Lambda x,x}}</m> with respect to <m>\Lambda_{j,l}</m> inserts the factor <m>-x_j^2</m> (if <m>j=l</m>) or <m>-2x_jx_l</m> (if <m>j&lt;l</m>).
-Now let <m>\abs\beta=2k</m> and write <m>x^\beta=\prod_{i=1}^kx_{j_i}x_{l_i}</m> with <m>j_i\le l_i</m> (group the <m>2k</m> factors into pairs).
-Differentiating <m>k</m> times, with respect to <m>\Lambda_{j_1,l_1},\dots,\Lambda_{j_k,l_k}</m>, and then putting <m>\Lambda=I</m>, we get
-<md>\int_{\R^n}e^{-\ags{Bx,x}/t}x^\beta e^{-\abs x^2}\,dx
-        = c_\beta\,(\pi t)^{n/2}\,\pr_{\Lambda_{j_1,l_1}}\cdots\pr_{\Lambda_{j_k,l_k}}D(B+t\Lambda)\Big|_{\Lambda=I},</md>
-with a constant <m>c_\beta</m> of the form <m>\pm2^{-p}</m>.
-By the chain rule, <m>\pr_{\Lambda_{j,l}}\bigl[D(B+t\Lambda)\bigr]=t\,(\pr_{B_{j,l}}D)(B+t\Lambda)</m>: each differentiation produces a factor <m>t</m>.
-Hence
-<md>\int_{\R^n}e^{-\ags{Bx,x}/t}x^\beta e^{-\abs x^2}\,dx
-        = c_\beta\,(\pi t)^{n/2}\,t^{k}\,(\pr^kD)(B+tI),</md>
-where <m>\pr^kD</m> is the <m>k</m>-th order partial derivative <m>\pr_{B_{j_1,l_1}}\cdots\pr_{B_{j_k,l_k}}D</m>.
-By Lemma <xref ref="lem-det-branch" text="global"/>(iv), <m>(\pr^kD)(B+tI)=D(B+tI)\,P\bigl((B+tI)^{-1}\bigr)</m> with a fixed polynomial <m>P</m>.
-The matrices <m>B+tI</m> are invertible for all <m>t\ge0</m> (<m>t=0</m>: <m>B\in S</m>; <m>t&gt;0</m>: <m>B+tI\in H</m>).
-So <m>t\mapsto(B+tI)^{-1}</m> is continuous on <m>[0,1]</m>, hence bounded there; and <m>t\mapsto D(B+tI)</m> is continuous on <m>[0,1]</m> by Lemma <xref ref="lem-det-branch" text="global"/>(ii), hence bounded.
-Therefore <m>\abs{(\pr^kD)(B+tI)}\le C</m> for <m>0&lt;t\le1</m>, and <xref ref="eq-gauss-even" text="global"/> holds with <m>t_0=1</m> and <m>C_\beta=\abs{c_\beta}\pi^{n/2}C</m>.</p>
+<p>(iii) Substitute <m>x\mapsto-x</m>: the integrand changes sign.</p>
+<p>(i) <m>e^{-\ags{Bx,x}/t-\abs x^2}=e^{-\ags{Mx,x}}</m> with <m>M=(B+tI)/t\in H</m>.
+By Lemma <xref ref="lem-gaussian-integral" text="global"/> and Lemma <xref ref="lem-det-branch" text="global"/>(i), the integral is <m>\pi^{n/2}D(t^{-1}(B+tI))=(\pi t)^{n/2}D(B+tI)</m>.
+The limit is Lemma <xref ref="lem-det-branch" text="global"/>(ii).</p>
+<p>(ii) For symmetric <m>\Lambda</m> with <m>\norm{\Lambda-I}&lt;1/2</m>, <m>\operatorname{Re}\Lambda&gt;0</m>, so <m>(B+t\Lambda)/t\in H</m>, and as in (i)
+<md>\int_{\R^n}e^{-\ags{Bx,x}/t-\ags{\Lambda x,x}}\,dx=(\pi t)^{n/2}D(B+t\Lambda).</md>
+Differentiate <m>k</m> times in the entries <m>\Lambda_{j,l}</m> (<m>j\le l</m>) and set <m>\Lambda=I</m>.
+Each derivative on the left inserts a factor <m>-x_j^2</m> (if <m>j=l</m>) or <m>-2x_jx_l</m> (if <m>j&lt;l</m>) (justified by domination with <m>\mathrm{poly}(x)e^{-\abs x^2/2}</m>).
+Writing <m>x^\beta</m> as a product of <m>k</m> such pairs, and using the chain rule on the right (each derivative gives a factor <m>t</m>),
+<md>\int_{\R^n}e^{-\ags{Bx,x}/t}x^\beta e^{-\abs x^2}\,dx=c_\beta(\pi t)^{n/2}t^k(\pr^kD)(B+tI).</md>
+By Lemma <xref ref="lem-det-branch" text="global"/>(iv), <m>(\pr^kD)(B+tI)=D(B+tI)P((B+tI)^{-1})</m>, which is bounded on <m>(0,1]</m> because <m>B+tI</m> is invertible for <m>t\in[0,1]</m> (<m>\det B\ne0</m>) and <m>D</m> is continuous.</p>
 </proof>
 </lemma>
 <lemma xml:id="lem-oscillatory-estimate">
 <statement>
-<p>Let <m>B\in S</m> and <m>\phi\in C_c^\infty(\R^n)</m>.
-Then
+<p>Let <m>B\in S</m> and <m>K\Subset\R^n</m>.
+There are <m>C&gt;0</m> and <m>N</m> (<m>N=2n+2</m> works) such that for <m>t&gt;0</m> and <m>\phi\in C_c^\infty(\R^n)</m> with <m>\operatorname{supp}\phi\subset K</m>,
 <md>
-<mrow xml:id="eq-osc-limit" number="yes">\lim_{t\to0^+}(\pi t)^{-n/2}\int_{\R^n}e^{-\ags{Bx,x}/t}\phi(x)\,dx
-        = (\det B)^{-1/2}\phi(0).</mrow>
+<mrow xml:id="eq-osc-bound" number="yes">\left\lvert (\pi t)^{-n/2}\int_{\R^n}e^{-\ags{Bx,x}/t}\phi(x)\,dx \right\rvert\le C\sum_{\abs\alpha\le N}\sup\abs{\pr^\alpha\phi}.</mrow>
 </md>
-Moreover, for every compact set <m>K\subset\R^n</m> there is a constant <m>C&gt;0</m> such that
+Moreover, for every <m>\phi\in C_c^\infty(\R^n)</m>,
 <md>
-<mrow xml:id="eq-osc-bound" number="yes">\left\lvert (\pi t)^{-n/2}\int_{\R^n}e^{-\ags{Bx,x}/t}\phi(x)\,dx \right\rvert
-        \le C \sum_{\abs{\alpha}\le 2n+2}\sup_K \abs{\pr_x^\alpha \phi}</mrow>
-</md>
-for all <m>t&gt;0</m> and all <m>\phi\in C_c^\infty(\R^n)</m> with <m>\operatorname{supp}\phi\subset K</m>.
-(The order of the seminorm is irrelevant for the application below: any fixed order suffices to get a distribution.
-The lecture writes order <m>n</m>; the argument below gives <m>2n+2</m>.)</p>
+<mrow xml:id="eq-osc-limit" number="yes">\lim_{t\to0^+}(\pi t)^{-n/2}\int_{\R^n}e^{-\ags{Bx,x}/t}\phi(x)\,dx=(\det B)^{-1/2}\phi(0).</mrow>
+</md></p>
 </statement>
 <proof>
-<p><em>Step 1: an integration by parts identity.</em>
-Let <m>F\in C^\infty(\R^n)</m> be such that <m>F</m> and all its derivatives are integrable and tend to <m>0</m> at infinity (we only use <m>F</m> of the form <m>\mathrm{poly}(x)e^{-\abs x^2}g(x)</m> with <m>g</m> bounded together with all derivatives).
-Since <m>B</m> is symmetric, <m>\pr_{x_j}\ags{Bx,x}=2(Bx)_j</m>, so
-<md>\pr_{x_j}e^{-\ags{Bx,x}/t}=-\frac2t(Bx)_j\,e^{-\ags{Bx,x}/t}.</md>
-Since <m>x_k=\sum_j(B^{-1})_{k,j}(Bx)_j</m>, this gives <m>x_ke^{-\ags{Bx,x}/t}=-\frac t2\sum_j(B^{-1})_{k,j}\pr_{x_j}e^{-\ags{Bx,x}/t}</m>, and, integrating by parts in <m>x_j</m> (there are no boundary terms by the decay of <m>F</m>, and <m>\abs{e^{-\ags{Bx,x}/t}}\le1</m>),
+<p><em>Integration by parts.</em>
+Since <m>B=B^{\mathsf T}</m>, <m>\pr_{x_j}e^{-\ags{Bx,x}/t}=-\frac2t(Bx)_je^{-\ags{Bx,x}/t}</m>, so <m>x_ke^{-\ags{Bx,x}/t}=-\frac t2\sum_j(B^{-1})_{k,j}\pr_{x_j}e^{-\ags{Bx,x}/t}</m>.
+So for a rapidly decreasing <m>F</m>,
+<md>\int e^{-\ags{Bx,x}/t}x_kF\,dx=\frac t2\sum_j(B^{-1})_{k,j}\int e^{-\ags{Bx,x}/t}\pr_{x_j}F\,dx.</md>
+Applying this repeatedly (each step gains <m>t/2</m>; if the derivative hits another factor <m>x_i</m> it removes it), and using <m>\abs{e^{-\ags{Bx,x}/t}}\le1</m>, for <m>0&lt;t\le1</m> and <m>\abs\gamma=m</m>,
 <md>
-<mrow xml:id="eq-ibp" number="yes">\int_{\R^n}e^{-\ags{Bx,x}/t}\,x_kF\,dx=\frac t2\sum_{j=1}^n(B^{-1})_{k,j}\int_{\R^n}e^{-\ags{Bx,x}/t}\,\pr_{x_j}F\,dx.</mrow>
-</md>
-Let <m>\gamma\in\N_0^n</m> with <m>\abs\gamma=m</m>, and apply <xref ref="eq-ibp" text="global"/> repeatedly to remove the factors of <m>x^\gamma</m> one at a time.
-Each application produces a factor <m>t/2</m> and a derivative <m>\pr_{x_j}</m>, which falls either on <m>F</m> or on one of the remaining factors <m>x_i</m> (which then disappears as well).
-So each application removes one or two factors <m>x_i</m>, and after <m>p</m> applications, with <m>m/2\le p\le m</m>, all factors are gone.
-By induction on <m>m</m>,
-<md>\int_{\R^n}e^{-\ags{Bx,x}/t}x^\gamma F\,dx=\sum_{p,\delta}c_{p,\delta}\,t^p\int_{\R^n}e^{-\ags{Bx,x}/t}\,\pr^\delta F\,dx,</md>
-a finite sum over <m>m/2\le p\le m</m> and <m>\abs\delta\le p</m>, with constants <m>c_{p,\delta}</m> depending only on <m>B^{-1}</m> and <m>\gamma</m>.
-Since <m>\abs{e^{-\ags{Bx,x}/t}}\le1</m> and <m>t^p\le t^{m/2}</m> for <m>0&lt;t\le1</m>, we get
-<md>
-<mrow xml:id="eq-ibp-bound" number="yes">\left\lvert \int_{\R^n}e^{-\ags{Bx,x}/t}x^\gamma F\,dx \right\rvert\le C\,t^{m/2}\sum_{\abs\delta\le m}\norm{\pr^\delta F}_{L^1}\qquad(0&lt;t\le1).</mrow>
+<mrow xml:id="eq-ibp-bound" number="yes">\left\lvert \int e^{-\ags{Bx,x}/t}x^\gamma F\,dx \right\rvert\le Ct^{m/2}\sum_{\abs\delta\le m}\norm{\pr^\delta F}_{L^1}.</mrow>
 </md></p>
-<p><em>Step 2: Taylor expansion.</em>
-Let <m>\operatorname{supp}\phi\subset K</m>.
-Put <m>h(x)\coloneqq e^{\abs x^2}\phi(x)\in C_c^\infty(\R^n)</m> (also supported in <m>K</m>), and let <m>T(x)=\sum_{\abs\beta\le n}c_\beta x^\beta</m>, <m>c_\beta=\pr^\beta h(0)/\beta!</m>, be its Taylor polynomial of degree <m>n</m> at <m>0</m>.
-By the Leibniz rule, <m>\abs{c_\beta}\le C\sum_{\abs\gamma\le n}\abs{\pr^\gamma\phi(0)}</m>, with <m>C</m> depending only on the derivatives of <m>e^{\abs x^2}</m> at <m>0</m>.
-By Taylor's formula with integral remainder,
-<md>h(x)-T(x)=\sum_{\abs\gamma=n+1}x^\gamma h_\gamma(x),\qquad h_\gamma(x)\coloneqq\frac{n+1}{\gamma!}\int_0^1(1-s)^n(\pr^\gamma h)(sx)\,ds.</md>
-Multiplying by <m>e^{-\abs x^2}</m>,
-<md>\phi(x)=e^{-\abs x^2}T(x)+R(x),\qquad R(x)\coloneqq\sum_{\abs\gamma=n+1}x^\gamma G_\gamma(x),\quad G_\gamma(x)\coloneqq e^{-\abs x^2}h_\gamma(x).</md>
-(The lecture uses degree <m>n-1</m> and a remainder <m>O(\abs x^n)</m>; we take one more term because <xref ref="eq-ibp-bound" text="global"/> only gains <m>t^{m/2}</m> from <m>m</m> factors of <m>x</m>, and we need <m>m/2&gt;n/2</m>.)
-Differentiating under the integral sign,
-<md>\pr^\delta h_\gamma(x)=\frac{n+1}{\gamma!}\int_0^1(1-s)^ns^{\abs\delta}(\pr^{\gamma+\delta}h)(sx)\,ds,
-        \qquad\text{so}\qquad
-        \sup\abs{\pr^\delta h_\gamma}\le\frac{n+1}{\gamma!}\sup\abs{\pr^{\gamma+\delta}h}.</md>
-By the Leibniz rule and the boundedness of the derivatives of <m>e^{\abs x^2}</m> on <m>K</m>, <m>\sup\abs{\pr^{\gamma+\delta}h}\le C_K\sum_{\abs\alpha\le n+1+\abs\delta}\sup_K\abs{\pr^\alpha\phi}</m>.
-Again by the Leibniz rule (now for <m>e^{-\abs x^2}h_\gamma</m>, whose derivatives are of the form <m>\mathrm{poly}(x)e^{-\abs x^2}\pr^{\delta'}h_\gamma</m>),
-<md>\norm{\pr^\delta G_\gamma}_{L^1}\le C\sum_{\abs\alpha\le 2n+2}\sup_K\abs{\pr^\alpha\phi}\qquad(\abs\delta\le n+1),</md>
-with <m>C</m> depending only on <m>n</m> and <m>K</m>.</p>
-<p><em>Step 3: the limit <xref ref="eq-osc-limit" text="global"/>.</em>
-Let <m>0&lt;t\le1</m>.
-By <xref ref="eq-ibp-bound" text="global"/> with <m>m=n+1</m> and <m>F=G_\gamma</m>,
-<md>(\pi t)^{-n/2}\left\lvert \int_{\R^n}e^{-\ags{Bx,x}/t}R\,dx \right\rvert\le(\pi t)^{-n/2}\,C\,t^{(n+1)/2}\sum_{\abs\alpha\le 2n+2}\sup_K\abs{\pr^\alpha\phi}=C'\,t^{1/2}\sum_{\abs\alpha\le 2n+2}\sup_K\abs{\pr^\alpha\phi},</md>
-which tends to <m>0</m> as <m>t\to0^+</m>.
-For the main term, Lemma <xref ref="lem-gaussian-moments" text="global"/> gives: the monomial <m>\beta=0</m> contributes <m>(\pi t)^{n/2}D(B+tI)</m> (part (i)), the monomials with <m>\abs\beta</m> odd contribute <m>0</m> (part (iii)), and those with <m>\abs\beta=2k\ge2</m> contribute at most <m>C_\beta t^{n/2+k}</m> in absolute value (part (ii)).
-Hence
+<p><em>Taylor expansion.</em>
+Let <m>h=e^{\abs x^2}\phi</m> and <m>T</m> its Taylor polynomial of degree <m>n</m> at <m>0</m>, <m>T=\sum_{\abs\beta\le n}c_\beta x^\beta</m>, <m>\abs{c_\beta}\le C\sum_{\abs\gamma\le n}\abs{\pr^\gamma\phi(0)}</m>.
+Then
+<md>\phi=e^{-\abs x^2}T+R,\qquad R=\sum_{\abs\gamma=n+1}x^\gamma G_\gamma,\quad G_\gamma=e^{-\abs x^2}\frac{n+1}{\gamma!}\int_0^1(1-s)^n(\pr^\gamma h)(sx)\,ds.</md>
+<m>G_\gamma</m> is a Schwartz function, and <m>\norm{\pr^\delta G_\gamma}_{L^1}\le C\sum_{\abs\alpha\le2n+2}\sup\abs{\pr^\alpha\phi}</m> for <m>\abs\delta\le n+1</m>.
+By <xref ref="eq-ibp-bound" text="global"/> with <m>m=n+1</m>,
+<md>(\pi t)^{-n/2}\left\lvert \int e^{-\ags{Bx,x}/t}R\,dx \right\rvert\le Ct^{1/2}\sum_{\abs\alpha\le2n+2}\sup\abs{\pr^\alpha\phi}\qquad(0&lt;t\le1).</md>
+By Lemma <xref ref="lem-gaussian-moments" text="global"/>, the main term is
 <md>
-<mrow>(\pi t)^{-n/2}\int_{\R^n}e^{-\ags{Bx,x}/t}e^{-\abs x^2}T(x)\,dx
-        =c_0\,D(B+tI)+\sum_{\substack{2\le\abs\beta\le n</mrow>
-<mrow>\abs\beta\text{ even}}}c_\beta\,r_\beta(t),\qquad\abs{r_\beta(t)}\le\pi^{-n/2}C_\beta\,t^{\abs\beta/2}.</mrow>
+<mrow>(\pi t)^{-n/2}\int e^{-\ags{Bx,x}/t}e^{-\abs x^2}T\,dx=c_0D(B+tI)+\sum_{\substack{2\le\abs\beta\le n</mrow>
+<mrow>\abs\beta\text{ even}}}c_\beta O(t^{\abs\beta/2}),</mrow>
 </md>
-Here <m>c_0=h(0)=\phi(0)</m>, <m>D(B+tI)\to D(B)=(\det B)^{-1/2}</m>, and the sum is <m>O(t)</m> as <m>t\to0^+</m>.
-Adding the two parts gives <xref ref="eq-osc-limit" text="global"/>.</p>
-<p><em>Step 4: the bound <xref ref="eq-osc-bound" text="global"/>.</em>
-For <m>0&lt;t\le1</m>, Step 3 gives
-<md>(\pi t)^{-n/2}\left\lvert \int_{\R^n}e^{-\ags{Bx,x}/t}\phi\,dx \right\rvert
-        \le\abs{c_0}\sup_{0&lt;t\le1}\abs{D(B+tI)}+\sum_{\beta}\abs{c_\beta}\pi^{-n/2}C_\beta+C'\sum_{\abs\alpha\le 2n+2}\sup_K\abs{\pr^\alpha\phi},</md>
-and every term on the right is bounded by a constant times <m>\sum_{\abs\alpha\le 2n+2}\sup_K\abs{\pr^\alpha\phi}</m> (recall <m>\abs{c_\beta}\le C\sum_{\abs\gamma\le n}\abs{\pr^\gamma\phi(0)}</m>, and <m>\sup_{0&lt;t\le1}\abs{D(B+tI)}&lt;+\infty</m> by the continuity of <m>D</m>).
-For <m>t\ge1</m>, simply use <m>\abs{e^{-\ags{Bx,x}/t}}\le1</m>:
-<md>(\pi t)^{-n/2}\left\lvert \int_{\R^n}e^{-\ags{Bx,x}/t}\phi\,dx \right\rvert\le\pi^{-n/2}\abs K\sup_K\abs\phi.</md>
-This proves <xref ref="eq-osc-bound" text="global"/>.</p>
+with <m>c_0=\phi(0)</m>.
+Hence <xref ref="eq-osc-limit" text="global"/> holds, and <xref ref="eq-osc-bound" text="global"/> holds for <m>0&lt;t\le1</m> with <m>N=2n+2</m>.
+For <m>t\ge1</m>, the left side of <xref ref="eq-osc-bound" text="global"/> is at most <m>\pi^{-n/2}\abs K\sup\abs\phi</m>.</p>
 </proof>
 </lemma>
 <proof ref="thm-schrodinger-fundamental">
-<p><em>Step 0: reduction to Lemma <xref ref="lem-oscillatory-estimate" text="global"/>.</em>
-Let <m>B\coloneqq\frac14A^{-1}</m>.
-By Lemma <xref ref="lem-det-branch" text="global"/>(iii), <m>A^{-1}\in S</m> and <m>B\in S</m>, and
-<md>D(B)=\left(\tfrac14\right)^{-n/2}D(A^{-1})=2^nD(A)^{-1}.</md>
-Since <m>(4\pi t)^{-n/2}=4^{-n/2}(\pi t)^{-n/2}=2^{-n}(\pi t)^{-n/2}</m> and <m>\ags{A^{-1}x,x}/4t=\ags{Bx,x}/t</m>, for <m>\phi\in C_c^\infty(\R^{n+1})</m> and <m>t&gt;0</m> the inner integral is
+<p>Let <m>B=\frac14A^{-1}\in S</m> (Lemma <xref ref="lem-det-branch" text="global"/>(iii)).
+Then <m>D(B)=(\frac14)^{-n/2}D(A^{-1})=2^nD(A)^{-1}</m>, and since <m>(4\pi t)^{-n/2}=2^{-n}(\pi t)^{-n/2}</m>,
 <md>
-<mrow>F_\phi(t)&amp;\coloneqq(4\pi t)^{-n/2}D(A)\int_{\R^n}e^{-\ags{A^{-1}x,x}/4t}\phi(x,t)\,dx
-        =2^{-n}D(A)\,(\pi t)^{-n/2}\int_{\R^n}e^{-\ags{Bx,x}/t}\phi(x,t)\,dx.</mrow>
-</md></p>
-<p><em>Step 1: <m>E</m> is a distribution.</em>
-Let <m>K\subset\R^{n+1}</m> be compact, and choose a compact set <m>K_0\subset\R^n</m> and <m>C&gt;0</m> with <m>K\subset K_0\times[-C,C]</m>.
-If <m>\operatorname{supp}\phi\subset K</m>, then <m>\operatorname{supp}\phi(\cdot,t)\subset K_0</m> for every <m>t</m>, and <m>\phi(\cdot,t)=0</m> for <m>t&gt;C</m>.
-By <xref ref="eq-osc-bound" text="global"/> applied to <m>\phi(\cdot,t)\in C_c^\infty(\R^n)</m> and the compact set <m>K_0</m>,
-<md>\abs{F_\phi(t)}\le C_1\sum_{\abs\alpha\le 2n+2}\sup_{x}\abs{\pr_x^\alpha\phi(x,t)}\le C_1\sum_{\abs\alpha\le 2n+2}\sup_{\R^{n+1}}\abs{\pr_x^\alpha\phi}\qquad(t&gt;0),</md>
-with <m>C_1=2^{-n}\abs{D(A)}C</m> independent of <m>t</m> and <m>\phi</m>.
-The function <m>F_\phi</m> is continuous on <m>(0,+\infty)</m> (dominated convergence, with dominating function <m>\sup\abs\phi\cdot1_{K_0}</m>) and vanishes for <m>t&gt;C</m>.
-So <m>E(\phi)=\int_0^{+\infty}F_\phi(t)\,dt=\int_0^CF_\phi(t)\,dt</m> converges absolutely, it is linear in <m>\phi</m>, and
-<md>\abs{E(\phi)}\le\int_0^C\abs{F_\phi(t)}\,dt\le C\,C_1\sum_{\abs\alpha\le 2n+2}\sup_{\R^{n+1}}\abs{\pr_x^\alpha\phi}.</md>
-Hence <m>E\in\mathcal D'(\R^{n+1})</m>.
-(If <m>\operatorname{Re}A^{-1}\ge c\,I</m> with <m>c&gt;0</m>, then <m>\abs{E(x,t)}\le(4\pi t)^{-n/2}\abs{D(A)}e^{-c\abs x^2/4t}</m>, so <m>\int_{\R^n}\abs{E(x,t)}\,dx\le\abs{D(A)}c^{-n/2}</m> by Step 0 of Theorem <xref ref="thm-heat-fundamental" text="global"/> (after the substitution <m>x\mapsto x/\sqrt c</m>); thus <m>E\in L^1_\mathrm{loc}(\R^{n+1})</m>, and Fubini's theorem shows that <m>E(\phi)=\int_{\R^{n+1}}E\phi</m>.)</p>
-<p><em>Step 2: <m>LE=0</m> on <m>\set{t&gt;0}</m>.</em>
-Let <m>Q(x)\coloneqq\ags{A^{-1}x,x}</m>.
-For <m>t&gt;0</m>, <m>E=c\,t^{-n/2}e^{-Q/4t}</m> with <m>c=(4\pi)^{-n/2}D(A)</m> is smooth.
-Since <m>A^{-1}</m> is symmetric, <m>\pr_{x_j}Q=2(A^{-1}x)_j</m> and <m>\pr_{x_k}(A^{-1}x)_j=(A^{-1})_{j,k}</m>, so
-<md>\pr_{x_j}E=-\frac{(A^{-1}x)_j}{2t}E,\qquad
-        \pr_{x_k}\pr_{x_j}E=\left(-\frac{(A^{-1})_{j,k}}{2t}+\frac{(A^{-1}x)_j(A^{-1}x)_k}{4t^2}\right)E.</md>
-Multiply by <m>A_{j,k}</m> and sum over <m>j,k</m>.
-Since <m>A</m> and <m>A^{-1}</m> are symmetric,
-<md>\sum_{j,k}A_{j,k}(A^{-1})_{j,k}=\sum_{j,k}A_{j,k}(A^{-1})_{k,j}=\operatorname{tr}(AA^{-1})=n,</md>
-and, writing <m>y=A^{-1}x</m>,
-<md>\sum_{j,k}A_{j,k}y_jy_k=y^{\mathsf T}Ay=x^{\mathsf T}A^{-1}AA^{-1}x=x^{\mathsf T}A^{-1}x=Q(x).</md>
-Hence
-<md>\sum_{j,k}A_{j,k}\pr_{x_j}\pr_{x_k}E=\left(-\frac n{2t}+\frac{Q(x)}{4t^2}\right)E.</md>
-On the other hand, by the product rule, <m>\pr_tE=\left(-\frac n{2t}+\frac{Q(x)}{4t^2}\right)E</m>.
-So <m>LE=0</m> on <m>\set{t&gt;0}</m> in the classical sense.</p>
-<p><em>Step 3: <m>LE=\delta_0</m>.</em>
-Let <m>\phi\in C_c^\infty(\R^{n+1})</m> and put <m>\psi\coloneqq-\pr_t\phi-\sum_{j,k}A_{j,k}\pr_{x_j}\pr_{x_k}\phi\in C_c^\infty(\R^{n+1})</m>.
-By the definition of derivatives of distributions (one <m>t</m>-derivative gives a sign <m>-1</m>, two <m>x</m>-derivatives give <m>(-1)^2</m>),
-<md>(LE)(\phi)=E(\psi)=\int_0^{+\infty}F_\psi(t)\,dt=\lim_{\eps\to0^+}\int_\eps^{+\infty}F_\psi(t)\,dt,</md>
-the last step by the absolute convergence from Step 1.
-On <m>\set{t\ge\eps}</m> the function <m>E</m> is smooth and bounded and <m>\phi</m> has compact support, so <m>\int_\eps^{+\infty}F_\psi(t)\,dt=\int_{t&gt;\eps}E\psi\,dx\,dt</m> by Fubini's theorem.
-Integrating by parts in <m>t</m> and twice in <m>x</m> exactly as in <xref ref="eq-heat-ibp-t" text="global"/> and <xref ref="eq-heat-ibp-x" text="global"/> (the matrix <m>A</m> is symmetric, so moving <m>\sum_{j,k}A_{j,k}\pr_{x_j}\pr_{x_k}</m> from <m>\phi</m> to <m>E</m> gives the same operator),
-<md>
-<mrow>\int_\eps^{+\infty}F_\psi(t)\,dt
-        &amp;=\int_{\R^n}E(x,\eps)\phi(x,\eps)\,dx+\int_{t&gt;\eps}\left(\frac{\pr E}{\pr t}-\sum_{j,k}A_{j,k}\frac{\pr^2E}{\pr x_j\pr x_k}\right)\phi\,dx\,dt</mrow>
-<mrow>&amp;=\int_{\R^n}E(x,\eps)\phi(x,\eps)\,dx,</mrow>
+<mrow>F_\phi(t)&amp;\coloneqq(4\pi t)^{-n/2}D(A)\int e^{-\ags{A^{-1}x,x}/4t}\phi(x,t)\,dx
+        =2^{-n}D(A)(\pi t)^{-n/2}\int e^{-\ags{Bx,x}/t}\phi(x,t)\,dx.</mrow>
 </md>
-by Step 2.
-Now write <m>\phi(x,\eps)=\phi(x,0)+\bigl(\phi(x,\eps)-\phi(x,0)\bigr)</m>.
-<ol marker="(i)">
-<li>
-<p>By Step 0 and <xref ref="eq-osc-limit" text="global"/> applied to <m>\phi(\cdot,0)</m>,
-<md>
-<mrow>\int_{\R^n}E(x,\eps)\phi(x,0)\,dx
-            &amp;=2^{-n}D(A)\,(\pi\eps)^{-n/2}\int_{\R^n}e^{-\ags{Bx,x}/\eps}\phi(x,0)\,dx</mrow>
-<mrow>&amp;\to2^{-n}D(A)D(B)\phi(0,0)=2^{-n}D(A)\cdot2^nD(A)^{-1}\phi(0,0)=\phi(0,0).</mrow>
-</md></p>
-</li>
-<li>
-<p>By <xref ref="eq-osc-bound" text="global"/> applied to <m>x\mapsto\phi(x,\eps)-\phi(x,0)</m> (supported in <m>K_0</m>), and the mean value theorem in <m>t</m>,
-<md>
-<mrow>\left\lvert \int_{\R^n}E(x,\eps)\bigl(\phi(x,\eps)-\phi(x,0)\bigr)\,dx \right\rvert
-            &amp;\le C_1\sum_{\abs\alpha\le 2n+2}\sup_x\abs{\pr_x^\alpha\phi(x,\eps)-\pr_x^\alpha\phi(x,0)}</mrow>
-<mrow>&amp;\le C_1\,\eps\sum_{\abs\alpha\le 2n+2}\sup_{\R^{n+1}}\abs{\pr_t\pr_x^\alpha\phi}\to0.</mrow>
-</md></p>
-</li>
-</ol>
-(The lecture glosses over the dependence of <m>\phi(x,\eps)</m> on <m>\eps</m>; it is the uniform estimate <xref ref="eq-osc-bound" text="global"/> that handles it.)
-Therefore
-<md>(LE)(\phi)=\lim_{\eps\to0^+}\int_{\R^n}E(x,\eps)\phi(x,\eps)\,dx=\phi(0,0)=\delta_0(\phi),</md>
-that is, <m>LE=\delta_0</m>.</p>
+<em><m>E</m> is a distribution.</em>
+Let <m>K\subset K_0\times[-C,C]</m>.
+If <m>\operatorname{supp}\phi\subset K</m>, then by <xref ref="eq-osc-bound" text="global"/>, <m>\abs{F_\phi(t)}\le C_1\sum_{\abs\alpha\le N}\sup\abs{\pr_x^\alpha\phi}</m> for all <m>t&gt;0</m>, and <m>F_\phi=0</m> for <m>t&gt;C</m>.
+So <m>E(\phi)=\int_0^CF_\phi\,dt</m> converges and <m>\abs{E(\phi)}\le CC_1\sum_{\abs\alpha\le N}\sup\abs{\pr_x^\alpha\phi}</m>.</p>
+<p><em><m>LE=0</m> for <m>t&gt;0</m>.</em>
+Let <m>Q(x)=\ags{A^{-1}x,x}</m>, so <m>\pr_{x_j}Q=2(A^{-1}x)_j</m>.
+Then
+<md>\pr_{x_j}\pr_{x_k}E=\Bigl(-\frac{(A^{-1})_{j,k}}{2t}+\frac{(A^{-1}x)_j(A^{-1}x)_k}{4t^2}\Bigr)E.</md>
+Multiplying by <m>A_{j,k}</m> and summing, with <m>\sum_{j,k}A_{j,k}(A^{-1})_{j,k}=\operatorname{tr}(AA^{-1})=n</m> and <m>(A^{-1}x)^{\mathsf T}A(A^{-1}x)=Q(x)</m>,
+<md>\sum_{j,k} A_{j,k}\pr_{x_j}\pr_{x_k}E=\Bigl(-\frac n{2t}+\frac{Q}{4t^2}\Bigr)E=\pr_tE.</md></p>
+<p><em><m>LE=\delta_0</m>.</em>
+Let <m>\psi=-\pr_t\phi-\sum A_{j,k}\pr_{x_j}\pr_{x_k}\phi</m>.
+As for the heat operator (integration by parts on <m>\set{t\ge\eps}</m>; <m>A</m> is symmetric),
+<md>(LE)(\phi)=E(\psi)=\lim_{\eps\to0^+}\int_{\R^n}E(x,\eps)\phi(x,\eps)\,dx.</md>
+Write <m>\phi(x,\eps)=\phi(x,0)+(\phi(x,\eps)-\phi(x,0))</m>.
+By <xref ref="eq-osc-limit" text="global"/>, <m>\int E(x,\eps)\phi(x,0)\,dx\to2^{-n}D(A)D(B)\phi(0,0)=\phi(0,0)</m>.
+By <xref ref="eq-osc-bound" text="global"/> and the mean value theorem in <m>t</m>,
+<md>\left\lvert \int E(x,\eps)\bigl(\phi(x,\eps)-\phi(x,0)\bigr)\,dx \right\rvert\le C\eps\sum_{\abs\alpha\le N}\sup\abs{\pr_t\pr_x^\alpha\phi}\to0.</md>
+So <m>(LE)(\phi)=\phi(0,0)</m>.</p>
 </proof>
 <remark xml:id="rmk-schrodinger-examples">
-<p>For <m>A=I</m> we have <m>D(I)=1</m> and <m>A^{-1}=I</m>, and <m>E</m> is the heat kernel of Theorem <xref ref="thm-heat-fundamental" text="global"/>.
-For <m>A=iI</m> (the operator <m>\pr_t-i\triangle_x</m>) we have <m>A^{-1}=-iI</m>, so <m>-\ags{A^{-1}x,x}/4t=i\abs x^2/4t</m>, and, as in the warning in the proof of Lemma <xref ref="lem-det-branch" text="global"/> (with <m>n</m> in place of <m>3</m>), <m>D(iI)=\lim_{\delta\to0^+}D\bigl((\delta+i)I\bigr)=e^{-in\pi/4}</m>.
-Hence
-<md>E(x,t)=(4\pi t)^{-n/2}e^{-in\pi/4}e^{i\abs x^2/4t}\qquad(t&gt;0),</md>
-which is not locally integrable for <m>n\ge2</m> and is defined as a distribution by the formula in Theorem <xref ref="thm-schrodinger-fundamental" text="global"/>.
-By Lemma <xref ref="lem-PDO-convolution" text="global"/> (in <m>\R^{n+1}</m>) and Remark <xref ref="rmk-solving-with-fundamental-solution" text="global"/>, <m>u=E\ast v</m>, i.e. <m>u(x,t)=E\bigl(v((x,t)-\cdot)\bigr)</m>, solves <m>Lu=v</m> for every <m>v\in C_c^\infty(\R^{n+1})</m>.</p>
+<p><m>A=I</m> gives the heat kernel.
+<m>A=iI</m> gives <m>E=(4\pi t)^{-n/2}e^{-in\pi/4}e^{i\abs x^2/4t}</m> (<m>t&gt;0</m>), and <m>u=E\ast v</m> solves <m>Lu=v</m> for <m>v\in C_c^\infty(\R^{n+1})</m>.</p>
 </remark>
+</subsection>
+<subsection xml:id="ssec-1124">
+<title>20261124</title>
+<p>Let <m>X\subset\R^n</m> be open.
+Recall <m>\mathcal E'(X)=\set{u\in\mathcal D'(X)\mid\operatorname{supp} u\text{ is a compact subset of }X}</m>.</p>
+<definition xml:id="def-convergence-C-infty">
+<statement>
+<p>Let <m>\phi_j,\phi\in C^\infty(X)</m>.
+We say <m>\lim_{j\to+\infty}\phi_j=\phi</m> in <m>C^\infty(X)</m> if for all multi-indices <m>\alpha</m> and every compact <m>K\subset X</m>,
+<md>\lim_{j\to+\infty}\sup\set{\abs{\pr_x^\alpha(\phi_j-\phi)(x)}\mathrel{\Big\vert} x\in K}=0.</md></p>
+</statement>
+</definition>
+<theorem xml:id="thm-extension-E-prime">
+<statement>
+<p>Let <m>u\in\mathcal E'(X)</m>.
+Then <m>u</m> extends to <m>C^\infty(X)</m>, and <m>u\colon C^\infty(X)\to\C</m> is a continuous linear form.</p>
+</statement>
+<proof>
+<p>Let <m>\psi\in C_c^\infty(X)</m> with <m>\psi=1</m> near <m>\operatorname{supp} u</m> (Theorem <xref ref="thm-cutoff" text="global"/>).
+Define <m>u(\phi)\coloneqq u(\psi\phi)</m> for <m>\phi\in C^\infty(X)</m> (note <m>\psi\phi\in C_c^\infty(X)</m>).
+For <m>\phi\in C_c^\infty(X)</m> this agrees with the old value, since <m>(1-\psi)\phi</m> vanishes near <m>\operatorname{supp} u</m>.</p>
+<p><em>Well-defined.</em>
+Let <m>\widetilde\psi\in C_c^\infty(X)</m> be another function equal to <m>1</m> near <m>\operatorname{supp} u</m>.
+Then <m>(\widetilde\psi-\psi)\phi</m> is a test function vanishing near <m>\operatorname{supp} u</m>, so <m>u((\widetilde\psi-\psi)\phi)=0</m> (as <m>u|_{X\setminus\operatorname{supp} u}=0</m>).
+Hence <m>u(\widetilde\psi\phi)=u(\psi\phi)</m>.</p>
+<p><em>Continuous.</em>
+Let <m>\operatorname{supp}\psi\subset K\Subset X</m>.
+There are <m>C,k</m> such that <m>\abs{u(\Phi)}\le C\,p_k(\Phi)</m> for <m>\operatorname{supp}\Phi\subset K</m>.
+If <m>\phi_j\to\phi</m> in <m>C^\infty(X)</m>, then, by the Leibniz formula,
+<md>\abs{u(\phi_j)-u(\phi)}=\abs{u(\psi(\phi_j-\phi))}\le C'\sum_{\abs\alpha\le k}\sup_K\abs{\pr^\alpha(\phi_j-\phi)}\to0.</md></p>
+</proof>
+</theorem>
+<definition xml:id="def-translation">
+<statement>
+<p>For <m>h\in\R^n</m>, the <em>translation operator</em> is <m>\tau_h\colon C^\infty(\R^n)\to C^\infty(\R^n)</m> (and <m>C_c^\infty(\R^n)\to C_c^\infty(\R^n)</m>), <m>(\tau_h\phi)(x)\coloneqq\phi(x-h)</m>.</p>
+</statement>
+</definition>
+<p>For <m>u\in\mathcal D'(\R^n)</m> and <m>\phi\in C_c^\infty(\R^n)</m>,
+<md>(u\ast\tau_h\phi)(x)=u\bigl((\tau_h\phi)(x-\cdot)\bigr)=u\bigl(\phi(x-h-\cdot)\bigr)=(u\ast\phi)(x-h)=\tau_h(u\ast\phi)(x).</md>
+Thus <m>u\ast\tau_h=\tau_hu\ast</m> on <m>C_c^\infty(\R^n)</m>, where <m>u\ast\colon C_c^\infty(\R^n)\to C^\infty(\R^n)</m> denotes the operator <m>\phi\mapsto u\ast\phi</m>.
+If <m>u\in\mathcal E'(\R^n)</m>, then <m>u\ast\phi\coloneqq u(\phi(x-\cdot))</m> also makes sense for <m>\phi\in C^\infty(\R^n)</m> (Theorem <xref ref="thm-extension-E-prime" text="global"/>); it is smooth, because near any <m>x_0</m> it agrees with <m>u\ast(\theta\phi)</m> for some <m>\theta\in C_c^\infty(\R^n)</m>, and the same computation gives <m>u\ast\tau_h=\tau_hu\ast</m> on <m>C^\infty(\R^n)</m>.</p>
+<lemma xml:id="lem-translation-continuity">
+<statement>
+<p>Let <m>u\in\mathcal D'(\R^n)</m>, <m>h\in\R^n</m>.
+Then <m>u\ast\colon C_c^\infty(\R^n)\to C^\infty(\R^n)</m>, <m>\tau_h\colon C_c^\infty\to C_c^\infty</m> and <m>\tau_h\colon C^\infty\to C^\infty</m> are continuous.
+If <m>u\in\mathcal E'(\R^n)</m>, then <m>u\ast\colon C^\infty(\R^n)\to C^\infty(\R^n)</m> and <m>u\ast\colon C_c^\infty(\R^n)\to C_c^\infty(\R^n)</m> are continuous.</p>
+</statement>
+<proof>
+<p>Let <m>\phi_j\to\phi</m> in <m>C_c^\infty(\R^n)</m>, with supports in <m>K</m>.
+Let <m>L\Subset\R^n</m>.
+For <m>x\in L</m>, <m>\operatorname{supp}\phi_j(x-\cdot)\subset L-K</m>, and by Remark <xref ref="rmk-distribution-convolution" text="global"/>(i) and the chain rule,
+<md>\abs{\pr_x^\alpha(u\ast(\phi_j-\phi))(x)}=\abs{u\bigl((\pr^\alpha(\phi_j-\phi))(x-\cdot)\bigr)}\le C\sum_{\abs\beta\le k}\sup\abs{\pr^{\alpha+\beta}(\phi_j-\phi)}\to0,</md>
+with <m>C,k</m> depending only on the compact set <m>L-K</m>.
+If <m>u\in\mathcal E'(\R^n)</m> and <m>\phi_j\to\phi</m> in <m>C^\infty(\R^n)</m>, use Theorem <xref ref="thm-extension-E-prime" text="global"/>: <m>(u\ast\phi)(x)=u(\psi\,\phi(x-\cdot))</m> with <m>\psi=1</m> near <m>\operatorname{supp} u</m>, <m>\operatorname{supp}\psi\subset K_0</m>, and the same estimate holds with the supremum over the compact set <m>L-K_0</m>.
+If moreover <m>\phi_j\to\phi</m> in <m>C_c^\infty</m> with supports in <m>K</m>, then all <m>u\ast\phi_j</m> are supported in <m>\operatorname{supp} u+K</m> (Remark <xref ref="rmk-distribution-convolution" text="global"/>(ii)), so <m>u\ast\phi_j\to u\ast\phi</m> in <m>C_c^\infty</m>.
+The claims for <m>\tau_h</m> are clear.</p>
+</proof>
+</lemma>
+<theorem xml:id="thm-translation-invariant">
+<statement>
+<p>Let <m>U\colon C_c^\infty(\R^n)\to C^\infty(\R^n)</m> be a continuous linear operator.
+If <m>U\tau_h=\tau_hU</m> for all <m>h\in\R^n</m>, then there is a unique <m>u\in\mathcal D'(\R^n)</m> such that <m>U=u\ast</m>.</p>
+</statement>
+<proof>
+<p>Define <m>u(\phi)\coloneqq(U\check\phi)(0)</m>, <m>\phi\in C_c^\infty(\R^n)</m>.
+<m>u</m> is linear.
+If <m>\phi_j\to\phi</m> in <m>C_c^\infty</m>, then <m>\check\phi_j\to\check\phi</m> in <m>C_c^\infty</m>, so <m>U\check\phi_j\to U\check\phi</m> in <m>C^\infty</m>.
+Hence <m>u(\phi_j)=(U\check\phi_j)(0)\to(U\check\phi)(0)=u(\phi)</m>.
+By Theorem <xref ref="thm-sequential-continuity" text="global"/>, <m>u\in\mathcal D'(\R^n)</m>.</p>
+<p><em>Claim: <m>U=u\ast</m>.</em>
+Let <m>\phi\in C_c^\infty(\R^n)</m>.
+Then <m>(u\ast\phi)(0)=u(\phi(0-\cdot))=u(\check\phi)=(U\check{\check\phi})(0)=(U\phi)(0)</m>.
+For <m>x=-h</m>,
+<md>
+<mrow>(U\phi)(x)&amp;=(U\phi)(-h)=(\tau_hU\phi)(0)=(U\tau_h\phi)(0)</mrow>
+<mrow>&amp;=(u\ast\tau_h\phi)(0)=(\tau_h(u\ast\phi))(0)=(u\ast\phi)(-h)=(u\ast\phi)(x).</mrow>
+</md></p>
+<p><em>Uniqueness.</em>
+If <m>U=u_1\ast=u_2\ast</m>, then <m>u_1=\lim_{\eps\to0^+}u_1\ast\chi_\eps=\lim_{\eps\to0^+}u_2\ast\chi_\eps=u_2</m> (Theorem <xref ref="thm-mollify-distribution" text="global"/>).</p>
+</proof>
+</theorem>
+<p>Let <m>u_1\in\mathcal E'(\R^n)</m>, <m>u_2\in\mathcal D'(\R^n)</m>.
+By Lemma <xref ref="lem-translation-continuity" text="global"/>, the operators
+<md>
+<mrow xml:id="eq-convolution-operators" number="yes">U\coloneqq u_1\ast u_2\ast\colon C_c^\infty(\R^n)\to C^\infty(\R^n),\qquad\widetilde U\coloneqq u_2\ast u_1\ast\colon C_c^\infty(\R^n)\to C^\infty(\R^n)</mrow>
+</md>
+are continuous (for <m>U</m>: first <m>u_2\ast\colon C_c^\infty\to C^\infty</m>, then <m>u_1\ast\colon C^\infty\to C^\infty</m>; for <m>\widetilde U</m>: first <m>u_1\ast\colon C_c^\infty\to C_c^\infty</m>, then <m>u_2\ast\colon C_c^\infty\to C^\infty</m>).
+Both commute with <m>\tau_h</m>.</p>
+<definition xml:id="def-convolution-distributions">
+<statement>
+<p>Let <m>u_1\in\mathcal E'(\R^n)</m>, <m>u_2\in\mathcal D'(\R^n)</m>.
+The <em>convolution</em> <m>u_1\ast u_2</m> (resp. <m>u_2\ast u_1</m>) is the unique distribution <m>u</m> (resp. <m>\widetilde u</m>) in <m>\mathcal D'(\R^n)</m> such that <m>U=u\ast</m> (resp. <m>\widetilde U=\widetilde u\ast</m>), with <m>U,\widetilde U</m> as in <xref ref="eq-convolution-operators" text="global"/> (Theorem <xref ref="thm-translation-invariant" text="global"/>).</p>
+</statement>
+</definition>
+<remark xml:id="rmk-convolution-formula">
+<p>(i) From the proof of Theorem <xref ref="thm-translation-invariant" text="global"/>,
+<md>(u_1\ast u_2)(\phi)=(U\check\phi)(0)=\bigl(u_1\ast(u_2\ast\check\phi)\bigr)(0),\qquad(u_2\ast u_1)(\phi)=\bigl(u_2\ast(u_1\ast\check\phi)\bigr)(0).</md>
+(ii) By definition, <m>(u_1\ast u_2)\ast\phi=u_1\ast(u_2\ast\phi)</m> and <m>(u_2\ast u_1)\ast\phi=u_2\ast(u_1\ast\phi)</m> for <m>\phi\in C_c^\infty(\R^n)</m>.</p>
+</remark>
+<lemma xml:id="lem-assoc-extension">
+<statement>
+<p>Let <m>u\in\mathcal E'(\R^n)</m>, <m>\psi\in C_c^\infty(\R^n)</m> and <m>g\in C^\infty(\R^n)</m>.
+Then <m>(u\ast\psi)\ast g=u\ast(\psi\ast g)</m>.</p>
+</statement>
+<proof>
+<p>Fix <m>x</m>.
+Let <m>S=\operatorname{supp} u+\operatorname{supp}\psi</m> (compact), and let <m>\theta\in C_c^\infty(\R^n)</m> with <m>\theta=1</m> on a neighborhood of <m>x-S</m> large enough to contain <m>x-V-\operatorname{supp}\psi</m> for some neighborhood <m>V</m> of <m>\operatorname{supp} u</m>.
+Put <m>\widetilde g=\theta g\in C_c^\infty(\R^n)</m>.
+The left side at <m>x</m> is <m>\int(u\ast\psi)(y)g(x-y)\,dy</m>, and <m>u\ast\psi</m> vanishes outside <m>S</m>, so it does not change if <m>g</m> is replaced by <m>\widetilde g</m>.
+For <m>z\in V</m>, <m>(\psi\ast g)(x-z)=\int\psi(w)g(x-z-w)\,dw=(\psi\ast\widetilde g)(x-z)</m>.
+So <m>z\mapsto(\psi\ast g)(x-z)</m> and <m>z\mapsto(\psi\ast\widetilde g)(x-z)</m> agree near <m>\operatorname{supp} u</m>, and <m>u</m> takes the same value on them; that is, the right side at <m>x</m> does not change either.
+Since <m>\widetilde g\in C_c^\infty</m>, the identity holds for <m>\widetilde g</m> by Theorem <xref ref="thm-convolution-associative" text="global"/>.</p>
+</proof>
+</lemma>
+<theorem xml:id="thm-convolution-commutative">
+<statement>
+<p>Let <m>u_1\in\mathcal E'(\R^n)</m>, <m>u_2\in\mathcal D'(\R^n)</m>.
+Then <m>u_1\ast u_2=u_2\ast u_1</m>.</p>
+</statement>
+<proof>
+<p>Let <m>\phi,\psi\in C_c^\infty(\R^n)</m>.
+<em>Claim</em>: <m>(u_1\ast u_2)\ast(\phi\ast\psi)=(u_2\ast u_1)\ast(\phi\ast\psi)</m>.
+By Remark <xref ref="rmk-convolution-formula" text="global"/>(ii), Theorem <xref ref="thm-convolution-associative" text="global"/>, commutativity of the convolution of functions, and Lemma <xref ref="lem-assoc-extension" text="global"/> (with <m>g=u_2\ast\phi</m>),
+<md>
+<mrow>(u_1\ast u_2)\ast(\phi\ast\psi)&amp;=u_1\ast\bigl(u_2\ast(\phi\ast\psi)\bigr)=u_1\ast\bigl((u_2\ast\phi)\ast\psi\bigr)</mrow>
+<mrow>&amp;=u_1\ast\bigl(\psi\ast(u_2\ast\phi)\bigr)=(u_1\ast\psi)\ast(u_2\ast\phi)=(u_2\ast\phi)\ast(u_1\ast\psi).</mrow>
+</md>
+Similarly (now <m>u_1\ast\psi\in C_c^\infty</m>, so Theorem <xref ref="thm-convolution-associative" text="global"/> applies to <m>u_2</m>),
+<md>
+<mrow>(u_2\ast u_1)\ast(\phi\ast\psi)=(u_2\ast u_1)\ast(\psi\ast\phi)&amp;=u_2\ast\bigl(u_1\ast(\psi\ast\phi)\bigr)=u_2\ast\bigl((u_1\ast\psi)\ast\phi\bigr)</mrow>
+<mrow>&amp;=u_2\ast\bigl(\phi\ast(u_1\ast\psi)\bigr)=(u_2\ast\phi)\ast(u_1\ast\psi).</mrow>
+</md>
+The claim follows.</p>
+<p>For <m>\eps,\delta&gt;0</m>, by Theorem <xref ref="thm-convolution-associative" text="global"/> and the claim,
+<md>((u_1\ast u_2)\ast\chi_\eps)\ast\chi_\delta=(u_1\ast u_2)\ast(\chi_\eps\ast\chi_\delta)=(u_2\ast u_1)\ast(\chi_\eps\ast\chi_\delta)=((u_2\ast u_1)\ast\chi_\eps)\ast\chi_\delta.</md>
+Fix <m>\eps</m> and let <m>\delta\to0^+</m>: since <m>(u_i\ast u_j)\ast\chi_\eps</m> is continuous, its convolution with <m>\chi_\delta</m> converges to it pointwise (as in the proof of Theorem <xref ref="thm-mollification" text="global"/>).
+So <m>(u_1\ast u_2)\ast\chi_\eps=(u_2\ast u_1)\ast\chi_\eps</m>.
+Let <m>\eps\to0^+</m> (Theorem <xref ref="thm-mollify-distribution" text="global"/>): <m>u_1\ast u_2=u_2\ast u_1</m>.</p>
+</proof>
+</theorem>
 </subsection>
 </section>
 <backmatter>
